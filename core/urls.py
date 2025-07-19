@@ -58,7 +58,6 @@ urlpatterns = [
     path('contact/', views.contact, name= 'contact'),
     path('account/', views.account, name= 'account'),
     path('editProfile/', views.editProfile, name= 'editProfile'),
-    path('editProfile/', views.editProfile, name= 'editProfile'),
 
     # path('login_page/', login_page, name='login_page'),
     # path('forgot_password_page/', forgot_password_page, name='forgot_password_page'),
