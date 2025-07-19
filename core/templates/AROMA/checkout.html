@@ -1,355 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Aroma Shop - Checkout</title>
-	<link rel="icon" href="img/Fevicon.png" type="image/png">
-
-  <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="vendors/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="vendors/linericon/style.css">
-  <link rel="stylesheet" href="vendors/owl-carousel/owl.theme.default.min.css">
-  <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-  <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
-  <link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
-
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - ReStyle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
-  <!--================ Start Header Menu Area =================-->
-	<header class="header_area">
-    <div class="main_menu">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-          <a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-            <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-              <li class="nav-item active submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Shop</a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>
-                  <li class="nav-item"><a class="nav-link" href="single-product.html">Product Details</a></li>
-                  <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-                  <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
-                </ul>
-							</li>
-              <li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Blog</a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                  <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-                </ul>
-							</li>
-							<li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Pages</a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
-                  <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
-                </ul>
-              </li>
-              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-            </ul>
-
-            <ul class="nav-shop">
-              <li class="nav-item"><button><i class="ti-search"></i></button></li>
-              <li class="nav-item"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span></button> </li>
-              <li class="nav-item"><a class="button button-header" href="#">Buy Now</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
-  </header>
-	<!--================ End Header Menu Area =================-->
-
-	<!-- ================ start banner area ================= -->	
-	<section class="blog-banner-area" id="category">
-		<div class="container h-100">
-			<div class="blog-banner">
-				<div class="text-center">
-					<h1>Product Checkout</h1>
-					<nav aria-label="breadcrumb" class="banner-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Checkout</li>
-            </ol>
-          </nav>
-				</div>
-			</div>
-    </div>
-	</section>
-	<!-- ================ end banner area ================= -->
-  
-  
-  <!--================Checkout Area =================-->
-  <section class="checkout_area section-margin--small">
-    <div class="container">
-        <div class="returning_customer">
-            <div class="check_title">
-                <h2>Returning Customer? <a href="#">Click here to login</a></h2>
+<body class="bg-gray-50">
+    <!--NavBar-->
+    {% include 'aroma/navbar.html' %}
+    <!-- Checkout Progress -->
+    <div class="bg-white border-b">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center justify-center space-x-8">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-medium">1</div>
+                    <span class="ml-2 text-green-600 font-medium">Shipping</span>
+                </div>
+                <div class="w-16 h-0.5 bg-gray-300"></div>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-medium">2</div>
+                    <span class="ml-2 text-gray-600">Payment</span>
+                </div>
+                <div class="w-16 h-0.5 bg-gray-300"></div>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-medium">3</div>
+                    <span class="ml-2 text-gray-600">Review</span>
+                </div>
             </div>
-            <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new
-                customer, please proceed to the Billing & Shipping section.</p>
-            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" placeholder="Username or Email*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Username or Email*'" id="name" name="name">
-                    <!-- <span class="placeholder" data-placeholder="Username or Email"></span> -->
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="password" class="form-control" placeholder="Password*" onfocus="this.placeholder=''" onblur="this.placeholder = 'Password*'" id="password" name="password">
-                    <!-- <span class="placeholder" data-placeholder="Password"></span> -->
-                </div>
-                <div class="col-md-12 form-group">
-                    <button type="submit" value="submit" class="button button-login">login</button>
-                    <div class="creat_account">
-                        <input type="checkbox" id="f-option" name="selector">
-                        <label for="f-option">Remember me</label>
-                    </div>
-                    <a class="lost_pass" href="#">Lost your password?</a>
-                </div>
-            </form>
         </div>
-        <div class="cupon_area">
-            <div class="check_title">
-                <h2>Have a coupon? <a href="#">Click here to enter your code</a></h2>
-            </div>
-            <input type="text" placeholder="Enter coupon code">
-            <a class="button button-coupon" href="#">Apply Coupon</a>
-        </div>
-        <div class="billing_details">
-            <div class="row">
-                <div class="col-lg-8">
-                    <h3>Billing Details</h3>
-                    <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="first" name="name">
-                            <span class="placeholder" data-placeholder="First name"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="last" name="name">
-                            <span class="placeholder" data-placeholder="Last name"></span>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="company" name="company" placeholder="Company name">
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="number" name="number">
-                            <span class="placeholder" data-placeholder="Phone number"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="email" name="compemailany">
-                            <span class="placeholder" data-placeholder="Email Address"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <select class="country_select">
-                                <option value="1">Country</option>
-                                <option value="2">Country</option>
-                                <option value="4">Country</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="add1" name="add1">
-                            <span class="placeholder" data-placeholder="Address line 01"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="add2" name="add2">
-                            <span class="placeholder" data-placeholder="Address line 02"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="city" name="city">
-                            <span class="placeholder" data-placeholder="Town/City"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <select class="country_select">
-                                <option value="1">District</option>
-                                <option value="2">District</option>
-                                <option value="4">District</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP">
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option2" name="selector">
-                                <label for="f-option2">Create an account?</label>
+    </div>
+
+    <!-- Checkout Content -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Checkout Form -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Shipping Information -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Shipping Information</h2>
+                    <form class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Doe">
                             </div>
                         </div>
-                        <div class="col-md-12 form-group mb-0">
-                            <div class="creat_account">
-                                <h3>Shipping Details</h3>
-                                <input type="checkbox" id="f-option3" name="selector">
-                                <label for="f-option3">Ship to a different address?</label>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                            <input type="email" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="john@example.com">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="+1 (555) 123-4567">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                            <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="123 Main Street">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">City</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="New York">
                             </div>
-                            <textarea class="form-control" name="message" id="message" rows="1" placeholder="Order Notes"></textarea>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">State</label>
+                                <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    <option>Select State</option>
+                                    <option>New York</option>
+                                    <option>California</option>
+                                    <option>Texas</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">ZIP Code</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="10001">
+                            </div>
                         </div>
                     </form>
                 </div>
-                <div class="col-lg-4">
-                    <div class="order_box">
-                        <h2>Your Order</h2>
-                        <ul class="list">
-                            <li><a href="#"><h4>Product <span>Total</span></h4></a></li>
-                            <li><a href="#">Fresh Blackberry <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                            <li><a href="#">Fresh Tomatoes <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                            <li><a href="#">Fresh Brocoli <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                        </ul>
-                        <ul class="list list_2">
-                            <li><a href="#">Subtotal <span>$2160.00</span></a></li>
-                            <li><a href="#">Shipping <span>Flat rate: $50.00</span></a></li>
-                            <li><a href="#">Total <span>$2210.00</span></a></li>
-                        </ul>
-                        <div class="payment_item">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option5" name="selector">
-                                <label for="f-option5">Check payments</label>
-                                <div class="check"></div>
+
+                <!-- Payment Information -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Payment Information</h2>
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Card Number</label>
+                            <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="1234 5678 9012 3456">
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Expiry Date</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="MM/YY">
                             </div>
-                            <p>Please send a check to Store Name, Store Street, Store Town, Store State / County,
-                                Store Postcode.</p>
-                        </div>
-                        <div class="payment_item active">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option6" name="selector">
-                                <label for="f-option6">Paypal </label>
-                                <img src="img/product/card.jpg" alt="">
-                                <div class="check"></div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">CVV</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="123">
                             </div>
-                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
-                                account.</p>
                         </div>
-                        <div class="creat_account">
-                            <input type="checkbox" id="f-option4" name="selector">
-                            <label for="f-option4">I’ve read and accept the </label>
-                            <a href="#">terms & conditions*</a>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Cardholder Name</label>
+                            <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="John Doe">
                         </div>
-                        <div class="text-center">
-                          <a class="button button-paypal" href="#">Proceed to Paypal</a>
+                    </form>
+                </div>
+
+                <!-- Shipping Method -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Shipping Method</h2>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="shipping" class="text-green-600 focus:ring-green-500" checked>
+                            <div class="ml-3 flex-1">
+                                <div class="flex justify-between">
+                                    <span class="font-medium text-gray-900">Standard Shipping</span>
+                                    <span class="text-gray-900">Free</span>
+                                </div>
+                                <p class="text-sm text-gray-500">5-7 business days</p>
+                            </div>
+                        </label>
+                        
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="shipping" class="text-green-600 focus:ring-green-500">
+                            <div class="ml-3 flex-1">
+                                <div class="flex justify-between">
+                                    <span class="font-medium text-gray-900">Express Shipping</span>
+                                    <span class="text-gray-900">$9.99</span>
+                                </div>
+                                <p class="text-sm text-gray-500">2-3 business days</p>
+                            </div>
+                        </label>
+                        
+                        <label class="flex items-center p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="shipping" class="text-green-600 focus:ring-green-500">
+                            <div class="ml-3 flex-1">
+                                <div class="flex justify-between">
+                                    <span class="font-medium text-gray-900">Overnight Shipping</span>
+                                    <span class="text-gray-900">$19.99</span>
+                                </div>
+                                <p class="text-sm text-gray-500">Next business day</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Order Summary</h2>
+                    
+                    <!-- Order Items -->
+                    <div class="space-y-4 mb-6">
+                        <div class="flex gap-4">
+                            <img src="/placeholder.svg?height=80&width=80" alt="Vintage Designer Dress" class="w-20 h-20 object-cover rounded">
+                            <div class="flex-1">
+                                <h3 class="font-medium text-gray-900">Vintage Designer Dress</h3>
+                                <p class="text-sm text-gray-500">Size M • Zara</p>
+                                <p class="text-sm text-gray-500">Qty: 1</p>
+                                <p class="font-semibold text-green-600">$45.00</p>
+                            </div>
                         </div>
+                        
+                        <div class="flex gap-4">
+                            <img src="/placeholder.svg?height=80&width=80" alt="Leather Boots" class="w-20 h-20 object-cover rounded">
+                            <div class="flex-1">
+                                <h3 class="font-medium text-gray-900">Leather Ankle Boots</h3>
+                                <p class="text-sm text-gray-500">Size 8 • Dr. Martens</p>
+                                <p class="text-sm text-gray-500">Qty: 1</p>
+                                <p class="font-semibold text-green-600">$85.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Order Totals -->
+                    <div class="border-t pt-4 space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Subtotal</span>
+                            <span class="text-gray-900">$130.00</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Shipping</span>
+                            <span class="text-gray-900">Free</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Tax</span>
+                            <span class="text-gray-900">$10.40</span>
+                        </div>
+                        <div class="border-t pt-2 flex justify-between font-semibold text-lg">
+                            <span class="text-gray-900">Total</span>
+                            <span class="text-gray-900">$140.40</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Promo Code -->
+                    <div class="mt-6">
+                        <div class="flex gap-2">
+                            <input type="text" placeholder="Promo code" class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-md text-sm hover:bg-gray-200">Apply</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Place Order Button -->
+                    <a href="{% url 'confirmation' %}" class="w-full bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700 mt-6 block text-center">
+                        Proceed to Pay
+                    </a>
+                    
+                    <!-- Security Info -->
+                    <div class="mt-4 flex items-center justify-center text-sm text-gray-500">
+                        <i class="fas fa-lock mr-2"></i>
+                        <span>Secure checkout with SSL encryption</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-  </section>
-  <!--================End Checkout Area =================-->
-
-
-
-  <!--================ Start footer Area  =================-->	
-	<footer>
-		<div class="footer-area footer-only">
-			<div class="container">
-				<div class="row section_gap">
-					<div class="col-lg-3 col-md-6 col-sm-6">
-						<div class="single-footer-widget tp_widgets ">
-							<h4 class="footer_title large_title">Our Mission</h4>
-							<p>
-								So seed seed green that winged cattle in. Gathering thing made fly you're no 
-								divided deep moved us lan Gathering thing us land years living.
-							</p>
-							<p>
-								So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep moved 
-							</p>
-						</div>
-					</div>
-					<div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
-						<div class="single-footer-widget tp_widgets">
-							<h4 class="footer_title">Quick Links</h4>
-							<ul class="list">
-								<li><a href="#">Home</a></li>
-								<li><a href="#">Shop</a></li>
-								<li><a href="#">Blog</a></li>
-								<li><a href="#">Product</a></li>
-								<li><a href="#">Brand</a></li>
-								<li><a href="#">Contact</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-6 col-sm-6">
-						<div class="single-footer-widget instafeed">
-							<h4 class="footer_title">Gallery</h4>
-							<ul class="list instafeed d-flex flex-wrap">
-								<li><img src="img/gallery/r1.jpg" alt=""></li>
-								<li><img src="img/gallery/r2.jpg" alt=""></li>
-								<li><img src="img/gallery/r3.jpg" alt=""></li>
-								<li><img src="img/gallery/r5.jpg" alt=""></li>
-								<li><img src="img/gallery/r7.jpg" alt=""></li>
-								<li><img src="img/gallery/r8.jpg" alt=""></li>
-							</ul>
-						</div>
-					</div>
-					<div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
-						<div class="single-footer-widget tp_widgets">
-							<h4 class="footer_title">Contact Us</h4>
-							<div class="ml-40">
-								<p class="sm-head">
-									<span class="fa fa-location-arrow"></span>
-									Head Office
-								</p>
-								<p>123, Main Street, Your City</p>
-	
-								<p class="sm-head">
-									<span class="fa fa-phone"></span>
-									Phone Number
-								</p>
-								<p>
-									+123 456 7890 <br>
-									+123 456 7890
-								</p>
-	
-								<p class="sm-head">
-									<span class="fa fa-envelope"></span>
-									Email
-								</p>
-								<p>
-									free@infoexample.com <br>
-									www.infoexample.com
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row d-flex">
-					<p class="col-lg-12 footer-text text-center">
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!--================ End footer Area  =================-->
-
-
-
-  <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-  <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
-  <script src="vendors/skrollr.min.js"></script>
-  <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-  <script src="vendors/nice-select/jquery.nice-select.min.js"></script>
-  <script src="vendors/jquery.ajaxchimp.min.js"></script>
-  <script src="vendors/mail-script.js"></script>
-  <script src="js/main.js"></script>
+    <!--Footer-->
+    {% include 'aroma/footer.html' %}
 </body>
 </html>

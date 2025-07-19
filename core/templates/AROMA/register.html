@@ -1,246 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Aroma Shop - Login</title>
-	<link rel="icon" href="img/Fevicon.png" type="image/png">
-  <link rel="stylesheet" href="vendors/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
-	<link rel="stylesheet" href="vendors/themify-icons/themify-icons.css">
-	<link rel="stylesheet" href="vendors/linericon/style.css">
-  <link rel="stylesheet" href="vendors/owl-carousel/owl.theme.default.min.css">
-  <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-  <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
-  <link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
-
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - ReStyle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
-	<!--================ Start Header Menu Area =================-->
-	<header class="header_area">
-    <div class="main_menu">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-          <a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-            <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-              <li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Shop</a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="category.html">Shop Category</a></li>
-                  <li class="nav-item"><a class="nav-link" href="single-product.html">Blog Details</a></li>
-                  <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-                  <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
-                </ul>
-							</li>
-              <li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Blog</a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                  <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-                </ul>
-							</li>
-							<li class="nav-item active submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Pages</a>
-                <ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>									
-                  <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
-                </ul>
-              </li>
-              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-            </ul>
+<body class="bg-gray-50 min-h-screen">
 
-            <ul class="nav-shop">
-              <li class="nav-item"><button><i class="ti-search"></i></button></li>
-              <li class="nav-item"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span></button> </li>
-              <li class="nav-item"><a class="button button-header" href="#">Buy Now</a></li>
-            </ul>
-          </div>
+    <!-- Register Section -->
+    <div class="flex min-h-screen">
+        <!-- Left Side - Registration Form -->
+        <div class="w-full lg:w-1/2 flex items-center justify-center px-6 py-12">
+            <div class="w-full max-w-md">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Create Account</h2>
+                    <p class ="text-gray-600">Join ReStyle and start your sustainable fashion journey!</p>
+                </div>
+
+                <!-- Registration Form -->
+                <form class="space-y-6" id="registerForm">
+                    <!-- Name Fields -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">
+                                First Name
+                            </label>
+                            <input type="text" id="firstName" name="firstName" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+                                   placeholder="First name">
+                            <div class="text-red-500 text-sm mt-1 hidden" id="firstNameError">First name is required</div>
+                        </div>
+                        <div>
+                            <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">
+                                Last Name
+                            </label>
+                            <input type="text" id="lastName" name="lastName" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+                                   placeholder="Last name">
+                            <div class="text-red-500 text-sm mt-1 hidden" id="lastNameError">Last name is required</div>
+                        </div>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                            Email Address
+                        </label>
+                        <div class="relative">
+                            <input type="email" id="email" name="email" required
+                                   class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+                                   placeholder="Enter your email">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div class="text-red-500 text-sm mt-1 hidden" id="emailError">Please enter a valid email address</div>
+                    </div>
+
+                    <!-- Phone Field -->
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+                            Phone Number (Optional)
+                        </label>
+                        <div class="relative">
+                            <input type="tel" id="phone" name="phone"
+                                   class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+                                   placeholder="Enter your phone number">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
+                                <i class="fas fa-phone text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                            Password
+                        </label>
+                        <div class="relative">
+                            <input type="password" id="password" name="password" required
+                                   class="w-full px-4 py-3 pl-12 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+                                   placeholder="Create a password">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <button type="button" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600" onclick="togglePassword('password')">
+                                <i class="fas fa-eye" id="passwordToggle"></i>
+                            </button>
+                        </div>
+                        <div class="text-red-500 text-sm mt-1 hidden" id="passwordError">Password must be at least 8 characters</div>
+                        
+                        <!-- Password Strength Indicator -->
+                        <div class="mt-2">
+                            <div class="flex space-x-1">
+                                <div class="h-1 flex-1 bg-gray-200 rounded" id="strength1"></div>
+                                <div class="h-1 flex-1 bg-gray-200 rounded" id="strength2"></div>
+                                <div class="h-1 flex-1 bg-gray-200 rounded" id="strength3"></div>
+                                <div class="h-1 flex-1 bg-gray-200 rounded" id="strength4"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1" id="strengthText">Password strength</p>
+                        </div>
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div>
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-2">
+                            Confirm Password
+                        </label>
+                        <div class="relative">
+                            <input type="password" id="confirmPassword" name="confirmPassword" required
+                                   class="w-full px-4 py-3 pl-12 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+                                   placeholder="Confirm your password">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <button type="button" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600" onclick="togglePassword('confirmPassword')">
+                                <i class="fas fa-eye" id="confirmPasswordToggle"></i>
+                            </button>
+                        </div>
+                        <div class="text-red-500 text-sm mt-1 hidden" id="confirmPasswordError">Passwords do not match</div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="flex items-start">
+                        <input type="checkbox" id="terms" name="terms" required
+                               class="mt-1 rounded border-gray-300 text-green-600 focus:ring-green-500">
+                        <label for="terms" class="ml-3 text-sm text-gray-600">
+                            I agree to the
+                            <a href="#" class="text-green-600 hover:text-green-700 font-medium">Terms of Service</a>
+                            and
+                            <a href="#" class="text-green-600 hover:text-green-700 font-medium">Privacy Policy</a>
+                        </label>
+                    </div>
+                    <div class="text-red-500 text-sm hidden" id="termsError">You must agree to the terms and conditions</div>
+
+                    <!-- Newsletter Subscription -->
+                    <div class="flex items-start">
+                        <input type="checkbox" id="newsletter" name="newsletter"
+                               class="mt-1 rounded border-gray-300 text-green-600 focus:ring-green-500">
+                        <label for="newsletter" class="ml-3 text-sm text-gray-600">
+                            Subscribe to our newsletter for sustainable fashion tips and exclusive offers
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors">
+                        <span id="registerButtonText">Create Account</span>
+                        <i class="fas fa-spinner fa-spin ml-2 hidden" id="registerSpinner"></i>
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="mt-8">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-gray-50 text-gray-500">Or sign up with</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Registration -->
+                <div class="mt-6 grid grid-cols-2 gap-3">
+                    <button class="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors group">
+                        <i class="fab fa-google text-red-500 mr-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-medium text-gray-700">Google</span>
+                    </button>
+                    <button class="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors group">
+                        <i class="fab fa-facebook text-blue-600 mr-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-medium text-gray-700">Facebook</span>
+                    </button>
+                </div>
+
+                <!-- Sign In Link -->
+                <div class="mt-8 text-center">
+                    <p class="text-sm text-gray-600">
+                        Already have an account?
+                        <a href="{% url 'login' %}" class="text-green-600 hover:text-green-700 font-medium">
+                            Sign in here
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
-      </nav>
+
+        <!-- Right Side - Image/Branding -->
+        <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-green-600 via-green-700 to-green-800 relative overflow-hidden">
+            <div class="absolute inset-0 bg-black opacity-20"></div>
+            <div class="absolute inset-0">
+                <img src="/placeholder.svg?height=800&width=600" alt="Sustainable Fashion Community" class="w-full h-full object-cover opacity-30">
+            </div>
+            <div class="relative z-10 flex flex-col justify-center px-12 text-white">
+                <div class="max-w-md">
+                    <h1 class="text-4xl font-bold mb-6">Join the ReStyle Community</h1>
+                    <p class="text-xl text-green-100 mb-8">Be part of the sustainable fashion revolution. Buy, sell, and discover unique pre-loved pieces.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-shopping-bag text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">Shop Sustainably</h3>
+                                <p class="text-green-100 text-sm">Discover unique, pre-loved fashion pieces at great prices</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-plus-circle text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">Sell Your Items</h3>
+                                <p class="text-green-100 text-sm">Turn your closet into cash by selling items you no longer wear</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-heart text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg mb-2">Make an Impact</h3>
+                                <p class="text-green-100 text-sm">Reduce fashion waste and support sustainable practices</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-4 bg-green-500 bg-opacity-20 rounded-lg border border-green-400">
+                        <p class="text-green-100 text-sm">
+                            <i class="fas fa-gift mr-2"></i>
+                            <strong>Welcome Bonus:</strong> Get $10 off your first purchase when you sign up!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </header>
-	<!--================ End Header Menu Area =================-->
-  
-  <!-- ================ start banner area ================= -->	
-	<section class="blog-banner-area" id="category">
-		<div class="container h-100">
-			<div class="blog-banner">
-				<div class="text-center">
-					<h1>Register</h1>
-					<nav aria-label="breadcrumb" class="banner-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Register</li>
-            </ol>
-          </nav>
-				</div>
-			</div>
-    </div>
-	</section>
-	<!-- ================ end banner area ================= -->
-  
-  <!--================Login Box Area =================-->
-	<section class="login_box_area section-margin">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="login_box_img">
-						<div class="hover">
-							<h4>Already have an account?</h4>
-							<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
-							<a class="button button-account" href="login.html">Login Now</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="login_form_inner register_form_inner">
-						<h3>Create an account</h3>
-						<form class="row login_form" action="#/" id="register_form" >
-							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
-							</div>
-							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="email" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
-              </div>
-              <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
-              </div>
-              <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm Password'">
-							</div>
-							<div class="col-md-12 form-group">
-								<div class="creat_account">
-									<input type="checkbox" id="f-option2" name="selector">
-									<label for="f-option2">Keep me logged in</label>
-								</div>
-							</div>
-							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="button button-register w-100">Register</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--================End Login Box Area =================-->
 
+    <script>
+        // Password strength checker
+        document.getElementById('password').addEventListener('input', function(e) {
+            const password = e.target.value;
+            const strength = calculatePasswordStrength(password);
+            updatePasswordStrength(strength);
+        });
 
+        function calculatePasswordStrength(password) {
+            let strength = 0;
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            return Math.min(strength, 4);
+        }
 
-  <!--================ Start footer Area  =================-->	
-	<footer>
-		<div class="footer-area footer-only">
-			<div class="container">
-				<div class="row section_gap">
-					<div class="col-lg-3 col-md-6 col-sm-6">
-						<div class="single-footer-widget tp_widgets ">
-							<h4 class="footer_title large_title">Our Mission</h4>
-							<p>
-								So seed seed green that winged cattle in. Gathering thing made fly you're no 
-								divided deep moved us lan Gathering thing us land years living.
-							</p>
-							<p>
-								So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep moved 
-							</p>
-						</div>
-					</div>
-					<div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
-						<div class="single-footer-widget tp_widgets">
-							<h4 class="footer_title">Quick Links</h4>
-							<ul class="list">
-								<li><a href="#">Home</a></li>
-								<li><a href="#">Shop</a></li>
-								<li><a href="#">Blog</a></li>
-								<li><a href="#">Product</a></li>
-								<li><a href="#">Brand</a></li>
-								<li><a href="#">Contact</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-6 col-sm-6">
-						<div class="single-footer-widget instafeed">
-							<h4 class="footer_title">Gallery</h4>
-							<ul class="list instafeed d-flex flex-wrap">
-								<li><img src="img/gallery/r1.jpg" alt=""></li>
-								<li><img src="img/gallery/r2.jpg" alt=""></li>
-								<li><img src="img/gallery/r3.jpg" alt=""></li>
-								<li><img src="img/gallery/r5.jpg" alt=""></li>
-								<li><img src="img/gallery/r7.jpg" alt=""></li>
-								<li><img src="img/gallery/r8.jpg" alt=""></li>
-							</ul>
-						</div>
-					</div>
-					<div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
-						<div class="single-footer-widget tp_widgets">
-							<h4 class="footer_title">Contact Us</h4>
-							<div class="ml-40">
-								<p class="sm-head">
-									<span class="fa fa-location-arrow"></span>
-									Head Office
-								</p>
-								<p>123, Main Street, Your City</p>
-	
-								<p class="sm-head">
-									<span class="fa fa-phone"></span>
-									Phone Number
-								</p>
-								<p>
-									+123 456 7890 <br>
-									+123 456 7890
-								</p>
-	
-								<p class="sm-head">
-									<span class="fa fa-envelope"></span>
-									Email
-								</p>
-								<p>
-									free@infoexample.com <br>
-									www.infoexample.com
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        function updatePasswordStrength(strength) {
+            const indicators = ['strength1', 'strength2', 'strength3', 'strength4'];
+            const colors = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-green-500'];
+            const texts = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+            
+            indicators.forEach((id, index) => {
+                const element = document.getElementById(id);
+                element.className = 'h-1 flex-1 rounded ' + (index < strength ? colors[Math.min(strength - 1, 3)] : 'bg-gray-200');
+            });
+            
+            document.getElementById('strengthText').textContent = strength > 0 ? texts[strength - 1] : 'Password strength';
+        }
 
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row d-flex">
-					<p class="col-lg-12 footer-text text-center">
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!--================ End footer Area  =================-->
-
-
-
-  <script src="vendors/jquery/jquery-3.2.1.min.js"></script>
-  <script src="vendors/bootstrap/bootstrap.bundle.min.js"></script>
-  <script src="vendors/skrollr.min.js"></script>
-  <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-  <script src="vendors/nice-select/jquery.nice-select.min.js"></script>
-  <script src="vendors/jquery.ajaxchimp.min.js"></script>
-  <script src="vendors/mail-script.js"></script>
-  <script src="js/main.js"></script>
+        // Form validation
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const terms = document.getElementById('terms').checked;
+            
+            // Reset errors
+            const errorElements = document.querySelectorAll('[id$="Error"]');
+            errorElements.forEach(el => el.classList.add('hidden'));
+            
+            let isValid = true;
+            
+            // First name validation
+            if (!firstName.trim()) {
+                document.getElementById('firstNameError').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            // Last name validation
+            if (!lastName.trim()) {
+                document.getElementById('lastNameError').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email || !emailRegex.test(email)) {
+                document.getElementById('emailError').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            // Password validation
+            if (!password || password.length < 8) {
+                document.getElementById('passwordError').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            // Confirm password validation
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            // Terms validation
+            if (!terms) {
+                document.getElementById('termsError').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Show loading state
+                const registerButton = document.getElementById('registerButtonText');
+                const registerSpinner = document.getElementById('registerSpinner');
+                
+                registerButton.textContent = 'Creating Account...';
+                registerSpinner.classList.remove('hidden');
+                
+                // Simulate API call
+                setTimeout(() => {
+                    alert('Account created successfully! (This is a demo)');
+                    registerButton.textContent = 'Create Account';
+                    registerSpinner.classList.add('hidden');
+                    // Redirect to login or dashboard
+                    // window.location.href = 'login.html';
+                }, 2000);
+            }
+        });
+        
+        // Password toggle
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const toggle = document.getElementById(fieldId + 'Toggle');
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                toggle.classList.remove('fa-eye');
+                toggle.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                toggle.classList.remove('fa-eye-slash');
+                toggle.classList.add('fa-eye');
+            }
+        }
+    </script>
 </body>
 </html>

@@ -73,6 +73,36 @@ def reset_password_page(request, uid, token):
 def home_page(request):
     return render(request, 'test_login_jwt_&_remember_me/home_page.html')
 
+def blog(request):
+    return render(request, 'aroma/blog.html')
+def blogDetails(request):
+    return render(request, 'aroma/blog-details.html')
+def checkout(request):
+    return render(request, 'aroma/checkout.html')
+def confirmation(request):
+    return render(request, 'aroma/confirmation.html')
+def forgotPassword(request):
+    return render(request, 'aroma/forgot-password.html')
+def home(request):
+    return render(request, 'aroma/index.html')
+def login(request):
+    return render(request, 'aroma/login.html')
+def productDetail(request):
+    return render(request, 'aroma/product-detail.html')
+def register(request):
+    return render(request, 'aroma/register.html')
+def shop(request):
+    return render(request, 'aroma/shop.html')
+def shoppingCart(request):
+    return render(request, 'aroma/shopping-cart.html')
+def contact(request):
+    return render(request, 'aroma/contact.html')
+def account(request):
+    return render(request, 'aroma/account.html')
+def editProfile(request):
+    return render(request, 'aroma/editProfile.html')
+
+
 
 # ================================================ User & Customer ====================================
 
