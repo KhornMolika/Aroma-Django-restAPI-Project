@@ -52,6 +52,7 @@ class ProductDetail(models.Model):
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=10, blank=True)
+    profileImage = models.ImageField(upload_to='images/profile/',null=True,blank=True)
 
     def __str__(self):
         return f'cusID : {self.id} - {self.user.username}'
