@@ -1,5 +1,6 @@
 from rest_framework.routers import DefaultRouter
 from .views import *
+from . import views
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -43,6 +44,20 @@ urlpatterns = [
     path('reset-password/<uid>/<token>/', ResetPasswordView.as_view(), name='reset-password'),
 
     path('api/', include(router.urls)),
+    path('blog/', views.blog, name= 'blog'),
+    path('blogDetails/', views.blogDetails, name= 'blogDetails'),
+    path('checkout/', views.checkout, name= 'checkout'),
+    path('comfirmation/', views.confirmation, name= 'confirmation'),
+    path('forgotPassword/', views.forgotPassword, name= 'forgotPassword'),
+    path('', views.home, name= 'home'),
+    path('login/', views.login, name= 'login'),
+    path('productDetail/', views.productDetail, name= 'productDetail'),
+    path('shop/', views.shop, name= 'shop'),
+    path('register/', views.register, name= 'register'),
+    path('shoppingCart/', views.shoppingCart, name= 'shoppingCart'),
+    path('contact/', views.contact, name= 'contact'),
+    path('account/', views.account, name= 'account'),
+    path('editProfile/', views.editProfile, name= 'editProfile'),
 
     # path('login_page/', login_page, name='login_page'),
     # path('forgot_password_page/', forgot_password_page, name='forgot_password_page'),

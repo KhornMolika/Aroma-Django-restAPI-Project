@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - ReStyle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!--NavBar-->
+    {% include 'aroma/navbar.html' %}
+    <!-- Search Hero Section -->
+    <section class="bg-gradient-to-br from-green-600 via-green-700 to-green-800 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Find Your Perfect Style</h1>
+                <p class="text-xl text-green-100 max-w-2xl mx-auto">Discover unique, sustainable fashion pieces from our curated collection</p>
+            </div>
+            
+            <!-- Enhanced Search Bar -->
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-2xl p-6">
+                    <div class="flex flex-col lg:flex-row gap-4">
+                        <!-- Main Search Input -->
+                        <div class="flex-1 relative">
+                            <input type="text" id="main-search" placeholder="Search for items, brands, or categories..." class="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" value="vintage dress">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
+                                <i class="fas fa-search text-gray-400 text-xl"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Category Filter -->
+                        <div class="relative">
+                            <select class="appearance-none bg-white border border-gray-300 rounded-xl px-4 py-4 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option>All Categories</option>
+                                <option>Women's Clothing</option>
+                                <option>Men's Clothing</option>
+                                <option>Shoes</option>
+                                <option>Accessories</option>
+                                <option>Bags</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                                <i class="fas fa-chevron-down text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Search Button -->
+                        <button class="bg-green-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-green-700 transition-colors flex items-center justify-center">
+                            <i class="fas fa-search mr-2"></i>
+                            Search
+                        </button>
+                    </div>
+                    
+                    <!-- Quick Filters -->
+                    <div class="mt-6 flex flex-wrap gap-2">
+                        <span class="text-sm text-gray-600 mr-2">Popular:</span>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-green-100 hover:text-green-700 transition-colors">vintage dresses</button>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-green-100 hover:text-green-700 transition-colors">designer bags</button>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-green-100 hover:text-green-700 transition-colors">leather jackets</button>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-green-100 hover:text-green-700 transition-colors">nike sneakers</button>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-green-100 hover:text-green-700 transition-colors">summer dresses</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Results -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Results Header -->
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Search Results for "vintage dress"</h2>
+                <p class="text-gray-600">Found 156 items • Showing 1-24 of 156</p>
+            </div>
+            
+            <!-- Sort Options -->
+            <div class="flex items-center space-x-4 mt-4 lg:mt-0">
+                <span class="text-sm text-gray-600">Sort by:</span>
+                <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <option>Most Relevant</option>
+                    <option>Price: Low to High</option>
+                    <option>Price: High to Low</option>
+                    <option>Newest First</option>
+                    <option>Best Rating</option>
+                </select>
+                
+                <!-- View Toggle -->
+                <div class="flex border border-gray-300 rounded-lg overflow-hidden">
+                    <button class="px-3 py-2 bg-green-600 text-white">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="px-3 py-2 text-gray-600 hover:bg-gray-50">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Filters Sidebar -->
+            <div class="lg:w-80 flex-shrink-0">
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 sticky top-24">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900">Filters</h3>
+                        <button class="text-sm text-green-600 hover:text-green-700 font-medium">Clear All</button>
+                    </div>
+                    
+                    <!-- Price Range -->
+                    <div class="mb-8">
+                        <h4 class="font-medium text-gray-900 mb-4">Price Range</h4>
+                        <div class="space-y-3">
+                            <div class="flex-col space-y-2">
+                                <input type="number" placeholder="Min" class="flex-1 px-3 py-2 w-full border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                                <input type="number" placeholder="Max" class="flex-1 px-3 py-2 w-full border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                    <span class="ml-2 text-sm text-gray-700">Under $25 (45)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                    <span class="ml-2 text-sm text-gray-700">$25 - $50 (89)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                    <span class="ml-2 text-sm text-gray-700">$50 - $100 (67)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                    <span class="ml-2 text-sm text-gray-700">Over $100 (23)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="mb-8">
+                        <h4 class="font-medium text-gray-900 mb-4">Category</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500" checked>
+                                <span class="ml-2 text-sm text-gray-700">Dresses (156)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 text-sm text-gray-700">Tops (89)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 text-sm text-gray-700">Skirts (34)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 text-sm text-gray-700">Jackets (23)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Size Filter -->
+                    <div class="mb-8">
+                        <h4 class="font-medium text-gray-900 mb-4">Size</h4>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:border-green-500 hover:text-green-600 transition-colors">XS</button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:border-green-500 hover:text-green-600 transition-colors">S</button>
+                            <button class="px-3 py-2 bg-green-600 text-white rounded-lg text-sm">M</button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:border-green-500 hover:text-green-600 transition-colors">L</button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:border-green-500 hover:text-green-600 transition-colors">XL</button>
+                            <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm hover:border-green-500 hover:text-green-600 transition-colors">XXL</button>
+                        </div>
+                    </div>
+
+                    <!-- Brand Filter -->
+                    <div class="mb-8">
+                        <h4 class="font-medium text-gray-900 mb-4">Brand</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 text-sm text-gray-700">Zara (45)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 text-sm text-gray-700">H&M (38)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 text-sm text-gray-700">Forever 21 (29)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 text-sm text-gray-700">Vintage (67)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Condition Filter -->
+                    <div class="mb-8">
+                        <h4 class="font-medium text-gray-900 mb-4">Condition</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 text-sm text-gray-700">New with tags (23)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 text-sm text-gray-700">Like new (89)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 text-sm text-gray-700">Good (67)</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 text-sm text-gray-700">Fair (12)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="flex-1">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Product Card 1 -->
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
+                        <div class="relative">
+                            <img src="/placeholder.svg?height=300&width=250" alt="Vintage Floral Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                                Like New
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Vintage Floral Midi Dress</h3>
+                            <p class="text-sm text-gray-600 mb-2">Zara • Size M</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-bold text-green-600">$45</span>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    4.8 (24)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 2 -->
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
+                        <div class="relative">
+                            <img src="/placeholder.svg?height=300&width=250" alt="Bohemian Maxi Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <div class="absolute top-3 left-3 bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                                New
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Bohemian Maxi Dress</h3>
+                            <p class="text-sm text-gray-600 mb-2">Free People • Size S</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-bold text-green-600">$78</span>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    4.9 (18)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 3 -->
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
+                        <div class="relative">
+                            <img src="/placeholder.svg?height=300&width=250" alt="Retro A-Line Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-red-500">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                                Good
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Retro A-Line Dress</h3>
+                            <p class="text-sm text-gray-600 mb-2">Vintage • Size L</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-bold text-green-600">$32</span>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    4.6 (31)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 4 -->
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
+                        <div class="relative">
+                            <img src="/placeholder.svg?height=300&width=250" alt="Elegant Evening Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <div class="absolute top-3 left-3 bg-purple-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                                Designer
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Elegant Evening Dress</h3>
+                            <p class="text-sm text-gray-600 mb-2">Calvin Klein • Size M</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-bold text-green-600">$125</span>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    5.0 (12)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Repeat similar cards for more products -->
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
+                        <div class="relative">
+                            <img src="/placeholder.svg?height=300&width=250" alt="Summer Sundress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                                Like New
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Summer Sundress</h3>
+                            <p class="text-sm text-gray-600 mb-2">H&M • Size S</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-bold text-green-600">$28</span>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    4.7 (19)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
+                        <div class="relative">
+                            <img src="/placeholder.svg?height=300&width=250" alt="Cocktail Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <div class="absolute top-3 left-3 bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                                New
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Black Cocktail Dress</h3>
+                            <p class="text-sm text-gray-600 mb-2">ASOS • Size M</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-bold text-green-600">$65</span>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    4.5 (27)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
+                        <div class="relative">
+                            <img src="/placeholder.svg?height=300&width=250" alt="Wrap Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                                Good
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Floral Wrap Dress</h3>
+                            <p class="text-sm text-gray-600 mb-2">Mango • Size L</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-bold text-green-600">$42</span>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    4.8 (15)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
+                        <div class="relative">
+                            <img src="/placeholder.svg?height=300&width=250" alt="Midi Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                                Like New
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-900 mb-1">Polka Dot Midi Dress</h3>
+                            <p class="text-sm text-gray-600 mb-2">Vintage • Size M</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-lg font-bold text-green-600">$38</span>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                    4.9 (22)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center mt-12">
+                    <nav class="flex items-center space-x-2">
+                        <button class="px-3 py-2 text-gray-500 hover:text-green-600 border border-gray-300 rounded-lg hover:border-green-300 transition-colors">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="px-4 py-2 bg-green-600 text-white rounded-lg">1</button>
+                        <button class="px-4 py-2 text-gray-700 hover:text-green-600 border border-gray-300 rounded-lg hover:border-green-300 transition-colors">2</button>
+                        <button class="px-4 py-2 text-gray-700 hover:text-green-600 border border-gray-300 rounded-lg hover:border-green-300 transition-colors">3</button>
+                        <span class="px-2 text-gray-500">...</span>
+                        <button class="px-4 py-2 text-gray-700 hover:text-green-600 border border-gray-300 rounded-lg hover:border-green-300 transition-colors">7</button>
+                        <button class="px-3 py-2 text-gray-500 hover:text-green-600 border border-gray-300 rounded-lg hover:border-green-300 transition-colors">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-6 border-b border-gray-100">
+                <h2 class="text-2xl font-bold text-gray-900">Welcome Back</h2>
+                <button onclick="closeLoginModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="p-6">
+                <!-- Login Tabs -->
+                <div class="flex mb-6 bg-gray-100 rounded-lg p-1">
+                    <button onclick="switchTab('login')" id="loginTab" class="flex-1 py-2 px-4 text-sm font-medium rounded-md bg-white text-green-600 shadow-sm">
+                        Sign In
+                    </button>
+                    <button onclick="switchTab('signup')" id="signupTab" class="flex-1 py-2 px-4 text-sm font-medium rounded-md text-gray-600 hover:text-gray-900">
+                        Sign Up
+                    </button>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="loginForm">
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Enter your email">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                            <div class="relative">
+                                <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Enter your password">
+                                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                                <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                            </label>
+                            <a href="#" class="text-sm text-green-600 hover:text-green-700">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                            Sign In
+                        </button>
+                    </form>
+                    
+                    <!-- Social Login -->
+                    <div class="mt-6">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-300"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-2 bg-white text-gray-500">Or continue with</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 grid grid-cols-2 gap-3">
+                            <button class="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                                <i class="fab fa-google text-red-500 mr-2"></i>
+                                <span class="text-sm font-medium text-gray-700">Google</span>
+                            </button>
+                            <button class="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                                <i class="fab fa-facebook text-blue-600 mr-2"></i>
+                                <span class="text-sm font-medium text-gray-700">Facebook</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Signup Form -->
+                <div id="signupForm" class="hidden">
+                    <form class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="First name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Last name">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Enter your email">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Create a password">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Confirm your password">
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" class="rounded border-gray-300 text-green-600 focus:ring-green-500">
+                            <span class="ml-2 text-sm text-gray-600">I agree to the <a href="#" class="text-green-600 hover:text-green-700">Terms of Service</a> and <a href="#" class="text-green-600 hover:text-green-700">Privacy Policy</a></span>
+                        </div>
+                        <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                            Create Account
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Footer-->
+    {% include 'aroma/footer.html' %}
+</body>
+</html>

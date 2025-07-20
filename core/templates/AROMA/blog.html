@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - ReStyle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!--NavBar-->
+    {% include 'aroma/navbar.html' %}
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-green-50 to-blue-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Sustainable Fashion
+                <span class="text-green-600">Stories</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Discover tips, trends, and stories about sustainable fashion, circular economy, and making conscious choices for a better planet.
+            </p>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Article</h2>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2">
+                        <img src="/placeholder.svg?height=400&width=600" alt="Featured Article" class="w-full h-64 md:h-full object-cover">
+                    </div>
+                    <div class="md:w-1/2 p-8">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Sustainability</span>
+                            <span class="text-gray-500 text-sm ml-4">January 15, 2024</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                            <a href="blog-details.html" class="hover:text-green-600">The Complete Guide to Building a Sustainable Wardrobe</a>
+                        </h3>
+                        <p class="text-gray-600 mb-6">
+                            Learn how to create a timeless, eco-friendly wardrobe that reflects your personal style while reducing your environmental impact. From choosing quality pieces to caring for your clothes properly.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <img src="/placeholder.svg?height=40&width=40" alt="Author" class="w-10 h-10 rounded-full">
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">Sarah Johnson</p>
+                                    <p class="text-sm text-gray-500">Fashion Sustainability Expert</p>
+                                </div>
+                            </div>
+                            <a href="blog-details.html" class="text-green-600 hover:text-green-700 font-medium">
+                                Read More →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Categories -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Browse by Category</h2>
+                <p class="text-gray-600">Find articles that interest you most</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg p-6 text-center hover:shadow-md transition-shadow cursor-pointer">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-leaf text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Sustainability</h3>
+                    <p class="text-sm text-gray-500">24 articles</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 text-center hover:shadow-md transition-shadow cursor-pointer">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tshirt text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Fashion Tips</h3>
+                    <p class="text-sm text-gray-500">18 articles</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 text-center hover:shadow-md transition-shadow cursor-pointer">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-recycle text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Upcycling</h3>
+                    <p class="text-sm text-gray-500">12 articles</p>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 text-center hover:shadow-md transition-shadow cursor-pointer">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-yellow-600 text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Trends</h3>
+                    <p class="text-sm text-gray-500">15 articles</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Articles -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Recent Articles</h2>
+                <div class="flex gap-2">
+                    <button class="px-4 py-2 bg-green-600 text-white rounded-md text-sm">All</button>
+                    <button class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md text-sm">Sustainability</button>
+                    <button class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md text-sm">Fashion</button>
+                    <button class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md text-sm">Trends</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog Card 1 -->
+                <article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <img src="/placeholder.svg?height=200&width=400" alt="Blog post" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Fashion Tips</span>
+                            <span class="text-gray-500 text-sm ml-3">Jan 12, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                            <a href="blog-details.html" class="hover:text-green-600">How to Style Vintage Pieces for Modern Looks</a>
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Transform your vintage finds into contemporary outfits with these expert styling tips and tricks.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <img src="/placeholder.svg?height=32&width=32" alt="Author" class="w-8 h-8 rounded-full">
+                                <span class="text-sm text-gray-700 ml-2">Emma Davis</span>
+                            </div>
+                            <a href="blog-details.html" class="text-green-600 hover:text-green-700 text-sm font-medium">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 2 -->
+                <article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <img src="/placeholder.svg?height=200&width=400" alt="Blog post" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Sustainability</span>
+                            <span class="text-gray-500 text-sm ml-3">Jan 10, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                            <a href="blog-details.html" class="hover:text-green-600">The Environmental Impact of Fast Fashion</a>
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Understanding the true cost of fast fashion and why choosing sustainable alternatives matters.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <img src="/placeholder.svg?height=32&width=32" alt="Author" class="w-8 h-8 rounded-full">
+                                <span class="text-sm text-gray-700 ml-2">Michael Chen</span>
+                            </div>
+                            <a href="blog-details.html" class="text-green-600 hover:text-green-700 text-sm font-medium">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 3 -->
+                <article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <img src="/placeholder.svg?height=200&width=400" alt="Blog post" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Upcycling</span>
+                            <span class="text-gray-500 text-sm ml-3">Jan 8, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                            <a href="blog-details.html" class="hover:text-green-600">DIY: Transform Old Jeans into Trendy Pieces</a>
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Step-by-step guide to upcycling your old denim into fashionable new items.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <img src="/placeholder.svg?height=32&width=32" alt="Author" class="w-8 h-8 rounded-full">
+                                <span class="text-sm text-gray-700 ml-2">Lisa Rodriguez</span>
+                            </div>
+                            <a href="blog-details.html" class="text-green-600 hover:text-green-700 text-sm font-medium">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 4 -->
+                <article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <img src="/placeholder.svg?height=200&width=400" alt="Blog post" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Trends</span>
+                            <span class="text-gray-500 text-sm ml-3">Jan 5, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                            <a href="blog-details.html" class="hover:text-green-600">2024 Sustainable Fashion Trends to Watch</a>
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Discover the eco-friendly fashion trends that are shaping the industry this year.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <img src="/placeholder.svg?height=32&width=32" alt="Author" class="w-8 h-8 rounded-full">
+                                <span class="text-sm text-gray-700 ml-2">Alex Thompson</span>
+                            </div>
+                            <a href="blog-details.html" class="text-green-600 hover:text-green-700 text-sm font-medium">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 5 -->
+                <article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <img src="/placeholder.svg?height=200&width=400" alt="Blog post" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Sustainability</span>
+                            <span class="text-gray-500 text-sm ml-3">Jan 3, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                            <a href="blog-details.html" class="hover:text-green-600">Building a Capsule Wardrobe: A Beginner's Guide</a>
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Learn how to create a minimalist wardrobe with versatile pieces that work for any occasion.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <img src="/placeholder.svg?height=32&width=32" alt="Author" class="w-8 h-8 rounded-full">
+                                <span class="text-sm text-gray-700 ml-2">Rachel Green</span>
+                            </div>
+                            <a href="blog-details.html" class="text-green-600 hover:text-green-700 text-sm font-medium">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 6 -->
+                <article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                    <img src="/placeholder.svg?height=200&width=400" alt="Blog post" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Fashion Tips</span>
+                            <span class="text-gray-500 text-sm ml-3">Dec 30, 2023</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                            <a href="blog-details.html" class="hover:text-green-600">How to Care for Your Pre-Loved Clothes</a>
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Essential tips for maintaining and extending the life of your secondhand fashion finds.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <img src="/placeholder.svg?height=32&width=32" alt="Author" class="w-8 h-8 rounded-full">
+                                <span class="text-sm text-gray-700 ml-2">David Kim</span>
+                            </div>
+                            <a href="blog-details.html" class="text-green-600 hover:text-green-700 text-sm font-medium">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-12">
+                <button class="bg-green-600 text-white px-8 py-3 rounded-md font-semibold hover:bg-green-700">
+                    Load More Articles
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="py-16 bg-green-600">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">Stay Updated</h2>
+            <p class="text-green-100 mb-8">Get the latest sustainable fashion tips and stories delivered to your inbox</p>
+            
+            <div class="max-w-md mx-auto flex gap-4">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-md border-0 focus:ring-2 focus:ring-white">
+                <button class="bg-white text-green-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </section>
+    <!--Footer-->
+    {% include 'aroma/footer.html' %}
+</body>
+</html>
