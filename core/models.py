@@ -5,7 +5,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 class ImageType(models.Model): 
     imageTypeName = models.CharField(max_length=200, null=True) 
     def __str__(self):          
-        return f'{self.id} {self.ImageTypeName}'
+        return f'{self.id} | {self.imageTypeName}'
     
 class Image(models.Model): 
     imageName = models.CharField(max_length=200, null=True) 
@@ -15,7 +15,7 @@ class Image(models.Model):
     active = models.CharField(max_length=200, null=True) 
     imageDate = models.DateTimeField(auto_now_add=True, null=True) 
     def __str__(self):          
-        return f'{self.ImageName}'
+        return f'{self.id} | {self.imageName}'
     
 class Menu(models.Model):
     menuNameKH = models.CharField(max_length=200, null=True)
@@ -23,7 +23,7 @@ class Menu(models.Model):
     orderBy = models.IntegerField(blank=True,null=True)
     createdDate = models.DateTimeField(auto_now_add=True, null=True)
     def __str__(self):
-        return f'{self.id} | {self.MenuNameKH} | {self.MenuNameEN} | {self.CreatedDate}'
+        return f'{self.id} | {self.menuNameKH} | {self.menuNameEN} | {self.createdDate}'
     
 class MenuDetail(models.Model):
     menuID = models.ForeignKey(Menu, on_delete=models.CASCADE, null=True)
@@ -36,7 +36,7 @@ class MenuDetail(models.Model):
 class Category(models.Model):
     categoryName = models.CharField(max_length=200, null=True)
     def __str__(self):         
-        return f'{self.id} - {self.categoryName}'
+        return f'{self.id} | {self.categoryName}'
     
 class Product(models.Model):
     productName = models.CharField(max_length=200, null=True)
