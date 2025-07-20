@@ -1,232 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Checkout - ReStyle</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-50">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-50">
     <!--NavBar-->
     {% include 'aroma/navbar.html' %}
-    <!-- Checkout Progress -->
-    <div class="bg-white border-b">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div class="flex items-center justify-center space-x-8">
-                <div class="flex items-center">
-                    <div class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-medium">1</div>
-                    <span class="ml-2 text-green-600 font-medium">Shipping</span>
-                </div>
-                <div class="w-16 h-0.5 bg-gray-300"></div>
-                <div class="flex items-center">
-                    <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-medium">2</div>
-                    <span class="ml-2 text-gray-600">Payment</span>
-                </div>
-                <div class="w-16 h-0.5 bg-gray-300"></div>
-                <div class="flex items-center">
-                    <div class="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-sm font-medium">3</div>
-                    <span class="ml-2 text-gray-600">Review</span>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Checkout Content -->
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Checkout Form -->
-            <div class="lg:col-span-2 space-y-6">
-                <!-- Shipping Information -->
-                <div class="bg-white rounded-lg shadow-sm p-6">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Shipping Information</h2>
-                    <form class="space-y-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                                <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="John">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                                <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Doe">
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                            <input type="email" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="john@example.com">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                            <input type="tel" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="+1 (555) 123-4567">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="123 Main Street">
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">City</label>
-                                <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="New York">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">State</label>
-                                <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                                    <option>Select State</option>
-                                    <option>New York</option>
-                                    <option>California</option>
-                                    <option>Texas</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">ZIP Code</label>
-                                <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="10001">
-                            </div>
-                        </div>
-                    </form>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Checkout Form -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- Shipping Information -->
+          <div class="bg-white rounded-lg shadow-sm p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6">
+              Shipping Information
+            </h2>
+            <form class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >First Name</label
+                  >
+                  <input
+                    type="text"
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    placeholder="John"
+                  />
                 </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Last Name</label
+                  >
+                  <input
+                    type="text"
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    placeholder="Doe"
+                  />
+                </div>
+              </div>
 
-                <!-- Payment Information -->
-                <div class="bg-white rounded-lg shadow-sm p-6">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Payment Information</h2>
-                    <form class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Card Number</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="1234 5678 9012 3456">
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Expiry Date</label>
-                                <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="MM/YY">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">CVV</label>
-                                <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="123">
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Cardholder Name</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="John Doe">
-                        </div>
-                    </form>
-                </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  placeholder="john@example.com"
+                />
+              </div>
 
-                <!-- Shipping Method -->
-                <div class="bg-white rounded-lg shadow-sm p-6">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Shipping Method</h2>
-                    <div class="space-y-3">
-                        <label class="flex items-center p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50">
-                            <input type="radio" name="shipping" class="text-green-600 focus:ring-green-500" checked>
-                            <div class="ml-3 flex-1">
-                                <div class="flex justify-between">
-                                    <span class="font-medium text-gray-900">Standard Shipping</span>
-                                    <span class="text-gray-900">Free</span>
-                                </div>
-                                <p class="text-sm text-gray-500">5-7 business days</p>
-                            </div>
-                        </label>
-                        
-                        <label class="flex items-center p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50">
-                            <input type="radio" name="shipping" class="text-green-600 focus:ring-green-500">
-                            <div class="ml-3 flex-1">
-                                <div class="flex justify-between">
-                                    <span class="font-medium text-gray-900">Express Shipping</span>
-                                    <span class="text-gray-900">$9.99</span>
-                                </div>
-                                <p class="text-sm text-gray-500">2-3 business days</p>
-                            </div>
-                        </label>
-                        
-                        <label class="flex items-center p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50">
-                            <input type="radio" name="shipping" class="text-green-600 focus:ring-green-500">
-                            <div class="ml-3 flex-1">
-                                <div class="flex justify-between">
-                                    <span class="font-medium text-gray-900">Overnight Shipping</span>
-                                    <span class="text-gray-900">$19.99</span>
-                                </div>
-                                <p class="text-sm text-gray-500">Next business day</p>
-                            </div>
-                        </label>
-                    </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Phone Number</label
+                >
+                <input
+                  type="tel"
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  placeholder="+1 (555) 123-4567"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Address</label
+                >
+                <input
+                  type="text"
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  placeholder="123 Main Street"
+                />
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >City</label
+                  >
+                  <input
+                    type="text"
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    placeholder="New York"
+                  />
                 </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >State</label
+                  >
+                  <select
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  >
+                    <option>Phnom Penh</option>
+                    <option>Kompong Cham</option>
+                    <option>Prey Veng</option>
+                    <option>Kratie</option>
+                    <option>Kompot</option>
+                    <option>Preah Sihanouk</option>
+                    <option>Koh Kong</option>
+                    <option>Banteay MeanChey</option>
+                    <option>Kompong Thom</option>
+                    <option>Kompong Speu</option>
+                    <option>Tboung Khmum</option>
+                    <option>Oddar Meanchey</option>
+                    <option>Ratanakiri</option>
+                    <option>Mondulkiri</option>
+                    <option>Kandal</option>
+                    <option>Takeo</option>
+                    <option>Siem Reab</option>
+                    <option>Battambong</option>
+                    <option>Kompong Chhnang</option>
+                    <option>Pursat</option>
+                    <option>Kep</option>
+                    <option>Pailin</option>
+                    <option>Preah Vihea</option>
+                    <option>Stung Treng</option>
+                    <option>Svay Rieng</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >ZIP Code</label
+                  >
+                  <input
+                    type="text"
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    placeholder="10001"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Shipping Method -->
+          <div class="bg-white rounded-lg shadow-sm p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6">
+              Shipping Method
+            </h2>
+            <div class="space-y-3">
+              <label
+                class="flex items-center p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50"
+              >
+                <input
+                  type="radio"
+                  name="shipping"
+                  class="text-green-600 focus:ring-green-500"
+                  checked
+                />
+                <div class="ml-3 flex-1">
+                  <div class="flex justify-between">
+                    <span class="font-medium text-gray-900"
+                      >Standard Shipping</span
+                    >
+                    <span class="text-gray-900">Free</span>
+                  </div>
+                  <p class="text-sm text-gray-500">5-7 business days</p>
+                </div>
+              </label>
+
+              <label
+                class="flex items-center p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50"
+              >
+                <input
+                  type="radio"
+                  name="shipping"
+                  class="text-green-600 focus:ring-green-500"
+                />
+                <div class="ml-3 flex-1">
+                  <div class="flex justify-between">
+                    <span class="font-medium text-gray-900"
+                      >Express Shipping</span
+                    >
+                    <span class="text-gray-900">$9.99</span>
+                  </div>
+                  <p class="text-sm text-gray-500">2-3 business days</p>
+                </div>
+              </label>
+
+              <label
+                class="flex items-center p-3 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50"
+              >
+                <input
+                  type="radio"
+                  name="shipping"
+                  class="text-green-600 focus:ring-green-500"
+                />
+                <div class="ml-3 flex-1">
+                  <div class="flex justify-between">
+                    <span class="font-medium text-gray-900"
+                      >Overnight Shipping</span
+                    >
+                    <span class="text-gray-900">$19.99</span>
+                  </div>
+                  <p class="text-sm text-gray-500">Next business day</p>
+                </div>
+              </label>
             </div>
-
-            <!-- Order Summary -->
-            <div class="lg:col-span-1">
-                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Order Summary</h2>
-                    
-                    <!-- Order Items -->
-                    <div class="space-y-4 mb-6">
-                        <div class="flex gap-4">
-                            <img src="/placeholder.svg?height=80&width=80" alt="Vintage Designer Dress" class="w-20 h-20 object-cover rounded">
-                            <div class="flex-1">
-                                <h3 class="font-medium text-gray-900">Vintage Designer Dress</h3>
-                                <p class="text-sm text-gray-500">Size M • Zara</p>
-                                <p class="text-sm text-gray-500">Qty: 1</p>
-                                <p class="font-semibold text-green-600">$45.00</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex gap-4">
-                            <img src="/placeholder.svg?height=80&width=80" alt="Leather Boots" class="w-20 h-20 object-cover rounded">
-                            <div class="flex-1">
-                                <h3 class="font-medium text-gray-900">Leather Ankle Boots</h3>
-                                <p class="text-sm text-gray-500">Size 8 • Dr. Martens</p>
-                                <p class="text-sm text-gray-500">Qty: 1</p>
-                                <p class="font-semibold text-green-600">$85.00</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Order Totals -->
-                    <div class="border-t pt-4 space-y-2">
-                        <div class="flex justify-between text-sm">
-                            <span class="text-gray-600">Subtotal</span>
-                            <span class="text-gray-900">$130.00</span>
-                        </div>
-                        <div class="flex justify-between text-sm">
-                            <span class="text-gray-600">Shipping</span>
-                            <span class="text-gray-900">Free</span>
-                        </div>
-                        <div class="flex justify-between text-sm">
-                            <span class="text-gray-600">Tax</span>
-                            <span class="text-gray-900">$10.40</span>
-                        </div>
-                        <div class="border-t pt-2 flex justify-between font-semibold text-lg">
-                            <span class="text-gray-900">Total</span>
-                            <span class="text-gray-900">$140.40</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Promo Code -->
-                    <div class="mt-6">
-                        <div class="flex gap-2">
-                            <input type="text" placeholder="Promo code" class="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                            <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-md text-sm hover:bg-gray-200">Apply</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Place Order Button -->
-                    <a href="{% url 'confirmation' %}" class="w-full bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700 mt-6 block text-center">
-                        Proceed to Pay
-                    </a>
-                    
-                    <!-- Security Info -->
-                    <div class="mt-4 flex items-center justify-center text-sm text-gray-500">
-                        <i class="fas fa-lock mr-2"></i>
-                        <span>Secure checkout with SSL encryption</span>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+
+        <!-- Order Summary -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6">
+              Order Summary
+            </h2>
+
+            <!-- Order Items -->
+            <div class="space-y-4 mb-6">
+              <div class="flex gap-4">
+                <img
+                  src="/placeholder.svg?height=80&width=80"
+                  alt="Vintage Designer Dress"
+                  class="w-20 h-20 object-cover rounded"
+                />
+                <div class="flex-1">
+                  <h3 class="font-medium text-gray-900">
+                    Vintage Designer Dress
+                  </h3>
+                  <p class="text-sm text-gray-500">Size M • Zara</p>
+                  <p class="text-sm text-gray-500">Qty: 1</p>
+                  <p class="font-semibold text-green-600">$45.00</p>
+                </div>
+              </div>
+
+              <div class="flex gap-4">
+                <img
+                  src="/placeholder.svg?height=80&width=80"
+                  alt="Leather Boots"
+                  class="w-20 h-20 object-cover rounded"
+                />
+                <div class="flex-1">
+                  <h3 class="font-medium text-gray-900">Leather Ankle Boots</h3>
+                  <p class="text-sm text-gray-500">Size 8 • Dr. Martens</p>
+                  <p class="text-sm text-gray-500">Qty: 1</p>
+                  <p class="font-semibold text-green-600">$85.00</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Totals -->
+            <div class="border-t pt-4 space-y-2">
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Subtotal</span>
+                <span class="text-gray-900">$130.00</span>
+              </div>
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-600">Shipping</span>
+                <span class="text-gray-900">Free</span>
+              </div>
+              <div
+                class="border-t pt-2 flex justify-between font-semibold text-lg"
+              >
+                <span class="text-gray-900">Total</span>
+                <span class="text-gray-900">$140.40</span>
+              </div>
+            </div>
+
+            <!--Uplaod Qr-->
+            <div class="">
+              <select id="qrSelect" class="w-full border border-gray-200 py-2 rounded-md my-3">
+                <option disabled selected>Select QR</option>
+              </select>
+              <div class="mb-3 space-y-3">
+                <label for="qrUpload" class="text-gray-500"
+                  >Upload Payment Reciet here:</label
+                >
+                <input
+                  type="file"
+                  id="qrUpload"
+                  accept="image/*"
+                  class=""
+                />
+              </div>
+            </div>
+            <!-- Place Order Button -->
+            <a
+              href="{% url 'confirmation' %}"
+              class="w-full bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700 mt-6 block text-center"
+            >
+              Proceed to Pay
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
     <!--Footer-->
     {% include 'aroma/footer.html' %}
-</body>
+  </body>
 </html>
