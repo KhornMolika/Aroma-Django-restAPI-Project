@@ -124,14 +124,6 @@ class ImageViewSet(viewsets.ModelViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
 
-class MenuViewSet(viewsets.ModelViewSet):
-    queryset = Menu.objects.all()
-    serializer_class = MenuSerializer
-
-class MenuDetailViewSet(viewsets.ModelViewSet):
-    queryset = MenuDetail.objects.all()
-    serializer_class = MenuDetailSerializer
-
 # ================================================ Product ====================================
 
 class CategoryViewSet(viewsets.ModelViewSet):

@@ -5,8 +5,6 @@ from .models import *
 
 admin.site.register(Image)
 admin.site.register(ImageType)
-admin.site.register(Menu)
-admin.site.register(MenuDetail)
 admin.site.register(Category)
 admin.site.register(Product)
 admin.site.register(ProductDetail)

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ReStyle - Sustainable Fashion Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-50">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-50">
     <!--NavBar-->
     {% include 'aroma/navbar.html' %}
     <!-- Hero Section -->
@@ -27,5 +30,31 @@
     
     <!--Footer-->
     {% include 'aroma/footer.html' %}
-</body>
+  </body>
+
+  <script>
+    // Helper to make a column card
+    function FuncHeroSectionImage() {
+      const IMAGE_API = "/api/images/";
+      const ImageTypeId = 2; // <-- CHANGE this ID if neede
+      fetch(IMAGE_API)
+        .then((res) => res.json())
+        .then((images) => {
+          const divHeroSection = document.getElementById("hero-section");
+          const filteredImages = images.filter(
+            (img) => img.imageTypeID === ImageTypeId
+          );
+          filteredImages.forEach((img, index) => {
+            divHeroSection.innerHTML += `
+                <img src="${img.imageURL}" alt="Sustainable Fashion" class="rounded-lg shadow-xl">
+                `;
+          });
+        })
+        .catch((err) => {
+          console.error("Image load error:", err);
+        });
+    }
+
+    FuncHeroSectionImage();
+  </script>
 </html>

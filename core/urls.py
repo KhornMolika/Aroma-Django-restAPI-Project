@@ -13,9 +13,6 @@ router.register(r'addresses', AddressViewSet, basename='addresses')
 router.register(r'image-types', ImageTypeViewSet, basename='imagetype')
 router.register(r'images', ImageViewSet, basename='image')
 
-router.register(r'menus', MenuViewSet, basename='menu')
-router.register(r'menu-details', MenuDetailViewSet, basename='menudetail')
-
 router.register(r'categories', CategoryViewSet, basename='category')
 router.register(r'products', ProductViewSet, basename='product')
 router.register(r'product-details', ProductDetailViewSet, basename='productdetail')
