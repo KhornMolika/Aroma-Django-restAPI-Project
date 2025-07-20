@@ -34,9 +34,6 @@ class Product(models.Model):
         return f'{self.id} | {self.productName}'
 
 class ProductDetail(models.Model):
-    # productDetailName = models.CharField(max_length=200, null=True)
-    # productDetailImage = models.ImageField(upload_to='images/productDetail/',null=True,blank=True)
-    # description =  RichTextUploadingField(null=True)
     productID = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     availability = models.CharField(max_length=200, null=True)
     stock = models.PositiveIntegerField(default=0)
@@ -47,7 +44,7 @@ class ProductDetail(models.Model):
     color = models.CharField(max_length=200, null=True)
     productDetailDate = models.DateTimeField (auto_now_add=True, null=True)
     def __str__(self):         
-        return f'{self.productID.productName} - {self.productDetailName}'
+        return f'{self.productID} - {self.productID.productName}'
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
