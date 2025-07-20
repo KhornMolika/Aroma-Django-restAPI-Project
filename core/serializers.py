@@ -161,15 +161,6 @@ class ImageSerializer(serializers.ModelSerializer):
         model = Image
         fields = '__all__'
 
-class MenuSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Menu
-        fields = '__all__'
-
-class MenuDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MenuDetail
-        fields = '__all__'
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

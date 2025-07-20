@@ -16,21 +16,6 @@ class Image(models.Model):
     imageDate = models.DateTimeField(auto_now_add=True, null=True) 
     def __str__(self):          
         return f'{self.id} | {self.imageName}'
-    
-class Menu(models.Model):
-    menuNameKH = models.CharField(max_length=200, null=True)
-    menuNameEN = models.CharField(max_length=200, null=True)
-    orderBy = models.IntegerField(blank=True,null=True)
-    createdDate = models.DateTimeField(auto_now_add=True, null=True)
-    def __str__(self):
-        return f'{self.id} | {self.menuNameKH} | {self.menuNameEN} | {self.createdDate}'
-    
-class MenuDetail(models.Model):
-    menuID = models.ForeignKey(Menu, on_delete=models.CASCADE, null=True)
-    description =  RichTextUploadingField(null=True)
-    menuDetailDate = models.DateTimeField (auto_now_add=True, null=True)
-    def __str__(self):         
-        return self.MenuID.MenuNameEN
 
 
 class Category(models.Model):
