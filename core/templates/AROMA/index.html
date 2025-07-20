@@ -1,250 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ReStyle - Sustainable Fashion Marketplace</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-50">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-50">
     <!--NavBar-->
     {% include 'aroma/navbar.html' %}
     <!-- Hero Section -->
     <section class="bg-gradient-to-r from-green-50 to-blue-50 py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-                        Sustainable Fashion
-                        <span class="text-green-600">Marketplace</span>
-                    </h1>
-                    <p class="text-xl text-gray-600 mb-8">
-                        Buy and sell pre-loved fashion items. Give clothes a second life while saving money and the planet.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="{% url 'shop' %}" class="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-green-700 text-center">
-                            Shop Now
-                        </a>
-                    </div>
-                </div>
-                <div class="relative">
-                    <img src="/placeholder.svg?height=500&width=600" alt="Sustainable Fashion" class="rounded-lg shadow-xl">
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+              Sustainable Fashion
+              <span class="text-green-600">Marketplace</span>
+            </h1>
+            <p class="text-xl text-gray-600 mb-8">
+              Buy and sell pre-loved fashion items. Give clothes a second life
+              while saving money and the planet.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a
+                href="{% url 'shop' %}"
+                class="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-green-700 text-center"
+              >
+                Shop Now
+              </a>
             </div>
+          </div>
+          <div class="relative" id="hero-section">
+            <!-- <img src="https://i.pinimg.com/1200x/b7/70/6f/b7706ffd609d9d5e44805831580511a9.jpg" alt="Sustainable Fashion" class="rounded-lg shadow-xl" id="hero-section-image"> -->
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Categories -->
     <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Shop by Category</h2>
-                <p class="text-gray-600">Find exactly what you're looking for</p>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="group cursor-pointer">
-                    <div class="bg-gray-100 rounded-lg p-8 text-center hover:bg-green-50 transition-colors">
-                        <i class="fas fa-tshirt text-4xl text-green-600 mb-4"></i>
-                        <h3 class="font-semibold text-gray-900">Clothing</h3>
-                        <p class="text-sm text-gray-500 mt-1">2,340 items</p>
-                    </div>
-                </div>
-                <div class="group cursor-pointer">
-                    <div class="bg-gray-100 rounded-lg p-8 text-center hover:bg-green-50 transition-colors">
-                        <i class="fas fa-shoe-prints text-4xl text-green-600 mb-4"></i>
-                        <h3 class="font-semibold text-gray-900">Shoes</h3>
-                        <p class="text-sm text-gray-500 mt-1">890 items</p>
-                    </div>
-                </div>
-                <div class="group cursor-pointer">
-                    <div class="bg-gray-100 rounded-lg p-8 text-center hover:bg-green-50 transition-colors">
-                        <i class="fas fa-gem text-4xl text-green-600 mb-4"></i>
-                        <h3 class="font-semibold text-gray-900">Accessories</h3>
-                        <p class="text-sm text-gray-500 mt-1">1,250 items</p>
-                    </div>
-                </div>
-                <div class="group cursor-pointer">
-                    <div class="bg-gray-100 rounded-lg p-8 text-center hover:bg-green-50 transition-colors">
-                        <i class="fas fa-handbag text-4xl text-green-600 mb-4"></i>
-                        <h3 class="font-semibold text-gray-900">Bags</h3>
-                        <p class="text-sm text-gray-500 mt-1">670 items</p>
-                    </div>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Shop by Category
+          </h2>
+          <p class="text-gray-600">Find exactly what you're looking for</p>
         </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="group cursor-pointer">
+            <div
+              class="bg-gray-100 rounded-lg p-8 text-center hover:bg-green-50 transition-colors"
+            >
+              <i class="fas fa-tshirt text-4xl text-green-600 mb-4"></i>
+              <h3 class="font-semibold text-gray-900">Clothing</h3>
+              <p class="text-sm text-gray-500 mt-1">2,340 items</p>
+            </div>
+          </div>
+          <div class="group cursor-pointer">
+            <div
+              class="bg-gray-100 rounded-lg p-8 text-center hover:bg-green-50 transition-colors"
+            >
+              <i class="fas fa-shoe-prints text-4xl text-green-600 mb-4"></i>
+              <h3 class="font-semibold text-gray-900">Shoes</h3>
+              <p class="text-sm text-gray-500 mt-1">890 items</p>
+            </div>
+          </div>
+          <div class="group cursor-pointer">
+            <div
+              class="bg-gray-100 rounded-lg p-8 text-center hover:bg-green-50 transition-colors"
+            >
+              <i class="fas fa-gem text-4xl text-green-600 mb-4"></i>
+              <h3 class="font-semibold text-gray-900">Accessories</h3>
+              <p class="text-sm text-gray-500 mt-1">1,250 items</p>
+            </div>
+          </div>
+          <div class="group cursor-pointer">
+            <div
+              class="bg-gray-100 rounded-lg p-8 text-center hover:bg-green-50 transition-colors"
+            >
+              <i class="fa-solid fa-briefcase text-4xl text-green-600 mb-4"></i>
+              <h3 class="font-semibold text-gray-900">Bags</h3>
+              <p class="text-sm text-gray-500 mt-1">670 items</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Featured Products -->
     <section class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Items</h2>
-                <p class="text-gray-600">Handpicked pre-loved treasures</p>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Product 1 -->
-                <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                    <div class="relative">
-                        <img src="/placeholder.svg?height=300&width=300" alt="Vintage Designer Dress" class="w-full h-64 object-cover rounded-t-lg">
-                        <button class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-sm hover:bg-gray-50">
-                            <i class="far fa-heart text-gray-400"></i>
-                        </button>
-                        <span class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 text-xs rounded">Like New</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-900 mb-1">Vintage Designer Dress</h3>
-                        <p class="text-sm text-gray-500 mb-2">Size M • Zara</p>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-lg font-bold text-green-600">$45</span>
-                                <span class="text-sm text-gray-400 line-through ml-2">$120</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-xs"></i>
-                                <span class="text-xs text-gray-500 ml-1">4.8</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                    <div class="relative">
-                        <img src="/placeholder.svg?height=300&width=300" alt="Leather Boots" class="w-full h-64 object-cover rounded-t-lg">
-                        <button class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-sm hover:bg-gray-50">
-                            <i class="far fa-heart text-gray-400"></i>
-                        </button>
-                        <span class="absolute top-3 left-3 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Good</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-900 mb-1">Leather Ankle Boots</h3>
-                        <p class="text-sm text-gray-500 mb-2">Size 8 • Dr. Martens</p>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-lg font-bold text-green-600">$85</span>
-                                <span class="text-sm text-gray-400 line-through ml-2">$180</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-xs"></i>
-                                <span class="text-xs text-gray-500 ml-1">4.6</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                    <div class="relative">
-                        <img src="/placeholder.svg?height=300&width=300" alt="Designer Handbag" class="w-full h-64 object-cover rounded-t-lg">
-                        <button class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-sm hover:bg-gray-50">
-                            <i class="fas fa-heart text-red-500"></i>
-                        </button>
-                        <span class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 text-xs rounded">Excellent</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-900 mb-1">Designer Handbag</h3>
-                        <p class="text-sm text-gray-500 mb-2">Michael Kors</p>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-lg font-bold text-green-600">$120</span>
-                                <span class="text-sm text-gray-400 line-through ml-2">$280</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-xs"></i>
-                                <span class="text-xs text-gray-500 ml-1">4.9</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                    <div class="relative">
-                        <img src="/placeholder.svg?height=300&width=300" alt="Vintage Denim Jacket" class="w-full h-64 object-cover rounded-t-lg">
-                        <button class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-sm hover:bg-gray-50">
-                            <i class="far fa-heart text-gray-400"></i>
-                        </button>
-                        <span class="absolute top-3 left-3 bg-yellow-500 text-white px-2 py-1 text-xs rounded">Good</span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold text-gray-900 mb-1">Vintage Denim Jacket</h3>
-                        <p class="text-sm text-gray-500 mb-2">Size L • Levi's</p>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-lg font-bold text-green-600">$65</span>
-                                <span class="text-sm text-gray-400 line-through ml-2">$150</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400 text-xs"></i>
-                                <span class="text-xs text-gray-500 ml-1">4.7</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="{% url 'shop' %}" class="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-green-700">
-                    View All Products
-                </a>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Items</h2>
+          <p class="text-gray-600">Handpicked pre-loved treasures</p>
         </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Product 1 -->
+          <div
+            class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div class="relative">
+              <img
+                src="/placeholder.svg?height=300&width=300"
+                alt="Vintage Designer Dress"
+                class="w-full h-64 object-cover rounded-t-lg"
+              />
+              <button
+                class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-sm hover:bg-gray-50"
+              >
+                <i class="far fa-heart text-gray-400"></i>
+              </button>
+              <span
+                class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 text-xs rounded"
+                >Like New</span
+              >
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-900 mb-1">
+                Vintage Designer Dress
+              </h3>
+              <p class="text-sm text-gray-500 mb-2">Size M • Zara</p>
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-lg font-bold text-green-600">$45</span>
+                  <span class="text-sm text-gray-400 line-through ml-2"
+                    >$120</span
+                  >
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-400 text-xs"></i>
+                  <span class="text-xs text-gray-500 ml-1">4.8</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div
+            class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div class="relative">
+              <img
+                src="/placeholder.svg?height=300&width=300"
+                alt="Leather Boots"
+                class="w-full h-64 object-cover rounded-t-lg"
+              />
+              <button
+                class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-sm hover:bg-gray-50"
+              >
+                <i class="far fa-heart text-gray-400"></i>
+              </button>
+              <span
+                class="absolute top-3 left-3 bg-yellow-500 text-white px-2 py-1 text-xs rounded"
+                >Good</span
+              >
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-900 mb-1">
+                Leather Ankle Boots
+              </h3>
+              <p class="text-sm text-gray-500 mb-2">Size 8 • Dr. Martens</p>
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-lg font-bold text-green-600">$85</span>
+                  <span class="text-sm text-gray-400 line-through ml-2"
+                    >$180</span
+                  >
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-400 text-xs"></i>
+                  <span class="text-xs text-gray-500 ml-1">4.6</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div
+            class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div class="relative">
+              <img
+                src="/placeholder.svg?height=300&width=300"
+                alt="Designer Handbag"
+                class="w-full h-64 object-cover rounded-t-lg"
+              />
+              <button
+                class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-sm hover:bg-gray-50"
+              >
+                <i class="fas fa-heart text-red-500"></i>
+              </button>
+              <span
+                class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 text-xs rounded"
+                >Excellent</span
+              >
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-900 mb-1">Designer Handbag</h3>
+              <p class="text-sm text-gray-500 mb-2">Michael Kors</p>
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-lg font-bold text-green-600">$120</span>
+                  <span class="text-sm text-gray-400 line-through ml-2"
+                    >$280</span
+                  >
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-400 text-xs"></i>
+                  <span class="text-xs text-gray-500 ml-1">4.9</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div
+            class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div class="relative">
+              <img
+                src="/placeholder.svg?height=300&width=300"
+                alt="Vintage Denim Jacket"
+                class="w-full h-64 object-cover rounded-t-lg"
+              />
+              <button
+                class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-sm hover:bg-gray-50"
+              >
+                <i class="far fa-heart text-gray-400"></i>
+              </button>
+              <span
+                class="absolute top-3 left-3 bg-yellow-500 text-white px-2 py-1 text-xs rounded"
+                >Good</span
+              >
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-900 mb-1">
+                Vintage Denim Jacket
+              </h3>
+              <p class="text-sm text-gray-500 mb-2">Size L • Levi's</p>
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-lg font-bold text-green-600">$65</span>
+                  <span class="text-sm text-gray-400 line-through ml-2"
+                    >$150</span
+                  >
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-star text-yellow-400 text-xs"></i>
+                  <span class="text-xs text-gray-500 ml-1">4.7</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <a
+            href="{% url 'shop' %}"
+            class="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-green-700"
+          >
+            View All Products
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- Why Choose Us -->
     <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Choose ReStyle?</h2>
-                <p class="text-gray-600">Making sustainable fashion accessible to everyone</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-leaf text-green-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Eco-Friendly</h3>
-                    <p class="text-gray-600">Reduce fashion waste by giving clothes a second life. Every purchase helps the environment.</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-shield-alt text-green-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Quality Guaranteed</h3>
-                    <p class="text-gray-600">All items are carefully inspected and authenticated before listing. Shop with confidence.</p>
-                </div>
-                
-                <div class="text-center">
-                    <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-dollar-sign text-green-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Great Prices</h3>
-                    <p class="text-gray-600">Save up to 70% on designer and brand name items. Luxury fashion at affordable prices.</p>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Why Choose ReStyle?
+          </h2>
+          <p class="text-gray-600">
+            Making sustainable fashion accessible to everyone
+          </p>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div
+              class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-leaf text-green-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              Eco-Friendly
+            </h3>
+            <p class="text-gray-600">
+              Reduce fashion waste by giving clothes a second life. Every
+              purchase helps the environment.
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-shield-alt text-green-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              Quality Guaranteed
+            </h3>
+            <p class="text-gray-600">
+              All items are carefully inspected and authenticated before
+              listing. Shop with confidence.
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-dollar-sign text-green-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              Great Prices
+            </h3>
+            <p class="text-gray-600">
+              Save up to 70% on designer and brand name items. Luxury fashion at
+              affordable prices.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Newsletter -->
     <section class="py-16 bg-green-600">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold text-white mb-4">Stay Updated</h2>
-            <p class="text-green-100 mb-8">Get notified about new arrivals and exclusive deals</p>
-            
-            <div class="max-w-md mx-auto flex gap-4">
-                <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-md border-0 focus:ring-2 focus:ring-white">
-                <button class="bg-white text-green-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100">
-                    Subscribe
-                </button>
-            </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4">Stay Updated</h2>
+        <p class="text-green-100 mb-8">
+          Get notified about new arrivals and exclusive deals
+        </p>
+
+        <div class="max-w-md mx-auto flex gap-4">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            class="flex-1 px-4 py-3 rounded-md border-0 focus:ring-2 focus:ring-white"
+          />
+          <button
+            class="bg-white text-green-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100"
+          >
+            Subscribe
+          </button>
         </div>
+      </div>
     </section>
     <!--Footer-->
     {% include 'aroma/footer.html' %}
-</body>
+  </body>
+
+  <script>
+    // Helper to make a column card
+    function FuncHeroSectionImage() {
+      const IMAGE_API = "/api/images/";
+      const ImageTypeId = 2; // <-- CHANGE this ID if neede
+      fetch(IMAGE_API)
+        .then((res) => res.json())
+        .then((images) => {
+          const divHeroSection = document.getElementById("hero-section");
+          const filteredImages = images.filter(
+            (img) => img.imageTypeID === ImageTypeId
+          );
+          filteredImages.forEach((img, index) => {
+            divHeroSection.innerHTML += `
+                <img src="${img.imageURL}" alt="Sustainable Fashion" class="rounded-lg shadow-xl">
+                `;
+          });
+        })
+        .catch((err) => {
+          console.error("Image load error:", err);
+        });
+    }
+
+    FuncHeroSectionImage();
+  </script>
 </html>
