@@ -28,20 +28,23 @@ class Product(models.Model):
     categoryID = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     unitPrice = models.DecimalField(max_digits=10, decimal_places=2)
     productDescript =  RichTextUploadingField(null=True)
-    availability = models.CharField(max_length=200, null=True)
-    stock = models.PositiveIntegerField()
     productImage = models.ImageField(upload_to='images/Products/',null=True,blank=True)
     productDate = models.DateTimeField(auto_now_add=True, null=True)
     def __str__(self):         
-        return self.productName
+        return f'{self.id} | {self.productName}'
 
 class ProductDetail(models.Model):
-    productDetailName = models.CharField(max_length=200, null=True)
-    productDetailImage = models.ImageField(upload_to='images/productDetail/',null=True,blank=True)
+    # productDetailName = models.CharField(max_length=200, null=True)
+    # productDetailImage = models.ImageField(upload_to='images/productDetail/',null=True,blank=True)
+    # description =  RichTextUploadingField(null=True)
     productID = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
-    Description =  RichTextUploadingField(null=True)
-    Information = RichTextUploadingField(null=True)
-    Reviews = RichTextUploadingField(null=True)
+    availability = models.CharField(max_length=200, null=True)
+    stock = models.PositiveIntegerField(default=0)
+    brand = models.CharField(max_length=200, null=True)
+    size = models.CharField(max_length=200, null=True)
+    condition = models.CharField(max_length=200, null=True)
+    material = models.CharField(max_length=200, null=True)
+    color = models.CharField(max_length=200, null=True)
     productDetailDate = models.DateTimeField (auto_now_add=True, null=True)
     def __str__(self):         
         return f'{self.productID.productName} - {self.productDetailName}'
