@@ -5,7 +5,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 class ImageType(models.Model): 
     imageTypeName = models.CharField(max_length=200, null=True) 
     def __str__(self):          
-        return f'{self.id} {self.ImageTypeName}'
+        return f'{self.id} {self.imageTypeName}'
     
 class Image(models.Model): 
     imageName = models.CharField(max_length=200, null=True) 
