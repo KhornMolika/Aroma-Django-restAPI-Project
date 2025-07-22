@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from rest_framework import generics
 from rest_framework.views import APIView
+
 from .models import *
 from .serializers import *
 
@@ -15,8 +15,18 @@ from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
 
 # RegisterViewSet
-class RegisterView(generics.CreateAPIView):
-    serializer_class = RegisterSerializer  
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import RegisterSerializer
+
+class RegisterAPIView(APIView):
+    def post(self, request):
+        serializer = RegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            return Response(serializer.to_representation(user), status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
 
 # JWT Login View with optional remember me
@@ -61,17 +71,6 @@ class ResetPasswordView(APIView):
 
 
 # HTML Page to serve Reset Form
-def login_page(request):
-    return render(request, 'test_login_jwt_&_remember_me/login_page.html')
-
-def forgot_password_page(request):
-    return render(request, 'test_login_jwt_&_remember_me/forgot_password_page.html')
-
-def reset_password_page(request, uid, token):
-    return render(request, 'test_login_jwt_&_remember_me/reset_password_page.html', {'uid': uid, 'token': token})
-
-def home_page(request):
-    return render(request, 'test_login_jwt_&_remember_me/home_page.html')
 
 def blog(request):
     return render(request, 'aroma/blog.html')

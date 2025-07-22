@@ -138,7 +138,7 @@ class BlogCategory(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
-    image = models.ImageField(upload_to='blogs/')
+    image = models.ImageField(upload_to='images/blogs/')
     author = models.CharField(max_length=100)
     category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL, null=True, related_name='blogs')
     views = models.PositiveIntegerField(default=0)
