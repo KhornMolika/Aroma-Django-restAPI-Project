@@ -5,7 +5,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 class ImageType(models.Model): 
     imageTypeName = models.CharField(max_length=200, null=True) 
     def __str__(self):          
-        return f'{self.id} {self.ImageTypeName}'
+        return f'{self.id} | {self.imageTypeName}'
     
 class Image(models.Model): 
     imageName = models.CharField(max_length=200, null=True) 
@@ -15,55 +15,41 @@ class Image(models.Model):
     active = models.CharField(max_length=200, null=True) 
     imageDate = models.DateTimeField(auto_now_add=True, null=True) 
     def __str__(self):          
-        return f'{self.ImageName}'
-    
-class Menu(models.Model):
-    menuNameKH = models.CharField(max_length=200, null=True)
-    menuNameEN = models.CharField(max_length=200, null=True)
-    orderBy = models.IntegerField(blank=True,null=True)
-    createdDate = models.DateTimeField(auto_now_add=True, null=True)
-    def __str__(self):
-        return f'{self.id} | {self.MenuNameKH} | {self.MenuNameEN} | {self.CreatedDate}'
-    
-class MenuDetail(models.Model):
-    menuID = models.ForeignKey(Menu, on_delete=models.CASCADE, null=True)
-    description =  RichTextUploadingField(null=True)
-    menuDetailDate = models.DateTimeField (auto_now_add=True, null=True)
-    def __str__(self):         
-        return self.MenuID.MenuNameEN
+        return f'{self.id} | {self.imageName}'
 
 
 class Category(models.Model):
     categoryName = models.CharField(max_length=200, null=True)
     def __str__(self):         
-        return f'{self.id} - {self.categoryName}'
+        return f'{self.id} | {self.categoryName}'
     
 class Product(models.Model):
     productName = models.CharField(max_length=200, null=True)
     categoryID = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     unitPrice = models.DecimalField(max_digits=10, decimal_places=2)
     productDescript =  RichTextUploadingField(null=True)
-    availability = models.CharField(max_length=200, null=True)
-    stock = models.PositiveIntegerField()
     productImage = models.ImageField(upload_to='images/Products/',null=True,blank=True)
     productDate = models.DateTimeField(auto_now_add=True, null=True)
     def __str__(self):         
-        return self.productName
+        return f'{self.id} | {self.productName}'
 
 class ProductDetail(models.Model):
-    productDetailName = models.CharField(max_length=200, null=True)
-    productDetailImage = models.ImageField(upload_to='images/productDetail/',null=True,blank=True)
     productID = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
-    Description =  RichTextUploadingField(null=True)
-    Information = RichTextUploadingField(null=True)
-    Reviews = RichTextUploadingField(null=True)
+    availability = models.CharField(max_length=200, null=True)
+    stock = models.PositiveIntegerField(default=0)
+    brand = models.CharField(max_length=200, null=True)
+    size = models.CharField(max_length=200, null=True)
+    condition = models.CharField(max_length=200, null=True)
+    material = models.CharField(max_length=200, null=True)
+    color = models.CharField(max_length=200, null=True)
     productDetailDate = models.DateTimeField (auto_now_add=True, null=True)
     def __str__(self):         
-        return f'{self.productID.productName} - {self.productDetailName}'
+        return f'{self.productID} - {self.productID.productName}'
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=10, blank=True)
+    profileImage = models.ImageField(upload_to='images/profile/',null=True,blank=True)
 
     def __str__(self):
         return f'cusID : {self.id} - {self.user.username}'

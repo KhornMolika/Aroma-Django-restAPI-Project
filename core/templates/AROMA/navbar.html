@@ -22,47 +22,11 @@
                             <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"></span>
                         </a>
                         
-                        <!-- Shop Dropdown -->
-                        <div class="relative group">
-                            <button class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors flex items-center">
-                                Shop
-                                <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"></i>
-                            </button>
-                            <div class="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                                <div class="p-4">
-                                    <div class="grid grid-cols-1 gap-2">
-                                        <a href="{% url 'shop' %}" class="flex items-center p-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors">
-                                            <i class="fas fa-tshirt mr-3 text-green-500"></i>
-                                            <div>
-                                                <div class="font-medium">All Products</div>
-                                                <div class="text-xs text-gray-500">Browse everything</div>
-                                            </div>
-                                        </a>
-                                        <a href="{% url 'shop' %}" class="flex items-center p-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors">
-                                            <i class="fas fa-female mr-3 text-pink-500"></i>
-                                            <div>
-                                                <div class="font-medium">Women's</div>
-                                                <div class="text-xs text-gray-500">Dresses, tops & more</div>
-                                            </div>
-                                        </a>
-                                        <a href="{% url 'shop' %}" class="flex items-center p-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors">
-                                            <i class="fas fa-male mr-3 text-blue-500"></i>
-                                            <div>
-                                                <div class="font-medium">Men's</div>
-                                                <div class="text-xs text-gray-500">Shirts, pants & more</div>
-                                            </div>
-                                        </a>
-                                        <a href="{% url 'shop' %}" class="flex items-center p-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors">
-                                            <i class="fas fa-gem mr-3 text-purple-500"></i>
-                                            <div>
-                                                <div class="font-medium">Accessories</div>
-                                                <div class="text-xs text-gray-500">Bags, jewelry & more</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Shop  -->
+                        <a href="{% url 'shop' %}" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors relative group">
+                            Shop
+                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"></span>
+                        </a>
                         
                         <a href="{% url 'blog' %}" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors relative group">
                             Blog

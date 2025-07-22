@@ -131,7 +131,7 @@ class CustomerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Customer
-        fields = ['id', 'user', 'phone']
+        fields = ['id', 'user', 'phone', 'profileImage']
 
     def create(self, validated_data):
         # Pop nested user data from the validated data
@@ -161,15 +161,6 @@ class ImageSerializer(serializers.ModelSerializer):
         model = Image
         fields = '__all__'
 
-class MenuSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Menu
-        fields = '__all__'
-
-class MenuDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MenuDetail
-        fields = '__all__'
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
