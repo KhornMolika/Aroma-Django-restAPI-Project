@@ -89,34 +89,16 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         try:
             customer = Customer.objects.get(user=user)
             data['phone'] = customer.phone
-            data['profile_image'] = customer.profileImage
+            if customer.profileImage and hasattr(customer.profileImage, 'url'):
+                data['profile_image'] = customer.profileImage.url
+            else:
+                data['profile_image'] = None  # or a default image URL
         except Customer.DoesNotExist:
             data['phone'] = None
-            data['profile_image'] = None
+            data['profile_image'] = getattr(customer, 'profileImage', None)
 
         data['remember_me'] = remember_me
 
-        return data
-
-
-# Forgot Password Serializer
-class ForgotPasswordSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-
-    def validate_email(self, value):
-        if not User.objects.filter(email=value).exists():
-            raise serializers.ValidationError("User with this email does not exist.")
-        return value
-
-
-# Reset Password Serializer
-class ResetPasswordSerializer(serializers.Serializer):
-    password = serializers.CharField(write_only=True)
-    confirm_password = serializers.CharField(write_only=True)
-
-    def validate(self, data):
-        if data['password'] != data['confirm_password']:
-            raise serializers.ValidationError("Passwords do not match.")
         return data
 
 

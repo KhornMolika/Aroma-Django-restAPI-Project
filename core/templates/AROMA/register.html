@@ -329,7 +329,7 @@
           <img
             src=""
             alt="Sustainable Fashion Community"
-            class="w-full h-full object-cover opacity-30"
+            class="w-full h-full object-cover opacity-30 "
           />
         </div>
         <div
@@ -492,9 +492,15 @@
             if (response.ok) {
               const data = await response.json();
               localStorage.setItem("access_token", data.access);
+              localStorage.setItem("refresh_token", data.refresh);
+              localStorage.setItem("username", data.username);
+
+              updateNavbar();
+
               alert("Account created successfully!");
 
-              // window.location.href = '/otp.html';  // or wherever appropriate
+              window.location.href = '/';  // or wherever appropriate
+
             } else {
               const errorData = await response.json();
               alert("Registration failed: " + JSON.stringify(errorData));

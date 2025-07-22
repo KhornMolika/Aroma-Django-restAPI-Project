@@ -7,15 +7,11 @@ from .serializers import *
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from .utils import send_password_reset_email
 
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.http import urlsafe_base64_decode
 from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
 
 # RegisterViewSet
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import RegisterSerializer
@@ -33,42 +29,6 @@ class RegisterAPIView(APIView):
 class CustomLoginView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
     
-
-# API: Forgot Password
-class ForgotPasswordView(APIView):
-    def post(self, request):
-        serializer = ForgotPasswordSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        email = serializer.validated_data['email']
-
-        try:
-            user = User.objects.get(email=email)
-            send_password_reset_email(request, user)
-            return Response({"message": "Password reset email sent."})
-        except User.DoesNotExist:
-            return Response({"error": "Email not found."}, status=400)
-
-# API: Reset Password
-class ResetPasswordView(APIView):
-    def post(self, request, uid, token):
-        serializer = ResetPasswordSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        try:
-            user_id = urlsafe_base64_decode(uid).decode()
-            user = User.objects.get(pk=user_id)
-            token_generator = PasswordResetTokenGenerator()
-
-            if not token_generator.check_token(user, token):
-                return Response({"error": "Invalid or expired token."}, status=400)
-
-            user.set_password(serializer.validated_data['password'])
-            user.save()
-
-            return Response({"message": "Password reset successful."})
-        except Exception:
-            return Response({"error": "Invalid link."}, status=400)
-
 
 # HTML Page to serve Reset Form
 

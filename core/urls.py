@@ -34,11 +34,8 @@ router.register(r'blog-comments', BlogCommentViewSet, basename='blogcomment')
 urlpatterns = [
     path('api/register/', RegisterAPIView.as_view(), name='register'),
 
-    path('api/token/login/', CustomLoginView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    
-    path('forgot-password/', ForgotPasswordView.as_view(), name='forgot-password'),
-    path('reset-password/<uid>/<token>/', ResetPasswordView.as_view(), name='reset-password'),
+    path('api/login/', CustomLoginView.as_view(), name='token_obtain_pair'),
+    path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('api/', include(router.urls)),
     path('blog/', views.blog, name= 'blog'),

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,8 @@
     <title>Sign In - ReStyle</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="{% static 'js/auth.js' %}"></script>
+
     <style>
         .gradient-bg {
             background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
@@ -37,7 +40,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen gradient-bg relative overflow-hidden">
+<body class="min-h-screen gradient-bg relative overflow-x-hidden">
     <!-- Animated Background Elements -->
     <div class="absolute inset-0 overflow-hidden">
         <div class="absolute -top-40 -right-40 w-80 h-80 bg-white opacity-10 rounded-full floating-animation"></div>
@@ -101,6 +104,10 @@
                                 <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                             </div>
                         </div>
+                        <div class="text-red-500 text-sm mt-1 hidden" id="usernameError">
+                            <i class="fas fa-exclamation-circle mr-1"></i>
+                            Username is required
+                        </div>
                     </div>
 
                     <!-- Password Field -->
@@ -138,7 +145,7 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 px-6 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transform hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl">
+                    <button id="loginButton" type="submit" class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 px-6 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transform hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl">
                         <span id="loginButtonText" class="flex items-center justify-center">
                             <i class="fas fa-sign-in-alt mr-2"></i>
                             Sign In
@@ -228,54 +235,69 @@
         });
 
         // Form validation with enhanced UX
+
+        const LOGIN_API = "/api/login/";
+
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const emailError = document.getElementById('emailError');
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const rememberMe = document.querySelector('input[type="checkbox"]').checked;
+            const loginButton = document.getElementById('loginButton');
+
+            // Error elements
+            const usernameError = document.getElementById('usernameError');
             const passwordError = document.getElementById('passwordError');
-            const loginButton = document.getElementById('loginButtonText');
-            const loginSpinner = document.getElementById('loginSpinner');
-            
-            // Reset errors with animation
-            emailError.classList.add('hidden');
+
+            // Reset error states
+            usernameError.classList.add('hidden');
             passwordError.classList.add('hidden');
-            
             let isValid = true;
-            
-            
-            
-            // Password validation
-            if (!password) {
-                passwordError.classList.remove('hidden');
-                document.getElementById('password').classList.add('border-red-300', 'bg-red-50');
-                setTimeout(() => {
-                    document.getElementById('password').classList.remove('border-red-300', 'bg-red-50');
-                }, 3000);
+
+            // Validate fields
+            if (!username) {
+                usernameError.classList.remove('hidden');
                 isValid = false;
             }
-            
-            if (isValid) {
-                // Show loading state with animation
-                loginButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Signing In...';
-                
-                // Simulate API call
-                setTimeout(() => {
-                    // Success animation
-                    loginButton.innerHTML = '<i class="fas fa-check mr-2"></i>Success!';
-                    loginButton.parentElement.classList.add('bg-green-500');
-                    
-                    setTimeout(() => {
-                        alert('Login successful! (This is a demo)');
-                        loginButton.innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i>Sign In';
-                        loginButton.parentElement.classList.remove('bg-green-500');
-                        // window.location.href = 'index.html';
-                    }, 1000);
-                }, 2000);
+            if (!password) {
+                passwordError.classList.remove('hidden');
+                isValid = false;
             }
+
+            if (!isValid) {
+                return;
+            }
+
+            // Disable button and show spinner
+            loginButton.disabled = true;
+            loginButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Signing In...';
+
+            fetch(LOGIN_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password, remember_me: rememberMe })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.access) {
+                    // console.log(data.access);
+                    handleLoginResponse(data);
+                    window.location.href = '/';
+                } else {
+                    alert('Invalid credentials');
+                }
+            })
+            .catch((error) => {
+                console.error('Fetch error:', error);
+                alert('Network error');
+            })
+            .finally(() => {
+                loginButton.disabled = false;
+                loginButton.innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i>Sign In';
+            });
         });
-        
+
         // Enhanced password toggle
         function togglePassword(fieldId) {
             const field = document.getElementById(fieldId);
