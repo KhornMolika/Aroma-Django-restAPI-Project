@@ -44,7 +44,7 @@ class ProductDetail(models.Model):
     color = models.CharField(max_length=200, null=True)
     productDetailDate = models.DateTimeField (auto_now_add=True, null=True)
     def __str__(self):         
-        return f'{self.productID} - {self.productID.productName}'
+        return f'{self.id} | Pro: {self.productID}'
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -138,14 +138,14 @@ class BlogCategory(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
-    image = models.ImageField(upload_to='blogs/')
+    image = models.ImageField(upload_to='images/blogs/')
     author = models.CharField(max_length=100)
     category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL, null=True, related_name='blogs')
     views = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.title
+        return f"{self.id} | {self.title}"
 
 class BlogDetail(models.Model):
     blog = models.OneToOneField(Blog, on_delete=models.CASCADE, related_name='details')
@@ -153,7 +153,7 @@ class BlogDetail(models.Model):
     body = models.TextField()
 
     def __str__(self):
-        return f"Details of {self.blog.title}"
+        return f"{self.id} | Detail of: {self.blog.title}"
 
 class BlogComment(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
@@ -164,7 +164,7 @@ class BlogComment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Comment by {self.name} on {self.blog.title}"
+        return f"{self.id} | Comment by: {self.name} on {self.blog.title}"
 
 class Feedback(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -174,6 +174,6 @@ class Feedback(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.name} - {self.rating} stars for {self.product.name}"
+        return f"{self.id} - {self.rating} stars for {self.product.productName}"
 
 

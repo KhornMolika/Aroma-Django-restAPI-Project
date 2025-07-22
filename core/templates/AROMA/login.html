@@ -87,23 +87,19 @@
                 <form class="space-y-6" id="loginForm">
                     <!-- Email Field -->
                     <div class="space-y-2">
-                        <label for="email" class="block text-sm font-semibold text-gray-700">
-                            Email Address
+                        <label for="username" class="block text-sm font-semibold text-gray-700">
+                            Username
                         </label>
                         <div class="relative group">
-                            <input type="email" id="email" name="email" required
+                            <input type="username" id="username" name="username" required
                                    class="input-focus w-full px-4 py-4 pl-12 bg-white bg-opacity-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 placeholder-gray-500"
-                                   placeholder="Enter your email">
+                                   placeholder="Enter your username">
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
-                                <i class="fas fa-envelope text-gray-400 group-focus-within:text-green-500 transition-colors"></i>
+                                <i class="fa-solid fa-user text-gray-400 group-focus-within:text-green-500 transition-colors"></i>
                             </div>
                             <div class="absolute inset-y-0 right-0 pr-4 flex items-center opacity-0 group-focus-within:opacity-100 transition-opacity">
                                 <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                             </div>
-                        </div>
-                        <div class="text-red-500 text-sm mt-1 hidden" id="emailError">
-                            <i class="fas fa-exclamation-circle mr-1"></i>
-                            Please enter a valid email address
                         </div>
                     </div>
 
@@ -235,7 +231,7 @@
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const emailError = document.getElementById('emailError');
             const passwordError = document.getElementById('passwordError');
@@ -248,16 +244,7 @@
             
             let isValid = true;
             
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!email || !emailRegex.test(email)) {
-                emailError.classList.remove('hidden');
-                document.getElementById('email').classList.add('border-red-300', 'bg-red-50');
-                setTimeout(() => {
-                    document.getElementById('email').classList.remove('border-red-300', 'bg-red-50');
-                }, 3000);
-                isValid = false;
-            }
+            
             
             // Password validation
             if (!password) {

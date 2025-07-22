@@ -32,7 +32,7 @@ router.register(r'blog-comments', BlogCommentViewSet, basename='blogcomment')
 
 
 urlpatterns = [
-    path('api/register/', RegisterView.as_view(), name='register'),
+    path('api/register/', RegisterAPIView.as_view(), name='register'),
 
     path('api/token/login/', CustomLoginView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
@@ -53,14 +53,9 @@ urlpatterns = [
     path('register/', views.register, name= 'register'),
     path('shoppingCart/', views.shoppingCart, name= 'shoppingCart'),
     path('contact/', views.contact, name= 'contact'),
+    
     path('account/', views.account, name= 'account'),
     path('editProfile/', views.editProfile, name= 'editProfile'),
 
-    # path('login_page/', login_page, name='login_page'),
-    # path('forgot_password_page/', forgot_password_page, name='forgot_password_page'),
-    # path('reset_password_page/<uid>/<token>/', reset_password_page, name='reset-password-page'),
-    # path('customer_addresses/', CustomerAddressesView.as_view(), name='customer_addresses'),
-
-    # path('home_page/', home_page, name='home_page'),
 ]
 

@@ -5,28 +5,43 @@ from django.contrib.auth.models import User
 from .models import *
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
-
 from django.contrib.auth.password_validation import validate_password
-
 
 # Register Serializer
 class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField()
-    email = serializers.EmailField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
     password = serializers.CharField(write_only=True)
     phone = serializers.CharField()
+    email = serializers.EmailField(required=False, allow_blank=True)  # Optional field
+
+    def validate_password(self, value):
+        validate_password(value)
+        return value
 
     def create(self, validated_data):
         user = User.objects.create_user(
             username=validated_data['username'],
-            email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            email=validated_data.get('email', ''),  # Optional email
             password=validated_data['password'],
         )
-        customer = Customer.objects.create(user=user, phone=validated_data['phone'])
-        return customer
+        Customer.objects.create(
+            user=user,
+            phone=validated_data['phone']
+        )
+        return user
 
     def to_representation(self, instance):
-        return CustomerSerializer(instance).data
+        token = RefreshToken.for_user(instance)
+        return {
+            "user_id": instance.id,
+            "username": instance.username,
+            "access": str(token.access_token),
+            "refresh": str(token),
+        }
     
 #Uses a custom token class (CustomRefreshToken) for expiry handling.
 class CustomRefreshToken(RefreshToken):
@@ -74,8 +89,10 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         try:
             customer = Customer.objects.get(user=user)
             data['phone'] = customer.phone
+            data['profile_image'] = customer.profileImage
         except Customer.DoesNotExist:
             data['phone'] = None
+            data['profile_image'] = None
 
         data['remember_me'] = remember_me
 
