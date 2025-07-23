@@ -20,6 +20,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import RegisterSerializer
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Customer
+from .forms import UserForm, CustomerForm # Import the forms
+from django.conf import settings
+import os
+
 class RegisterAPIView(APIView):
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
@@ -96,10 +103,10 @@ def shoppingCart(request):
     return render(request, 'aroma/shopping-cart.html')
 def contact(request):
     return render(request, 'aroma/contact.html')
-def account(request):
-    return render(request, 'aroma/account.html')
-def editProfile(request):
-    return render(request, 'aroma/editProfile.html')
+# def account(request):
+#     return render(request, 'aroma/account.html')
+# def editProfile(request):
+#     return render(request, 'aroma/editProfile.html')
 
 
 
@@ -215,3 +222,43 @@ class BlogCommentViewSet(viewsets.ModelViewSet):
 class FeedbackViewSet(viewsets.ModelViewSet):
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
+
+
+def account(request):
+    try:
+        customer = request.user.customer
+    except Customer.DoesNotExist:
+        # Create a customer profile if it doesn't exist for the user
+        customer = Customer.objects.create(user=request.user)
+
+    context = {
+        'customer': customer,
+        'user': request.user,
+    }
+    return render(request, 'aroma/account.html', context)
+
+def editProfile(request):
+    try:
+        customer = request.user.customer
+    except Customer.DoesNotExist:
+        customer = Customer.objects.create(user=request.user)
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        customer_form = CustomerForm(request.POST, request.FILES, instance=customer)
+
+        if user_form.is_valid() and customer_form.is_valid():
+            user_form.save()
+            customer_form.save()
+            return redirect('account') # Redirect to the account page after successful update
+    else:
+        user_form = UserForm(instance=request.user)
+        customer_form = CustomerForm(instance=customer)
+
+    context = {
+        'user_form': user_form,
+        'customer_form': customer_form,
+        'customer': customer, # Pass customer for profile image display in sidebar
+        'user': request.user, # Pass user for initials in sidebar
+    }
+    return render(request, 'aroma/editProfile.html', context)
