@@ -36,9 +36,18 @@ class RegisterSerializer(serializers.Serializer):
 
     def to_representation(self, instance):
         token = RefreshToken.for_user(instance)
+        
+        # Get related customer
+        customer = Customer.objects.get(user=instance)
+
         return {
             "user_id": instance.id,
             "username": instance.username,
+            "email": instance.email,
+            "first_name": instance.first_name,
+            "last_name": instance.last_name,
+            "phone": customer.phone,
+            "profile_image": customer.profileImage.url if customer.profileImage else None,
             "access": str(token.access_token),
             "refresh": str(token),
         }
@@ -57,7 +66,6 @@ class CustomRefreshToken(RefreshToken):
             token.set_exp(lifetime=timedelta(days=1))
 
         return token
-
 
 # Custom Token Serializer with extra data (e.g. remember me support) for Login
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -123,10 +131,10 @@ class UserSerializer(serializers.ModelSerializer):
         )
         return user
 
-
 # Customer
 class CustomerSerializer(serializers.ModelSerializer):
     user = UserSerializer()
+    profileImage = serializers.ImageField(required=False, allow_null=True)
 
     class Meta:
         model = Customer
@@ -139,15 +147,64 @@ class CustomerSerializer(serializers.ModelSerializer):
         # Create the user
         user = User.objects.create_user(
             username=user_data['username'],
-            email=user_data['email'],
+            email=user_data.get('email', ''),
             password=user_data['password'],
-            first_name=user_data['first_name'],
-            last_name=user_data['last_name']
+            first_name=user_data.get('first_name', ''),
+            last_name=user_data.get('last_name', '')
         )
 
         # Create the customer using the created user
         customer = Customer.objects.create(user=user, **validated_data)
         return customer
+
+    def update(self, instance, validated_data):
+        user_data = validated_data.pop('user', {})
+        profile_image = validated_data.pop('profileImage', None)
+
+        # Update customer fields
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        # Handle profile image update explicitly
+        if 'profileImage' in self.initial_data:
+            instance.profileImage = profile_image
+
+            instance.save()
+
+        # Update nested user
+        user = instance.user
+        for attr, value in user_data.items():
+            if attr == 'password':
+                user.set_password(value)
+            else:
+                setattr(user, attr, value)
+        user.save()
+
+        return instance
+
+# Password Change
+class PasswordChangeSerializer(serializers.Serializer):
+    old_password = serializers.CharField()
+    new_password = serializers.CharField(min_length=8)
+
+
+
+# Address Serializer
+class AddressSerializer(serializers.ModelSerializer):
+    customer_id = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all(), source='customer', write_only=True)
+
+    class Meta:
+        model = Address
+        fields = '__all__'
+
+# Customer Address Serializer
+class CustomerAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = ['id', 'street', 'city', 'postal_code', 'country', 'address_type', 'is_default']
+        read_only_fields = ['id', 'is_default']
+
+
 
 # Simple Models
 class ImageTypeSerializer(serializers.ModelSerializer):
@@ -161,12 +218,13 @@ class ImageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
+# Product
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
 
-# Product
 class ProductSerializer(serializers.ModelSerializer):
     categoryID = CategorySerializer(read_only=True)
     categoryID_id = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), source='categoryID', write_only=True)
@@ -182,6 +240,19 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductDetail
         fields = '__all__'
+
+# Feedback to Product
+class FeedbackSerializer(serializers.ModelSerializer):
+    customer = CustomerSerializer(read_only=True)
+    customer_id = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all(), source='customer', write_only=True)
+    product = ProductSerializer(read_only=True)
+    product_id = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), source='product', write_only=True)
+
+    class Meta:
+        model = Feedback
+        fields = '__all__'
+
+
 
 # CartItem comes first to avoid circular ref
 class CartItemSerializer(serializers.ModelSerializer):
@@ -210,21 +281,13 @@ class CartSerializer(serializers.ModelSerializer):
     def get_total_price(self, obj):
         return obj.total_price()
 
+
+
 # QR Code
 class QRCodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = QRCode
         fields = '__all__'
-
-
-# Address Serializer
-class AddressSerializer(serializers.ModelSerializer):
-    customer_id = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all(), source='customer', write_only=True)
-
-    class Meta:
-        model = Address
-        fields = ['id', 'customer_id', 'street', 'city', 'postal_code', 'country']
-
 
 # OrderItem comes first to avoid circular ref
 class OrderItemSerializer(serializers.ModelSerializer):
@@ -285,6 +348,7 @@ class OrderSerializer(serializers.ModelSerializer):
         return order
 
 
+
 # BlogCategory
 class BlogCategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -324,13 +388,3 @@ class BlogCommentSerializer(serializers.ModelSerializer):
         model = BlogComment
         fields = '__all__'
 
-# Feedback
-class FeedbackSerializer(serializers.ModelSerializer):
-    customer = CustomerSerializer(read_only=True)
-    customer_id = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all(), source='customer', write_only=True)
-    product = ProductSerializer(read_only=True)
-    product_id = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), source='product', write_only=True)
-
-    class Meta:
-        model = Feedback
-        fields = '__all__'

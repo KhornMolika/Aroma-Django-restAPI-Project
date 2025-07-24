@@ -11,11 +11,12 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
 
-# RegisterViewSet
-from rest_framework.response import Response
 from rest_framework import status
-from .serializers import RegisterSerializer
+from django.shortcuts import get_object_or_404
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.decorators import action
 
+# RegisterViewSet
 class RegisterAPIView(APIView):
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
@@ -58,10 +59,6 @@ def contact(request):
     return render(request, 'aroma/contact.html')
 def account(request):
     return render(request, 'aroma/account.html')
-def editProfile(request):
-    return render(request, 'aroma/editProfile.html')
-
-
 
 # ================================================ User & Customer ====================================
 
@@ -72,6 +69,66 @@ class UserViewSet(viewsets.ModelViewSet):
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
+    
+# CustomerProfile 
+class CustomerProfileViewSet(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]  # Handle image upload
+
+    def get_object(self):
+        return self.request.user.customer 
+
+    def retrieve(self, request):
+        customer = get_object_or_404(Customer, user=request.user)
+        serializer = CustomerSerializer(customer)
+        return Response(serializer.data)
+
+    def update(self, request):
+        customer = self.get_object()
+        user = request.user  # Get nested user instance
+
+        # Manually update nested user fields
+        user_data_fields = ['first_name', 'last_name', 'email']
+        for field in user_data_fields:
+            if field in request.data:
+                setattr(user, field, request.data.get(field))
+
+        user.save()  # Save updated user
+
+        # This ensures image is updated if included
+        data = request.data.copy()
+        if 'profileImage' in request.FILES:
+            data['profileImage'] = request.FILES['profileImage']
+
+        serializer = CustomerSerializer(customer, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def partial_update(self, request):
+        return self.update(request)
+    
+# Change Password
+class ChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        serializer = PasswordChangeSerializer(data=request.data, context={'request': request})
+        
+        if serializer.is_valid():
+            old_password = serializer.validated_data['old_password']
+            if not user.check_password(old_password):
+                return Response({"old_password": "Wrong password."}, status=status.HTTP_400_BAD_REQUEST)
+
+            user.set_password(serializer.validated_data['new_password'])
+            user.save()
+            return Response({"detail": "Password updated successfully."}, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 # ================================================ Image & Menu ====================================
 
@@ -134,14 +191,27 @@ class AddressViewSet(viewsets.ModelViewSet):
     serializer_class = AddressSerializer
 
 # Instead of requiring a customer_id in the URL, auto-fetch addresses for the logged-in customer
-class CustomerAddressesView(APIView):
+class CustomerAddressViewSet(viewsets.ModelViewSet):
+    serializer_class = CustomerAddressSerializer
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
-        customer = request.user.customer
-        addresses = customer.addresses.all()
-        serializer = AddressSerializer(addresses, many=True)
-        return Response(serializer.data)
+    def get_queryset(self):
+        return self.request.user.customer.addresses.all()
+
+    def perform_create(self, serializer):
+        serializer.save(customer=self.request.user.customer)
+
+        @action(detail=True, methods=["post"])
+        def set_default(self, request, pk=None):
+            address = get_object_or_404(Address, pk=pk, customer=request.user.customer)
+
+            Address.objects.filter(customer=request.user.customer).update(is_default=False)
+
+            address.is_default = True
+            address.save()
+
+            return Response({"message": "Default address set successfully."}, status=status.HTTP_200_OK)
+
 
 # ================================================ Order ====================================
 class OrderViewSet(viewsets.ModelViewSet):
