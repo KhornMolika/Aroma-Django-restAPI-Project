@@ -60,6 +60,8 @@ def account(request):
     return render(request, 'aroma/account.html')
 def editProfile(request):
     return render(request, 'aroma/editProfile.html')
+def shopcard(request):
+    return render(request, 'aroma/editProfile.html')
 
 
 

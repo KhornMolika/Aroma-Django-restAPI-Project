@@ -52,6 +52,6 @@ urlpatterns = [
     path('contact/', views.contact, name= 'contact'),
     path('account/', views.account, name= 'account'),
     path('editProfile/', views.editProfile, name= 'editProfile'),
-
+    path('shopcard/', views.shopcard, name= 'shopcard'),
 ]
 

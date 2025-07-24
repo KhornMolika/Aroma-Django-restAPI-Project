@@ -1,0 +1,46 @@
+<div class="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"  id="product-list"></div>
+<script>
+fetch("/api/products/")
+  .then(response => response.json())
+  .then(products => {
+    const container = document.getElementById("product-list");
+    container.innerHTML = "";
+
+    products.forEach(product => {
+      const productImage = product.productImage || 'https://via.placeholder.com/400x300';
+      const productName = product.productName || 'Unnamed Product';
+      const unitPrice = product.unitPrice || '0.00';
+      const productDescript = product.productDescript?.replace(/<[^>]*>?/gm, '').slice(0, 60) || '';
+      const productDate = new Date(product.productDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const categoryID = product.categoryID.name || 'Uncategorized';
+
+      container.innerHTML += `
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
+            <div class="relative">
+                <img src="${productImage}" alt="${productName}"
+                    class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                <button
+                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                    <i class="fas fa-heart"></i>
+                </button>
+                <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                    ${categoryID}
+                </div>
+            </div>
+            <div class="p-4">
+                <h3 class="font-semibold text-gray-900 mb-1">${productName}</h3>
+                <p class="text-sm text-gray-600 mb-1">${productDescript}...</p>
+                <p class="text-xs text-gray-400 mb-2">Added on ${productDate}</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-lg font-bold text-green-600">$${unitPrice}</span>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        4.5 (10)
+                    </div>
+                </div>
+            </div>
+        </div>
+      `;
+    });
+  });
+</script>
