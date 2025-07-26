@@ -1,322 +1,465 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign In - ReStyle</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="{% static 'js/auth.js' %}"></script>
+
     <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          #10b981 0%,
+          #059669 50%,
+          #047857 100%
+        );
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.95);
+      }
+      .floating-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
         }
-        .glass-effect {
-            backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.95);
+        50% {
+          transform: translateY(-20px);
         }
-        .floating-animation {
-            animation: float 6s ease-in-out infinite;
+      }
+      .slide-in {
+        animation: slideIn 0.8s ease-out;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .slide-in {
-            animation: slideIn 0.8s ease-out;
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .input-focus {
-            transition: all 0.3s ease;
-        }
-        .input-focus:focus {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
-        }
+      }
+      .input-focus {
+        transition: all 0.3s ease;
+      }
+      .input-focus:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
+      }
     </style>
-</head>
-<body class="min-h-screen gradient-bg relative overflow-hidden">
+  </head>
+  <body class="min-h-screen gradient-bg relative overflow-x-hidden">
     <!-- Animated Background Elements -->
     <div class="absolute inset-0 overflow-hidden">
-        <div class="absolute -top-40 -right-40 w-80 h-80 bg-white opacity-10 rounded-full floating-animation"></div>
-        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-white opacity-5 rounded-full floating-animation" style="animation-delay: -3s;"></div>
-        <div class="absolute top-1/2 left-1/4 w-32 h-32 bg-white opacity-10 rounded-full floating-animation" style="animation-delay: -1s;"></div>
-        <div class="absolute top-1/4 right-1/4 w-24 h-24 bg-white opacity-10 rounded-full floating-animation" style="animation-delay: -4s;"></div>
+      <div
+        class="absolute -top-40 -right-40 w-80 h-80 bg-white opacity-10 rounded-full floating-animation"
+      ></div>
+      <div
+        class="absolute -bottom-40 -left-40 w-96 h-96 bg-white opacity-5 rounded-full floating-animation"
+        style="animation-delay: -3s"
+      ></div>
+      <div
+        class="absolute top-1/2 left-1/4 w-32 h-32 bg-white opacity-10 rounded-full floating-animation"
+        style="animation-delay: -1s"
+      ></div>
+      <div
+        class="absolute top-1/4 right-1/4 w-24 h-24 bg-white opacity-10 rounded-full floating-animation"
+        style="animation-delay: -4s"
+      ></div>
     </div>
 
     <!-- Navigation -->
-    <nav class="relative z-10 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border-b border-white border-opacity-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <a href="{% url 'home' %}" class="flex items-center group">
-                        <div class="w-10 h-10 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mr-3 group-hover:bg-opacity-30 transition-all duration-300">
-                            <i class="fas fa-recycle text-white text-lg"></i>
-                        </div>
-                        <span class="text-2xl font-bold text-white">ReStyle</span>
-                    </a>
-                </div>
-                
-                <div class="flex items-center space-x-4">
-                    <a href="{% url 'home' %}" class="text-white text-opacity-80 hover:text-opacity-100 text-sm font-medium transition-all duration-300 flex items-center group">
-                        <i class="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
-                        Back to Home
-                    </a>
-                </div>
-            </div>
+    <nav
+      class="relative z-10 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border-b border-white border-opacity-20"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <a href="{% url 'home' %}" class="flex items-center group">
+              <div
+                class="w-10 h-10 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mr-3 group-hover:bg-opacity-30 transition-all duration-300"
+              >
+                <i class="fas fa-recycle text-white text-lg"></i>
+              </div>
+              <span class="text-2xl font-bold text-white">ReStyle</span>
+            </a>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <a
+              href="{% url 'home' %}"
+              class="text-white text-opacity-80 hover:text-opacity-100 text-sm font-medium transition-all duration-300 flex items-center group"
+            >
+              <i
+                class="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"
+              ></i>
+              Back to Home
+            </a>
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Main Content -->
-    <div class="relative z-10 flex items-center justify-center min-h-screen px-4 py-12">
-        <div class="w-full max-w-md slide-in">
-            <!-- Login Card -->
-            <div class="glass-effect rounded-3xl shadow-2xl p-8 border border-white border-opacity-20">
-                <!-- Header -->
-                <div class="text-center mb-8">
-                    <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <i class="fas fa-user text-white text-2xl"></i>
-                    </div>
-                    <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-                    <p class="text-gray-600">Sign in to continue your sustainable fashion journey</p>
+    <div
+      class="relative z-10 flex items-center justify-center min-h-screen px-4 py-12"
+    >
+      <div class="w-full max-w-md slide-in">
+        <!-- Login Card -->
+        <div
+          class="glass-effect rounded-3xl shadow-2xl p-8 border border-white border-opacity-20"
+        >
+          <!-- Header -->
+          <div class="text-center mb-8">
+            <div
+              class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg"
+            >
+              <i class="fas fa-user text-white text-2xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
+            <p class="text-gray-600">
+              Sign in to continue your sustainable fashion journey
+            </p>
+          </div>
+
+          <!-- Login Form -->
+          <form class="space-y-6" id="loginForm">
+            <!-- Email Field -->
+            <div class="space-y-2">
+              <label
+                for="username"
+                class="block text-sm font-semibold text-gray-700"
+              >
+                Username
+              </label>
+              <div class="relative group">
+                <input
+                  type="username"
+                  id="username"
+                  name="username"
+                  required
+                  class="input-focus w-full px-4 py-4 pl-12 bg-white bg-opacity-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 placeholder-gray-500"
+                  placeholder="Enter your username"
+                />
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
+                  <i
+                    class="fa-solid fa-user text-gray-400 group-focus-within:text-green-500 transition-colors"
+                  ></i>
                 </div>
-
-                <!-- Login Form -->
-                <form class="space-y-6" id="loginForm">
-                    <!-- Email Field -->
-                    <div class="space-y-2">
-                        <label for="email" class="block text-sm font-semibold text-gray-700">
-                            Email Address
-                        </label>
-                        <div class="relative group">
-                            <input type="email" id="email" name="email" required
-                                   class="input-focus w-full px-4 py-4 pl-12 bg-white bg-opacity-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 placeholder-gray-500"
-                                   placeholder="Enter your email">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
-                                <i class="fas fa-envelope text-gray-400 group-focus-within:text-green-500 transition-colors"></i>
-                            </div>
-                            <div class="absolute inset-y-0 right-0 pr-4 flex items-center opacity-0 group-focus-within:opacity-100 transition-opacity">
-                                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                            </div>
-                        </div>
-                        <div class="text-red-500 text-sm mt-1 hidden" id="emailError">
-                            <i class="fas fa-exclamation-circle mr-1"></i>
-                            Please enter a valid email address
-                        </div>
-                    </div>
-
-                    <!-- Password Field -->
-                    <div class="space-y-2">
-                        <label for="password" class="block text-sm font-semibold text-gray-700">
-                            Password
-                        </label>
-                        <div class="relative group">
-                            <input type="password" id="password" name="password" required
-                                   class="input-focus w-full px-4 py-4 pl-12 pr-12 bg-white bg-opacity-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 placeholder-gray-500"
-                                   placeholder="Enter your password">
-                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
-                                <i class="fas fa-lock text-gray-400 group-focus-within:text-green-500 transition-colors"></i>
-                            </div>
-                            <button type="button" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors" onclick="togglePassword('password')">
-                                <i class="fas fa-eye" id="passwordToggle"></i>
-                            </button>
-                        </div>
-                        <div class="text-red-500 text-sm mt-1 hidden" id="passwordError">
-                            <i class="fas fa-exclamation-circle mr-1"></i>
-                            Password is required
-                        </div>
-                    </div>
-
-                    <!-- Remember Me & Forgot Password -->
-                    <div class="flex items-center justify-between">
-                        <label class="flex items-center group cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 text-green-600 bg-white bg-opacity-50 border-gray-300 rounded focus:ring-green-500 focus:ring-2 transition-all">
-                            <span class="ml-3 text-sm text-gray-700 group-hover:text-gray-900 transition-colors">Remember me</span>
-                        </label>
-                        <a href="{% url 'forgotPassword' %}" class="text-sm text-green-600 hover:text-green-700 font-semibold transition-colors relative group">
-                            Forgot password?
-                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"></span>
-                        </a>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button type="submit" class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 px-6 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transform hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl">
-                        <span id="loginButtonText" class="flex items-center justify-center">
-                            <i class="fas fa-sign-in-alt mr-2"></i>
-                            Sign In
-                        </span>
-                        <i class="fas fa-spinner fa-spin hidden" id="loginSpinner"></i>
-                    </button>
-                </form>
-
-                <!-- Divider -->
-                <div class="my-8">
-                    <div class="relative">
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full border-t border-gray-300"></div>
-                        </div>
-                        <div class="relative flex justify-center text-sm">
-                            <span class="px-4 bg-white bg-opacity-80 text-gray-500 font-medium">Or continue with</span>
-                        </div>
-                    </div>
+                <div
+                  class="absolute inset-y-0 right-0 pr-4 flex items-center opacity-0 group-focus-within:opacity-100 transition-opacity"
+                >
+                  <div
+                    class="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+                  ></div>
                 </div>
-
-                <!-- Social Login -->
-                <div class="grid grid-cols-2 gap-4">
-                    <button class="flex items-center justify-center px-4 py-3 bg-white bg-opacity-50 border border-gray-200 rounded-xl hover:bg-opacity-70 transition-all duration-300 group transform hover:scale-105">
-                        <i class="fab fa-google text-red-500 mr-2 text-lg group-hover:scale-110 transition-transform"></i>
-                        <span class="text-sm font-semibold text-gray-700">Google</span>
-                    </button>
-                    <button class="flex items-center justify-center px-4 py-3 bg-white bg-opacity-50 border border-gray-200 rounded-xl hover:bg-opacity-70 transition-all duration-300 group transform hover:scale-105">
-                        <i class="fab fa-facebook text-blue-600 mr-2 text-lg group-hover:scale-110 transition-transform"></i>
-                        <span class="text-sm font-semibold text-gray-700">Facebook</span>
-                    </button>
-                </div>
-
-                <!-- Sign Up Link -->
-                <div class="mt-8 text-center">
-                    <p class="text-sm text-gray-600">
-                        Don't have an account?
-                        <a href="{% url 'register' %}" class="text-green-600 hover:text-green-700 font-semibold transition-colors relative group ml-1">
-                            Sign up here
-                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"></span>
-                        </a>
-                    </p>
-                </div>
+              </div>
+              <div class="text-red-500 text-sm mt-1 hidden" id="usernameError">
+                <i class="fas fa-exclamation-circle mr-1"></i>
+                Username is required
+              </div>
             </div>
 
-            <!-- Features -->
-            <div class="mt-8 grid grid-cols-3 gap-4 text-center">
-                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl p-4 border border-white border-opacity-20">
-                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-leaf text-white text-lg"></i>
-                    </div>
-                    <p class="text-white text-sm font-medium">Sustainable</p>
+            <!-- Password Field -->
+            <div class="space-y-2">
+              <label
+                for="password"
+                class="block text-sm font-semibold text-gray-700"
+              >
+                Password
+              </label>
+              <div class="relative group">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  required
+                  class="input-focus w-full px-4 py-4 pl-12 pr-12 bg-white bg-opacity-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 placeholder-gray-500"
+                  placeholder="Enter your password"
+                />
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
+                  <i
+                    class="fas fa-lock text-gray-400 group-focus-within:text-green-500 transition-colors"
+                  ></i>
                 </div>
-                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl p-4 border border-white border-opacity-20">
-                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-shield-alt text-white text-lg"></i>
-                    </div>
-                    <p class="text-white text-sm font-medium">Secure</p>
-                </div>
-                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl p-4 border border-white border-opacity-20">
-                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                        <i class="fas fa-users text-white text-lg"></i>
-                    </div>
-                    <p class="text-white text-sm font-medium">Community</p>
-                </div>
+                <button
+                  type="button"
+                  class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                  onclick="togglePassword('password')"
+                >
+                  <i class="fas fa-eye" id="passwordToggle"></i>
+                </button>
+              </div>
+              <div class="text-red-500 text-sm mt-1 hidden" id="passwordError">
+                <i class="fas fa-exclamation-circle mr-1"></i>
+                Password is required
+              </div>
             </div>
 
-            <!-- Terms -->
-            <div class="mt-8 text-center">
-                <p class="text-xs text-white text-opacity-70">
-                    By signing in, you agree to our
-                    <a href="#" class="text-white hover:text-opacity-100 underline">Terms of Service</a>
-                    and
-                    <a href="#" class="text-white hover:text-opacity-100 underline">Privacy Policy</a>
-                </p>
+            <!-- Remember Me & Forgot Password -->
+            <div class="flex items-center justify-between">
+              <label class="flex items-center group cursor-pointer">
+                <input
+                  type="checkbox"
+                  class="w-4 h-4 text-green-600 bg-white bg-opacity-50 border-gray-300 rounded focus:ring-green-500 focus:ring-2 transition-all"
+                />
+                <span
+                  class="ml-3 text-sm text-gray-700 group-hover:text-gray-900 transition-colors"
+                  >Remember me</span
+                >
+              </label>
+              <a
+                href="{% url 'forgotPassword' %}"
+                class="text-sm text-green-600 hover:text-green-700 font-semibold transition-colors relative group"
+              >
+                Forgot password?
+                <span
+                  class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"
+                ></span>
+              </a>
             </div>
+
+            <!-- Submit Button -->
+            <button
+              id="loginButton"
+              type="submit"
+              class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 px-6 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transform hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              <span
+                id="loginButtonText"
+                class="flex items-center justify-center"
+              >
+                <i class="fas fa-sign-in-alt mr-2"></i>
+                Sign In
+              </span>
+              <i class="fas fa-spinner fa-spin hidden" id="loginSpinner"></i>
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="my-8">
+            <div class="relative">
+              <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-gray-300"></div>
+              </div>
+              <div class="relative flex justify-center text-sm">
+                <span
+                  class="px-4 bg-white bg-opacity-80 text-gray-500 font-medium"
+                  >Or continue with</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Login -->
+          <div class="grid grid-cols-2 gap-4">
+            <button
+              class="flex items-center justify-center px-4 py-3 bg-white bg-opacity-50 border border-gray-200 rounded-xl hover:bg-opacity-70 transition-all duration-300 group transform hover:scale-105"
+            >
+              <i
+                class="fab fa-google text-red-500 mr-2 text-lg group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm font-semibold text-gray-700">Google</span>
+            </button>
+            <button
+              class="flex items-center justify-center px-4 py-3 bg-white bg-opacity-50 border border-gray-200 rounded-xl hover:bg-opacity-70 transition-all duration-300 group transform hover:scale-105"
+            >
+              <i
+                class="fab fa-facebook text-blue-600 mr-2 text-lg group-hover:scale-110 transition-transform"
+              ></i>
+              <span class="text-sm font-semibold text-gray-700">Facebook</span>
+            </button>
+          </div>
+
+          <!-- Sign Up Link -->
+          <div class="mt-8 text-center">
+            <p class="text-sm text-gray-600">
+              Don't have an account?
+              <a
+                href="{% url 'register' %}"
+                class="text-green-600 hover:text-green-700 font-semibold transition-colors relative group ml-1"
+              >
+                Sign up here
+                <span
+                  class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"
+                ></span>
+              </a>
+            </p>
+          </div>
         </div>
+
+        <!-- Features -->
+        <div class="mt-8 grid grid-cols-3 gap-4 text-center">
+          <div
+            class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl p-4 border border-white border-opacity-20"
+          >
+            <div
+              class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mx-auto mb-3"
+            >
+              <i class="fas fa-leaf text-white text-lg"></i>
+            </div>
+            <p class="text-white text-sm font-medium">Sustainable</p>
+          </div>
+          <div
+            class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl p-4 border border-white border-opacity-20"
+          >
+            <div
+              class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mx-auto mb-3"
+            >
+              <i class="fas fa-shield-alt text-white text-lg"></i>
+            </div>
+            <p class="text-white text-sm font-medium">Secure</p>
+          </div>
+          <div
+            class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl p-4 border border-white border-opacity-20"
+          >
+            <div
+              class="w-12 h-12 bg-white bg-opacity-20 rounded-xl flex items-center justify-center mx-auto mb-3"
+            >
+              <i class="fas fa-users text-white text-lg"></i>
+            </div>
+            <p class="text-white text-sm font-medium">Community</p>
+          </div>
+        </div>
+
+        <!-- Terms -->
+        <div class="mt-8 text-center">
+          <p class="text-xs text-white text-opacity-70">
+            By signing in, you agree to our
+            <a href="#" class="text-white hover:text-opacity-100 underline"
+              >Terms of Service</a
+            >
+            and
+            <a href="#" class="text-white hover:text-opacity-100 underline"
+              >Privacy Policy</a
+            >
+          </p>
+        </div>
+      </div>
     </div>
 
     <script>
-        // Add entrance animation delay
-        document.addEventListener('DOMContentLoaded', function() {
-            const card = document.querySelector('.slide-in');
-            setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, 200);
+      // Add entrance animation delay
+      document.addEventListener("DOMContentLoaded", function () {
+        const card = document.querySelector(".slide-in");
+        setTimeout(() => {
+          card.style.opacity = "1";
+          card.style.transform = "translateY(0)";
+        }, 200);
+      });
+
+      // Form validation with enhanced UX
+
+      const LOGIN_API = "/api/login/";
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const username = document.getElementById("username").value.trim();
+          const password = document.getElementById("password").value.trim();
+          const rememberMe = document.querySelector(
+            'input[type="checkbox"]'
+          ).checked;
+          const loginButton = document.getElementById("loginButton");
+
+          // Error elements
+          const usernameError = document.getElementById("usernameError");
+          const passwordError = document.getElementById("passwordError");
+
+          // Reset error states
+          usernameError.classList.add("hidden");
+          passwordError.classList.add("hidden");
+          let isValid = true;
+
+          // Validate fields
+          if (!username) {
+            usernameError.classList.remove("hidden");
+            isValid = false;
+          }
+          if (!password) {
+            passwordError.classList.remove("hidden");
+            isValid = false;
+          }
+
+          if (!isValid) {
+            return;
+          }
+
+          // Disable button and show spinner
+          loginButton.disabled = true;
+          loginButton.innerHTML =
+            '<i class="fas fa-spinner fa-spin mr-2"></i>Signing In...';
+
+          fetch(LOGIN_API, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              username,
+              password,
+              remember_me: rememberMe,
+            }),
+          })
+            .then((res) => res.json())
+            .then(async (data) => {
+              if (data.access) {
+                handleRegisterLoginResponse(data); 
+                alert("Login successful!");
+              } else {
+                alert("Invalid credentials");
+              }
+            })
+            .catch((error) => {
+              console.error("Fetch error:", error);
+              alert("Network error");
+            })
+            .finally(() => {
+              loginButton.disabled = false;
+              loginButton.innerHTML =
+                '<i class="fas fa-sign-in-alt mr-2"></i>Sign In';
+            });
         });
 
-        // Form validation with enhanced UX
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const emailError = document.getElementById('emailError');
-            const passwordError = document.getElementById('passwordError');
-            const loginButton = document.getElementById('loginButtonText');
-            const loginSpinner = document.getElementById('loginSpinner');
-            
-            // Reset errors with animation
-            emailError.classList.add('hidden');
-            passwordError.classList.add('hidden');
-            
-            let isValid = true;
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!email || !emailRegex.test(email)) {
-                emailError.classList.remove('hidden');
-                document.getElementById('email').classList.add('border-red-300', 'bg-red-50');
-                setTimeout(() => {
-                    document.getElementById('email').classList.remove('border-red-300', 'bg-red-50');
-                }, 3000);
-                isValid = false;
-            }
-            
-            // Password validation
-            if (!password) {
-                passwordError.classList.remove('hidden');
-                document.getElementById('password').classList.add('border-red-300', 'bg-red-50');
-                setTimeout(() => {
-                    document.getElementById('password').classList.remove('border-red-300', 'bg-red-50');
-                }, 3000);
-                isValid = false;
-            }
-            
-            if (isValid) {
-                // Show loading state with animation
-                loginButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Signing In...';
-                
-                // Simulate API call
-                setTimeout(() => {
-                    // Success animation
-                    loginButton.innerHTML = '<i class="fas fa-check mr-2"></i>Success!';
-                    loginButton.parentElement.classList.add('bg-green-500');
-                    
-                    setTimeout(() => {
-                        alert('Login successful! (This is a demo)');
-                        loginButton.innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i>Sign In';
-                        loginButton.parentElement.classList.remove('bg-green-500');
-                        // window.location.href = 'index.html';
-                    }, 1000);
-                }, 2000);
-            }
-        });
-        
-        // Enhanced password toggle
-        function togglePassword(fieldId) {
-            const field = document.getElementById(fieldId);
-            const toggle = document.getElementById(fieldId + 'Toggle');
-            
-            if (field.type === 'password') {
-                field.type = 'text';
-                toggle.classList.remove('fa-eye');
-                toggle.classList.add('fa-eye-slash');
-                toggle.classList.add('text-green-500');
-            } else {
-                field.type = 'password';
-                toggle.classList.remove('fa-eye-slash');
-                toggle.classList.add('fa-eye');
-                toggle.classList.remove('text-green-500');
-            }
+      // Enhanced password toggle
+      function togglePassword(fieldId) {
+        const field = document.getElementById(fieldId);
+        const toggle = document.getElementById(fieldId + "Toggle");
+
+        if (field.type === "password") {
+          field.type = "text";
+          toggle.classList.remove("fa-eye");
+          toggle.classList.add("fa-eye-slash");
+          toggle.classList.add("text-green-500");
+        } else {
+          field.type = "password";
+          toggle.classList.remove("fa-eye-slash");
+          toggle.classList.add("fa-eye");
+          toggle.classList.remove("text-green-500");
         }
+      }
 
-        // Add input focus animations
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.classList.add('scale-105');
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.classList.remove('scale-105');
-            });
+      // Add input focus animations
+      document.querySelectorAll("input").forEach((input) => {
+        input.addEventListener("focus", function () {
+          this.parentElement.classList.add("scale-105");
         });
+
+        input.addEventListener("blur", function () {
+          this.parentElement.classList.remove("scale-105");
+        });
+      });
     </script>
-</body>
+  </body>
 </html>

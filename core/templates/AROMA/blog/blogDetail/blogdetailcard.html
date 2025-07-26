@@ -57,6 +57,7 @@
         const subtitle = blog.details?.subtitle || "Untitled";
         const body = blog.details?.body || "";
         const author = blog.author || "Unknown";
+        const image = blog.image || 'https://via.placeholder.com/400x200';
 
         container.innerHTML += `
           <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -101,6 +102,7 @@
                       >
                       <div class="p-8 lg:p-12">
                         <div class="prose prose-lg max-w-none">
+                          <img src="${image}" alt="${subtitle}" class="w-full h-48 object-cover mb-8">
                           <p class="text-xl text-gray-700 mb-8 leading-relaxed font-light">
                             ${body}
                           </p>
@@ -174,52 +176,6 @@
 
               <!-- Sidebar -->
               <aside class="lg:col-span-1">
-                <!-- Table of Contents -->
-                <div
-                  class="bg-white rounded-xl shadow-sm p-6 mb-8 sticky top-24 border border-gray-100"
-                >
-                  <h3 class="font-semibold text-gray-900 mb-4 flex items-center">
-                    <i class="fas fa-list mr-2 text-green-600"></i>
-                    Table of Contents
-                  </h3>
-                  <nav class="space-y-2">
-                    <a
-                      href="#"
-                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
-                      >What is a Sustainable Wardrobe?</a
-                    >
-                    <a
-                      href="#"
-                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
-                      >Step 1: Audit Your Wardrobe</a
-                    >
-                    <a
-                      href="#"
-                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
-                      >Step 2: Define Your Style</a
-                    >
-                    <a
-                      href="#"
-                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
-                      >Step 3: Choose Quality</a
-                    >
-                    <a
-                      href="#"
-                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
-                      >Step 4: Build Foundation</a
-                    >
-                    <a
-                      href="#"
-                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
-                      >Step 5: Shop Secondhand</a
-                    >
-                    <a
-                      href="#"
-                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
-                      >Step 6: Care for Clothes</a
-                    >
-                  </nav>
-                </div>
 
                 <!-- Newsletter Signup -->
                 <div

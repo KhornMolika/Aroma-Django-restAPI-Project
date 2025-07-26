@@ -1,22 +1,29 @@
 from rest_framework import viewsets
-from rest_framework import generics
 from rest_framework.views import APIView
+
 from .models import *
 from .serializers import *
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from .utils import send_password_reset_email
 
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.http import urlsafe_base64_decode
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
 
+from rest_framework import status
+from django.shortcuts import get_object_or_404
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.decorators import action
+
 # RegisterViewSet
-class RegisterView(generics.CreateAPIView):
-    serializer_class = RegisterSerializer  
+class RegisterAPIView(APIView):
+    def post(self, request):
+        serializer = RegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            return Response(serializer.to_representation(user), status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
 
 # JWT Login View with optional remember me
@@ -24,54 +31,7 @@ class CustomLoginView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
     
 
-# API: Forgot Password
-class ForgotPasswordView(APIView):
-    def post(self, request):
-        serializer = ForgotPasswordSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        email = serializer.validated_data['email']
-
-        try:
-            user = User.objects.get(email=email)
-            send_password_reset_email(request, user)
-            return Response({"message": "Password reset email sent."})
-        except User.DoesNotExist:
-            return Response({"error": "Email not found."}, status=400)
-
-# API: Reset Password
-class ResetPasswordView(APIView):
-    def post(self, request, uid, token):
-        serializer = ResetPasswordSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        try:
-            user_id = urlsafe_base64_decode(uid).decode()
-            user = User.objects.get(pk=user_id)
-            token_generator = PasswordResetTokenGenerator()
-
-            if not token_generator.check_token(user, token):
-                return Response({"error": "Invalid or expired token."}, status=400)
-
-            user.set_password(serializer.validated_data['password'])
-            user.save()
-
-            return Response({"message": "Password reset successful."})
-        except Exception:
-            return Response({"error": "Invalid link."}, status=400)
-
-
 # HTML Page to serve Reset Form
-def login_page(request):
-    return render(request, 'test_login_jwt_&_remember_me/login_page.html')
-
-def forgot_password_page(request):
-    return render(request, 'test_login_jwt_&_remember_me/forgot_password_page.html')
-
-def reset_password_page(request, uid, token):
-    return render(request, 'test_login_jwt_&_remember_me/reset_password_page.html', {'uid': uid, 'token': token})
-
-def home_page(request):
-    return render(request, 'test_login_jwt_&_remember_me/home_page.html')
 
 def blog(request):
     return render(request, 'aroma/blog.html')
@@ -107,18 +67,13 @@ def contact(request):
     return render(request, 'aroma/contact.html')
 def account(request):
     return render(request, 'aroma/account.html')
-def editProfile(request):
-    return render(request, 'aroma/editProfile.html')
 def blogcard(request):
     return render(request, 'aroma/blog/blogcard.html')
-    
 def featuredProducts(request):
     return render(request, 'aroma/indexSection/FeaturedProducts.html')
-
 def product_details(request, id):
     product = get_object_or_404(Product, id=id)
     return render(request, 'aroma/product-detail.html', {'product': product})
-
 def productbreadcrumb_details(request, id):
     product = get_object_or_404(Product, id=id)
     return render(request, 'aroma/product-detail.html', {'product': product})
@@ -135,6 +90,66 @@ class UserViewSet(viewsets.ModelViewSet):
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
+    
+# CustomerProfile 
+class CustomerProfileViewSet(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]  # Handle image upload
+
+    def get_object(self):
+        return self.request.user.customer 
+
+    def retrieve(self, request):
+        customer = get_object_or_404(Customer, user=request.user)
+        serializer = CustomerSerializer(customer)
+        return Response(serializer.data)
+
+    def update(self, request):
+        customer = self.get_object()
+        user = request.user  # Get nested user instance
+
+        # Manually update nested user fields
+        user_data_fields = ['first_name', 'last_name', 'email']
+        for field in user_data_fields:
+            if field in request.data:
+                setattr(user, field, request.data.get(field))
+
+        user.save()  # Save updated user
+
+        # This ensures image is updated if included
+        data = request.data.copy()
+        if 'profileImage' in request.FILES:
+            data['profileImage'] = request.FILES['profileImage']
+
+        serializer = CustomerSerializer(customer, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def partial_update(self, request):
+        return self.update(request)
+    
+# Change Password
+class ChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        serializer = PasswordChangeSerializer(data=request.data, context={'request': request})
+        
+        if serializer.is_valid():
+            old_password = serializer.validated_data['old_password']
+            if not user.check_password(old_password):
+                return Response({"old_password": "Wrong password."}, status=status.HTTP_400_BAD_REQUEST)
+
+            user.set_password(serializer.validated_data['new_password'])
+            user.save()
+            return Response({"detail": "Password updated successfully."}, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 # ================================================ Image & Menu ====================================
 
@@ -197,14 +212,27 @@ class AddressViewSet(viewsets.ModelViewSet):
     serializer_class = AddressSerializer
 
 # Instead of requiring a customer_id in the URL, auto-fetch addresses for the logged-in customer
-class CustomerAddressesView(APIView):
+class CustomerAddressViewSet(viewsets.ModelViewSet):
+    serializer_class = CustomerAddressSerializer
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
-        customer = request.user.customer
-        addresses = customer.addresses.all()
-        serializer = AddressSerializer(addresses, many=True)
-        return Response(serializer.data)
+    def get_queryset(self):
+        return self.request.user.customer.addresses.all()
+
+    def perform_create(self, serializer):
+        serializer.save(customer=self.request.user.customer)
+
+        @action(detail=True, methods=["post"])
+        def set_default(self, request, pk=None):
+            address = get_object_or_404(Address, pk=pk, customer=request.user.customer)
+
+            Address.objects.filter(customer=request.user.customer).update(is_default=False)
+
+            address.is_default = True
+            address.save()
+
+            return Response({"message": "Default address set successfully."}, status=status.HTTP_200_OK)
+
 
 # ================================================ Order ====================================
 class OrderViewSet(viewsets.ModelViewSet):
