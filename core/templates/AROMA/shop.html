@@ -24,7 +24,14 @@
                     <div class="flex flex-col lg:flex-row gap-4">
                         <!-- Main Search Input -->
                         <div class="flex-1 relative">
-                            <input type="text" id="main-search" placeholder="Search for items, brands, or categories..." class="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" value="vintage dress">
+                            <input
+                            type="text"
+                            id="main-search"
+                            placeholder="Search for items, brands, or categories..."
+                            class="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl text-black font-bold focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            value="vintage dress"
+                          />
+                          
                             <div class="absolute inset-y-0 left-0 pl-4 flex items-center">
                                 <i class="fas fa-search text-gray-400 text-xl"></i>
                             </div>
@@ -77,13 +84,14 @@
             
             <!-- Sort Options -->
             <div class="flex items-center space-x-4 mt-4 lg:mt-0">
-                <span class="text-sm text-gray-600">Sort by:</span>
-                <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
-                    <option>Most Relevant</option>
-                    <option>Price: Low to High</option>
-                    <option>Price: High to Low</option>
-                    <option>Newest First</option>
-                    <option>Best Rating</option>
+                <span class="text-sm text-gray-600">Filter by:</span>
+                <select id="category-filter" class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <option value="all">All Categories</option>
+                    <option value="1">Women's Clothing</option>
+                    <option value="2">Men's Clothing</option>
+                    <option value="3">Shoes</option>
+                    <option value="4">Accessories</option>
+                    <option value="5">Bags</option>
                 </select>
                 
                 <!-- View Toggle -->
@@ -219,202 +227,18 @@
                     </div>
                 </div>
             </div>
+            
 
-            <!-- Products Grid -->
+                <!-- your product card content -->
+                   <!-- Products Grid -->
             <div class="flex-1">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div >
                     <!-- Product Card 1 -->
-                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
-                        <div class="relative">
-                            <img src="/placeholder.svg?height=300&width=250" alt="Vintage Floral Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
-                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
-                                Like New
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold text-gray-900 mb-1">Vintage Floral Midi Dress</h3>
-                            <p class="text-sm text-gray-600 mb-2">Zara • Size M</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-lg font-bold text-green-600">$45</span>
-                                <div class="flex items-center text-sm text-gray-500">
-                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                    4.8 (24)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 2 -->
-                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
-                        <div class="relative">
-                            <img src="/placeholder.svg?height=300&width=250" alt="Bohemian Maxi Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
-                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <div class="absolute top-3 left-3 bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium">
-                                New
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold text-gray-900 mb-1">Bohemian Maxi Dress</h3>
-                            <p class="text-sm text-gray-600 mb-2">Free People • Size S</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-lg font-bold text-green-600">$78</span>
-                                <div class="flex items-center text-sm text-gray-500">
-                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                    4.9 (18)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 3 -->
-                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
-                        <div class="relative">
-                            <img src="/placeholder.svg?height=300&width=250" alt="Retro A-Line Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
-                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-red-500">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
-                                Good
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold text-gray-900 mb-1">Retro A-Line Dress</h3>
-                            <p class="text-sm text-gray-600 mb-2">Vintage • Size L</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-lg font-bold text-green-600">$32</span>
-                                <div class="flex items-center text-sm text-gray-500">
-                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                    4.6 (31)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Card 4 -->
-                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
-                        <div class="relative">
-                            <img src="/placeholder.svg?height=300&width=250" alt="Elegant Evening Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
-                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <div class="absolute top-3 left-3 bg-purple-600 text-white px-2 py-1 rounded-full text-xs font-medium">
-                                Designer
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold text-gray-900 mb-1">Elegant Evening Dress</h3>
-                            <p class="text-sm text-gray-600 mb-2">Calvin Klein • Size M</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-lg font-bold text-green-600">$125</span>
-                                <div class="flex items-center text-sm text-gray-500">
-                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                    5.0 (12)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                        {% include 'aroma/shop/shopcard.html' %}
+                        
                     <!-- Repeat similar cards for more products -->
-                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
-                        <div class="relative">
-                            <img src="/placeholder.svg?height=300&width=250" alt="Summer Sundress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
-                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
-                                Like New
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold text-gray-900 mb-1">Summer Sundress</h3>
-                            <p class="text-sm text-gray-600 mb-2">H&M • Size S</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-lg font-bold text-green-600">$28</span>
-                                <div class="flex items-center text-sm text-gray-500">
-                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                    4.7 (19)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
-                        <div class="relative">
-                            <img src="/placeholder.svg?height=300&width=250" alt="Cocktail Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
-                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <div class="absolute top-3 left-3 bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium">
-                                New
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold text-gray-900 mb-1">Black Cocktail Dress</h3>
-                            <p class="text-sm text-gray-600 mb-2">ASOS • Size M</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-lg font-bold text-green-600">$65</span>
-                                <div class="flex items-center text-sm text-gray-500">
-                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                    4.5 (27)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
-                        <div class="relative">
-                            <img src="/placeholder.svg?height=300&width=250" alt="Wrap Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
-                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
-                                Good
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold text-gray-900 mb-1">Floral Wrap Dress</h3>
-                            <p class="text-sm text-gray-600 mb-2">Mango • Size L</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-lg font-bold text-green-600">$42</span>
-                                <div class="flex items-center text-sm text-gray-500">
-                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                    4.8 (15)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
-                        <div class="relative">
-                            <img src="/placeholder.svg?height=300&width=250" alt="Midi Dress" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
-                            <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <div class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">
-                                Like New
-                            </div>
-                        </div>
-                        <div class="p-4">
-                            <h3 class="font-semibold text-gray-900 mb-1">Polka Dot Midi Dress</h3>
-                            <p class="text-sm text-gray-600 mb-2">Vintage • Size M</p>
-                            <div class="flex items-center justify-between">
-                                <span class="text-lg font-bold text-green-600">$38</span>
-                                <div class="flex items-center text-sm text-gray-500">
-                                    <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                    4.9 (22)
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Pagination -->
-                <div class="flex justify-center mt-12">
+                <div class="flex justify-center mt-12 mb-5">
                     <nav class="flex items-center space-x-2">
                         <button class="px-3 py-2 text-gray-500 hover:text-green-600 border border-gray-300 rounded-lg hover:border-green-300 transition-colors">
                             <i class="fas fa-chevron-left"></i>
@@ -433,6 +257,8 @@
         </div>
     </div>
 
+              </a>
+          
     <!-- Login Modal -->
     <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md">

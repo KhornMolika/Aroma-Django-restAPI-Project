@@ -28,10 +28,12 @@ class RegisterSerializer(serializers.Serializer):
             email=validated_data.get('email', ''),  # Optional email
             password=validated_data['password'],
         )
-        Customer.objects.create(
+        customer = Customer.objects.create(
             user=user,
             phone=validated_data['phone']
         )
+        Cart.objects.create(customer=customer)
+
         return user
 
     def to_representation(self, instance):
@@ -224,6 +226,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+        
 
 class ProductSerializer(serializers.ModelSerializer):
     categoryID = CategorySerializer(read_only=True)
@@ -258,11 +261,12 @@ class FeedbackSerializer(serializers.ModelSerializer):
 class CartItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
     product_id = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), source='product', write_only=True)
-    cart_id = serializers.PrimaryKeyRelatedField(queryset=Cart.objects.all(), source='cart', write_only=True)
+    cart_id = serializers.PrimaryKeyRelatedField(read_only=True, source='cart')
 
     class Meta:
         model = CartItem
         fields = ['id', 'cart_id', 'product', 'product_id', 'quantity', 'subtotal']
+    
 
 # Cart
 class CartSerializer(serializers.ModelSerializer):
@@ -280,8 +284,6 @@ class CartSerializer(serializers.ModelSerializer):
 
     def get_total_price(self, obj):
         return obj.total_price()
-
-
 
 # QR Code
 class QRCodeSerializer(serializers.ModelSerializer):

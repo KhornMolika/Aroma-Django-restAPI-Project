@@ -72,5 +72,7 @@ urlpatterns = [
     path('shoppingCart/', views.shoppingCart, name='shoppingCart'),
     path('contact/', views.contact, name='contact'),
     path('account/', views.account, name='account'),
+    path('shop/<int:id>/', views.productbreadcrumb_details, name='productDetails'),
+    path('shop/<int:id>/', views.product_details, name='productDetails'),
 ]
 

@@ -1,0 +1,102 @@
+<div
+  class="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+  id="product-list"
+></div>
+
+<script>
+  let allProducts = []; // Step 2: store globally
+  const container = document.getElementById("product-list");
+
+  // Step 1: render reusable function
+  function renderProducts(products) {
+    container.innerHTML = "";
+   
+    products.forEach((product) => {
+      const productImage = product.productImage || "https://via.placeholder.com/400x300";
+      const productName = product.productName || "Unnamed Product";
+      const unitPrice = product.unitPrice || "0.00";
+      const productDescript = product.productDescript?.replace(/<[^>]*>?/gm, "").slice(0, 60) || "";
+      const productDate = new Date(product.productDate).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+      const categoryID = product.categoryID?.categoryName || "Uncategorized";
+      const categoryIDValue = product.categoryID?.id;
+
+      container.innerHTML += `
+           <a href="/shop/${product.id}"/>
+       
+    <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
+        <div class="relative">
+            <img src="${productImage}" alt="${productName}"
+                class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+            <button
+                class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors">
+                <i class="fas fa-heart"></i>
+            </button>
+            <div role="button" data-category-id="${categoryIDValue}" class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium category-label cursor-pointer">
+                ${categoryID}
+            </div>
+        </div>
+        <div class="p-4">
+            <h3 class="font-semibold text-gray-900 mb-1">${productName}</h3>
+            <p class="text-sm text-gray-600 mb-1">${productDescript}...</p>
+            <p class="text-xs text-gray-400 mb-2">Added on ${productDate}</p>
+            <div class="flex items-center justify-between">
+                <span class="text-lg font-bold text-green-600">$${unitPrice}</span>
+                <div class="flex items-center text-sm text-gray-500">
+                    <i class="fas fa-star text-yellow-400 mr-1"></i>
+                    4.5 (10)
+                </div>
+            </div>
+        </div>
+    </div>
+  </a>
+`;
+
+    });
+  }
+
+  // Step 3: fetch and render
+  fetch("/api/products/")
+    .then((response) => response.json())
+    .then((products) => {
+      allProducts = products; // store full list
+      renderProducts(allProducts); // render all
+    });
+
+  // Step 4: filter on category click
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("category-label")) {
+      const categoryId = parseInt(e.target.dataset.categoryId);
+      const filtered = allProducts.filter(
+        (p) => p.categoryID?.id === categoryId
+      );
+      renderProducts(filtered);
+    }
+  });
+  document.getElementById("category-filter").addEventListener("change", function () {
+  const selectedCategory = this.value;
+
+  if (selectedCategory === "all") {
+    renderProducts(allProducts); // Show all
+  } else {
+    const filtered = allProducts.filter(
+      (p) => p.categoryID?.id == selectedCategory
+    );
+    renderProducts(filtered); // Show filtered
+  }
+});
+// Searching
+document.getElementById("main-search").addEventListener("input", function () {
+    const searchText = this.value.toLowerCase();
+
+    const filtered = allProducts.filter((p) =>
+      p.productName?.toLowerCase().includes(searchText)
+    );
+
+    renderProducts(filtered);
+  });
+
+</script>

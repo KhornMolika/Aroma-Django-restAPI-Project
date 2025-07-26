@@ -23,151 +23,9 @@
 
     <!-- Cart Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <!-- Cart Items -->
-        <div class="lg:col-span-2 space-y-6">
-          <!-- Cart Item 1 -->
-          <div class="bg-white rounded-lg shadow-sm p-6">
-            <div class="flex gap-6">
-              <img
-                src="/placeholder.svg?height=120&width=120"
-                alt="Vintage Designer Dress"
-                class="w-30 h-30 object-cover rounded"
-              />
-              <div class="flex-1">
-                <div class="flex justify-between items-start mb-2">
-                  <div>
-                    <h3 class="font-semibold text-gray-900">
-                      Vintage Designer Dress
-                    </h3>
-                    <p class="text-sm text-gray-500">Zara • Size M</p>
-                    <span
-                      class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mt-1"
-                      >Like New</span
-                    >
-                  </div>
-                  <button class="text-gray-400 hover:text-red-500">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </div>
-
-                <div class="flex items-center justify-between mt-4">
-                  <div class="flex items-center border border-gray-300 rounded">
-                    <button class="px-3 py-1 hover:bg-gray-50">-</button>
-                    <span class="px-4 py-1 border-l border-r border-gray-300"
-                      >1</span
-                    >
-                    <button class="px-3 py-1 hover:bg-gray-50">+</button>
-                  </div>
-                  <div class="text-right">
-                    <p class="text-lg font-semibold text-green-600">$45.00</p>
-                    <p class="text-sm text-gray-400 line-through">$120.00</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cart Item 2 -->
-          <div class="bg-white rounded-lg shadow-sm p-6">
-            <div class="flex gap-6">
-              <img
-                src="/placeholder.svg?height=120&width=120"
-                alt="Leather Boots"
-                class="w-30 h-30 object-cover rounded"
-              />
-              <div class="flex-1">
-                <div class="flex justify-between items-start mb-2">
-                  <div>
-                    <h3 class="font-semibold text-gray-900">
-                      Leather Ankle Boots
-                    </h3>
-                    <p class="text-sm text-gray-500">Dr. Martens • Size 8</p>
-                    <span
-                      class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded mt-1"
-                      >Good</span
-                    >
-                  </div>
-                  <button class="text-gray-400 hover:text-red-500">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </div>
-
-                <div class="flex items-center justify-between mt-4">
-                  <div class="flex items-center border border-gray-300 rounded">
-                    <button class="px-3 py-1 hover:bg-gray-50">-</button>
-                    <span class="px-4 py-1 border-l border-r border-gray-300"
-                      >1</span
-                    >
-                    <button class="px-3 py-1 hover:bg-gray-50">+</button>
-                  </div>
-                  <div class="text-right">
-                    <p class="text-lg font-semibold text-green-600">$85.00</p>
-                    <p class="text-sm text-gray-400 line-through">$180.00</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cart Item 3 -->
-          <div class="bg-white rounded-lg shadow-sm p-6">
-            <div class="flex gap-6">
-              <img
-                src="/placeholder.svg?height=120&width=120"
-                alt="Designer Handbag"
-                class="w-30 h-30 object-cover rounded"
-              />
-              <div class="flex-1">
-                <div class="flex justify-between items-start mb-2">
-                  <div>
-                    <h3 class="font-semibold text-gray-900">
-                      Designer Handbag
-                    </h3>
-                    <p class="text-sm text-gray-500">Michael Kors</p>
-                    <span
-                      class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mt-1"
-                      >Excellent</span
-                    >
-                  </div>
-                  <button class="text-gray-400 hover:text-red-500">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </div>
-
-                <div class="flex items-center justify-between mt-4">
-                  <div class="flex items-center border border-gray-300 rounded">
-                    <button class="px-3 py-1 hover:bg-gray-50">-</button>
-                    <span class="px-4 py-1 border-l border-r border-gray-300"
-                      >1</span
-                    >
-                    <button class="px-3 py-1 hover:bg-gray-50">+</button>
-                  </div>
-                  <div class="text-right">
-                    <p class="text-lg font-semibold text-green-600">$120.00</p>
-                    <p class="text-sm text-gray-400 line-through">$280.00</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Continue Shopping -->
-          <div class="flex justify-between items-center pt-6">
-            <a
-              href="{% url 'shop' %}"
-              class="flex items-center text-green-600 hover:text-green-700"
-            >
-              <i class="fas fa-arrow-left mr-2"></i>
-              Continue Shopping
-            </a>
-            <button class="text-gray-500 hover:text-red-500">
-              <i class="fas fa-trash mr-2"></i>
-              Clear Cart
-            </button>
-          </div>
-        </div>
-
+        <div id="cart-container" class="w-full space-y-4"></div>
         <!-- Order Summary -->
         <div class="lg:col-span-1">
           <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
@@ -255,44 +113,24 @@
               <span>Secure checkout</span>
             </div>
           </div>
-
-          <!-- Recently Viewed -->
-          <div class="bg-white rounded-lg shadow-sm p-6 mt-6">
-            <h3 class="font-semibold text-gray-900 mb-4">Recently Viewed</h3>
-            <div class="space-y-3">
-              <div class="flex gap-3">
-                <img
-                  src="/placeholder.svg?height=60&width=60"
-                  alt="Vintage Jacket"
-                  class="w-15 h-15 object-cover rounded"
-                />
-                <div class="flex-1">
-                  <h4 class="text-sm font-medium text-gray-900">
-                    Vintage Denim Jacket
-                  </h4>
-                  <p class="text-xs text-gray-500">Size L • Levi's</p>
-                  <p class="text-sm font-semibold text-green-600">$65.00</p>
-                </div>
-              </div>
-              <div class="flex gap-3">
-                <img
-                  src="/placeholder.svg?height=60&width=60"
-                  alt="Silk Scarf"
-                  class="w-15 h-15 object-cover rounded"
-                />
-                <div class="flex-1">
-                  <h4 class="text-sm font-medium text-gray-900">
-                    Luxury Silk Scarf
-                  </h4>
-                  <p class="text-xs text-gray-500">Hermès</p>
-                  <p class="text-sm font-semibold text-green-600">$180.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-
+      <div class="lg:col-span-2 space-y-6">
+        <!-- Continue Shopping -->
+        <div class="flex justify-between items-center pt-6">
+          <a
+            href="{% url 'shop' %}"
+            class="flex items-center text-green-600 hover:text-green-700"
+          >
+            <i class="fas fa-arrow-left mr-2"></i>
+            Continue Shopping
+          </a>
+          <button class="text-gray-500 hover:text-red-500">
+            <i class="fas fa-trash mr-2"></i>
+            Clear Cart
+          </button>
+        </div>
+      </div>
       <!-- Recommended Items -->
       <div class="mt-16">
         <h2 class="text-2xl font-bold text-gray-900 mb-8">
@@ -459,5 +297,158 @@
     </div>
     <!--Footer-->
     {% include 'aroma/footer.html' %}
+
+    <script>
+      async function fetchCartItems() {
+        const token = localStorage.getItem("access_token"); // get token from localStorage
+
+        if (!token) {
+          console.error("No access token found, user might not be logged in");
+          return [];
+        }
+        try {
+          const response = await fetch("/api/carts/", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to fetch cart");
+          }
+
+          const data = await response.json();
+          console.log("Cart data:", data);
+
+          if (data.length === 0) {
+            console.log("No carts found for user");
+            return [];
+          }
+
+          // Assuming user has only one cart, take the first one
+          const cart = data[0];
+
+          // cart.items contains the list of cart items
+          return cart.items;
+        } catch (error) {
+          console.error("Error fetching cart:", error);
+          return [];
+        }
+      }
+
+      async function updateCartItemQuantityandSubtotal(cartItemId, newQuantity,newSubtotal) {
+        const accessToken = localStorage.getItem("access_token");
+
+        const response = await fetch(`/api/cart-items/${cartItemId}/`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({
+             quantity: newQuantity,
+             subtotal: newSubtotal 
+          }
+          ),
+        });
+
+        if (response.ok) {
+          const updatedItem = await response.json();
+          console.log("Quantity updated:", updatedItem);
+        } else {
+          console.error("Failed to update quantity", await response.text());
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const cartContainer = document.getElementById("cart-container");
+
+        if (!cartContainer) {
+          console.error("Cart container not found!");
+          return;
+        }
+        fetchCartItems().then((cartItems) => {
+          if (cartItems.length === 0) {
+            `
+              <div>You don't have card yet<div>
+            `;
+          } else {
+            // Render cart items on page
+            cartItems.forEach((item) => {
+              console.log(item.product.name, item.quantity, item.subtotal);
+              const wrapper = document.createElement("div");
+              wrapper.innerHTML = `
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                  <div class="flex gap-6">
+                    <img
+                      src=${item.product.productImage}
+                      alt=${item.product.productName}
+                      class="w-[20%] h-[20%] object-cover rounded"
+                    />
+                    <div class="flex-1">
+                      <div class="flex justify-between items-start mb-2">
+                        <div>
+                          <h3 class="font-semibold text-gray-900">${item.product.productName}</h3>
+                          <p class="text-sm text-gray-500">Zara • Size M</p>
+                          <span
+                            class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mt-1"
+                            >Like New</span
+                          >
+                        </div>
+                        <button class="text-gray-400 hover:text-red-500">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+
+                      <div class="flex items-center justify-between mt-4">
+                        <div class="flex items-center border border-gray-300 rounded">
+                          <button class="decreaseBtn px-3 py-1 hover:bg-gray-50">-</button>
+                          <span class="quantity px-4 py-1 border-l border-r border-gray-300">${item.quantity}</span>
+                          <button class="increaseBtn px-3 py-1 hover:bg-gray-50">+</button>
+                        </div>
+                        <div class="text-right">
+                          <p class="subTotal text-lg font-semibold text-green-600">$ ${item.subtotal} </p>
+                          <p class="text-sm text-gray-400">$${item.product.unitPrice}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+
+              document.querySelector("#cart-container").appendChild(wrapper);
+
+              // Get buttons inside this wrapper only
+              const increaseBtn = wrapper.querySelector(".increaseBtn");
+              const decreaseBtn = wrapper.querySelector(".decreaseBtn");
+              const quantitySpan = wrapper.querySelector(".quantity");
+              const subTotalChange = wrapper.querySelector(".subTotal");
+
+              increaseBtn.addEventListener("click",async () => {
+                item.quantity += 1;
+                item.subtotal = item.quantity*item.product.unitPrice;
+                quantitySpan.textContent = item.quantity;
+                subTotalChange.textContent = `$${item.subtotal}`;
+                console.log("Increased to", item.quantity);
+                await updateCartItemQuantityandSubtotal(item.id, item.quantity,item.subtotal);
+              });
+
+              decreaseBtn.addEventListener("click",async () => {
+                if (item.quantity > 1) {
+                  item.quantity -= 1;
+                  item.subtotal = item.quantity*item.product.unitPrice;
+                  quantitySpan.textContent = item.quantity;
+                  subTotalChange.textContent = `$${item.subtotal}`;
+                  console.log("Decreased to", item.quantity);
+                  await updateCartItemQuantityandSubtotal(item.id, item.quantity,item.subtotal);
+                }
+              });
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>

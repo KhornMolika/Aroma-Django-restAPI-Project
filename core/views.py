@@ -15,6 +15,8 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import action
+from rest_framework import permissions
+
 
 # RegisterViewSet
 class RegisterAPIView(APIView):
@@ -24,7 +26,6 @@ class RegisterAPIView(APIView):
             user = serializer.save()
             return Response(serializer.to_representation(user), status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
-
 
 # JWT Login View with optional remember me
 class CustomLoginView(TokenObtainPairView):
@@ -59,6 +60,13 @@ def contact(request):
     return render(request, 'aroma/contact.html')
 def account(request):
     return render(request, 'aroma/account.html')
+def product_details(request, id):
+    product = get_object_or_404(Product, id=id)
+    return render(request, 'aroma/product-detail.html', {'product': product})
+def productbreadcrumb_details(request, id):
+    product = get_object_or_404(Product, id=id)
+    return render(request, 'aroma/product-detail.html', {'product': product})
+
 
 # ================================================ User & Customer ====================================
 
@@ -165,16 +173,28 @@ class ProductDetailViewSet(viewsets.ModelViewSet):
         if product_id:
             return ProductDetail.objects.filter(productID_id=product_id)
         return ProductDetail.objects.all()
-
+    
 # ================================================ Cart ====================================
 
 class CartViewSet(viewsets.ModelViewSet):
-    queryset = Cart.objects.all()
     serializer_class = CartSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Cart.objects.filter(customer__user=self.request.user)
 
 class CartItemViewSet(viewsets.ModelViewSet):
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
+    def get_queryset(self):
+        return CartItem.objects.filter(cart__customer__user=self.request.user)
+    
+    def perform_create(self, serializer):
+        customer = self.request.user.customer
+        cart = Cart.objects.filter(customer=customer).first()
+        serializer.save(cart=cart)
+
+
 
 # ================================================ QR Code ====================================
 
@@ -245,3 +265,4 @@ class BlogCommentViewSet(viewsets.ModelViewSet):
 class FeedbackViewSet(viewsets.ModelViewSet):
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
+
