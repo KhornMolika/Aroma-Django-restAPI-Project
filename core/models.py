@@ -70,10 +70,10 @@ class CartItem(models.Model):
     quantity = models.PositiveIntegerField(default=1)
 
     def subtotal(self):
-        return self.product.price * self.quantity
+        return self.product.unitPrice * self.quantity
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.name}"
+        return f"{self.quantity} x {self.product.productName}"
         
        
 class QRCode(models.Model):
