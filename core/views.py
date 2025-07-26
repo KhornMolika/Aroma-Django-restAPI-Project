@@ -24,7 +24,6 @@ class RegisterAPIView(APIView):
             return Response(serializer.to_representation(user), status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-
 # JWT Login View with optional remember me
 class CustomLoginView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
@@ -110,7 +109,7 @@ class ProductDetailViewSet(viewsets.ModelViewSet):
         if product_id:
             return ProductDetail.objects.filter(productID_id=product_id)
         return ProductDetail.objects.all()
-
+    
 # ================================================ Cart ====================================
 
 class CartViewSet(viewsets.ModelViewSet):

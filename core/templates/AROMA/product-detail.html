@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vintage Designer Dress - ReStyle</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <scrip src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50" data-product-id="{{ product_id }}">
     <!--NavBar-->
     {% include 'aroma/navbar.html' %}
     <!-- Breadcrumb -->
@@ -20,7 +21,7 @@
                 <span class="mx-2 text-gray-400">/</span>
                 <a href="#" class="text-gray-500 hover:text-green-600">Clothing</a>
                 <span class="mx-2 text-gray-400">/</span>
-                <span class="text-gray-900">Vintage Designer Dress</span>
+                <span  class="text-gray-900" id="product-name">Vintage Designer Dress</span>
             </nav>
         </div>
     </div>
@@ -31,20 +32,20 @@
             <!-- Product Images -->
             <div class="space-y-4">
                 <div class="aspect-square bg-white rounded-lg overflow-hidden">
-                    <img src="/placeholder.svg?height=600&width=600" alt="Vintage Designer Dress" class="w-full h-full object-cover">
+                    <img src="/placeholder.svg?height=600&width=600" alt="Vintage Designer Dress" class="w-full h-full object-cover" id="productImage" >
                 </div>
                 <div class="grid grid-cols-4 gap-4">
                     <div class="aspect-square bg-white rounded-lg overflow-hidden border-2 border-green-600">
-                        <img src="/placeholder.svg?height=150&width=150" alt="Front view" class="w-full h-full object-cover">
+                        <img src="/placeholder.svg?height=150&width=150" alt="Front view" class="w-full h-full object-cover" id="productImage" >
                     </div>
                     <div class="aspect-square bg-white rounded-lg overflow-hidden">
-                        <img src="/placeholder.svg?height=150&width=150" alt="Back view" class="w-full h-full object-cover">
+                        <img src="/placeholder.svg?height=150&width=150" alt="Back view" class="w-full h-full object-cover" id="productImage" >
                     </div>
                     <div class="aspect-square bg-white rounded-lg overflow-hidden">
-                        <img src="/placeholder.svg?height=150&width=150" alt="Detail view" class="w-full h-full object-cover">
+                        <img src="/placeholder.svg?height=150&width=150" alt="Detail view" class="w-full h-full object-cover" id="productImage" >
                     </div>
                     <div class="aspect-square bg-white rounded-lg overflow-hidden">
-                        <img src="/placeholder.svg?height=150&width=150" alt="Tag view" class="w-full h-full object-cover">
+                        <img src="/placeholder.svg?height=150&width=150" alt="Tag view" class="w-full h-full object-cover" id="productImage" >
                     </div>
                 </div>
             </div>
@@ -65,7 +66,7 @@
                             <span class="text-sm text-gray-500 ml-2">(24 reviews)</span>
                         </div>
                     </div>
-                    <h1 class="text-3xl font-bold text-gray-900 mb-2">Vintage Designer Dress</h1>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2" id="product-name"></h1>
                     <p class="text-gray-600">Zara • Women's Clothing</p>
                 </div>
 
@@ -87,14 +88,14 @@
                         </div>
                     </div>
 
-                    <div>
-                        <h3 class="font-semibold text-gray-900 mb-2">Quantity</h3>
-                        <div class="flex items-center border border-gray-300 rounded w-32">
-                            <button class="px-3 py-2 hover:bg-gray-50">-</button>
-                            <span class="flex-1 text-center py-2">1</span>
-                            <button class="px-3 py-2 hover:bg-gray-50">+</button>
-                        </div>
+                   <div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Quantity</h3>
+                    <div class="flex items-center border border-gray-300 rounded w-32">
+                        <button id="qty-decrease" class="px-3 py-2 hover:bg-gray-50 text-xl">-</button>
+                        <span id="qty-value" class="flex-1 text-center py-2 text-lg">1</span>
+                        <button id="qty-increase" class="px-3 py-2 hover:bg-gray-50 text-xl">+</button>
                     </div>
+                </div>
                 </div>
 
                 <div class="flex gap-4">
@@ -112,7 +113,7 @@
                     <div class="space-y-2 text-sm">
                         <div class="flex justify-between">
                             <span class="text-gray-600">Brand:</span>
-                            <span class="text-gray-900">Zara</span>
+                            <span class="text-gray-900" id="product-name">Zara</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600">Size:</span>
@@ -305,7 +306,7 @@
                     <h3 class="font-semibold text-gray-900 mb-4">Similar Items</h3>
                     <div class="space-y-4">
                         <div class="flex gap-3">
-                            <img src="/placeholder.svg?height=80&width=80" alt="Similar dress" class="w-20 h-20 object-cover rounded">
+                            <img src="/placeholder.svg?height=80&width=80" alt="Similar dress" class="w-20 h-20 object-cover rounded" id="productImage" >
                             <div class="flex-1">
                                 <h4 class="font-medium text-gray-900 text-sm">Floral Summer Dress</h4>
                                 <p class="text-xs text-gray-500">Size S • H&M</p>
@@ -332,8 +333,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
+
     <!--Footer-->
     {% include 'aroma/footer.html' %}
 </body>
+
 </html>

@@ -18,8 +18,10 @@ router.register(r'products', ProductViewSet, basename='product')
 router.register(r'product-details', ProductDetailViewSet, basename='productdetail')
 router.register(r'feedbacks', FeedbackViewSet, basename='feedback')
 
+
 router.register(r'cart-items', CartItemViewSet, basename='cartitem')
 router.register(r'carts', CartViewSet, basename='cart')
+
 
 router.register(r'qrcodes', QRCodeViewSet, basename='qrcode')
 router.register(r'orders', OrderViewSet, basename='order')
@@ -45,7 +47,8 @@ urlpatterns = [
     path('forgotPassword/', views.forgotPassword, name= 'forgotPassword'),
     path('', views.home, name= 'home'),
     path('login/', views.login, name= 'login'),
-    path('productDetail/', views.productDetail, name= 'productDetail'),
+    path('product/<int:id>/', views.productDetail, name='productDetail'),
+    path("productDetail/",productDetail, name="productDetail"),
     path('shop/', views.shop, name= 'shop'),
     path('register/', views.register, name= 'register'),
     path('shoppingCart/', views.shoppingCart, name= 'shoppingCart'),
@@ -53,5 +56,6 @@ urlpatterns = [
     path('account/', views.account, name= 'account'),
     path('editProfile/', views.editProfile, name= 'editProfile'),
     path('shopcard/', views.shopcard, name= 'shopcard'),
+    
 ]
 
