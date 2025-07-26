@@ -1,0 +1,55 @@
+{% load static %}
+
+<div id="FeaturedProductList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"> </div>
+
+<script>
+  function fetchFeaturedProducts() {
+    fetch('/api/products/')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('FeaturedProductList');
+        container.innerHTML = '';
+        const featured = data.slice(0, 4);
+        featured.forEach(product => {
+          const productImage = product.productImage || 'https://via.placeholder.com/400x200';
+          const productName = product.productName || "Unnamed Product";
+          const unitPrice = product.unitPrice || "0.00";
+
+          container.innerHTML += `
+            <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <a href="/shop/${product.id}/" class="hover:text-green-600">
+                <div class="relative">
+                    <img src="${productImage}" alt="${productName}" class="w-full h-64 object-cover rounded-t-lg">
+                    <button class="absolute top-3 right-3 bg-white rounded-full p-2 shadow-sm hover:bg-gray-50">
+                        <i class="far fa-heart text-gray-400"></i>
+                    </button>
+                    <span class="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 text-xs rounded">Like New</span>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-900 mb-1">${productName}</h3>
+                    <p class="text-sm text-gray-500 mb-2">Size M • Zara</p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-lg font-bold text-green-600">${unitPrice}</span>
+                            <span class="text-sm text-gray-400 line-through ml-2">$120</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                            <span class="text-xs text-gray-500 ml-1">4.8</span>
+                        </div>
+                    </div>
+                </div>
+              </a>
+            </div>
+          `;
+        });
+      })
+      .catch((err) => {
+        console.error("Error loading featured products:", err);
+        document.getElementById("FeaturedProductList").innerHTML = `<p class="text-red-500">Products not found.</p>`;
+      });
+  }
+  
+  fetchFeaturedProducts();
+
+</script>

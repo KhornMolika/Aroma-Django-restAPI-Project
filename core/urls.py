@@ -42,7 +42,14 @@ urlpatterns = [
 
     path('api/', include(router.urls)),
     path('blog/', views.blog, name= 'blog'),
-    path('blogDetails/', views.blogDetails, name= 'blogDetails'),
+
+    path('blog/<int:id>/', views.blog_details, name='blogDetails'),
+    path('blog/<int:id>/', views.blogbreadcrumb_details, name='blogDetails'),
+
+    path('featuredProducts/', views.featuredProducts, name='featuredProducts'),
+    path('shop/<int:id>/', views.productbreadcrumb_details, name='productDetails'),
+    path('shop/<int:id>/', views.product_details, name='productDetails'),
+
     path('checkout/', views.checkout, name= 'checkout'),
     path('comfirmation/', views.confirmation, name= 'confirmation'),
     path('forgotPassword/', views.forgotPassword, name= 'forgotPassword'),
@@ -55,6 +62,7 @@ urlpatterns = [
     path('contact/', views.contact, name= 'contact'),
     path('account/', views.account, name= 'account'),
     path('editProfile/', views.editProfile, name= 'editProfile'),
+    path('blogcard/', views.blogcard, name= 'blogcard'),
 
     # path('login_page/', login_page, name='login_page'),
     # path('forgot_password_page/', forgot_password_page, name='forgot_password_page'),

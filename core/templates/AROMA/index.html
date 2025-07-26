@@ -14,20 +14,37 @@
     <!--NavBar-->
     {% include 'aroma/navbar.html' %}
     <!-- Hero Section -->
-    {% include 'aroma/HeroSection.html' %}
-    
+    {% include 'aroma/indexSection/HeroSection.html' %}
+
     <!-- Categories -->
-    {% include 'aroma/Categories.html' %}
-    
+    {% include 'aroma/indexSection/Categories.html' %}
+
     <!-- Featured Products -->
-    {% include 'aroma/FeaturedProducts.html' %}
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Items</h2>
+          <p class="text-gray-600">Handpicked pre-loved treasures</p>
+        </div>
+          {% include 'aroma/indexSection/FeaturedProducts.html' %}
+        <div class="text-center mt-12">
+          <a
+            href="{% url 'shop' %}"
+            class="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-green-700"
+          >
+            View All Products
+          </a>
+        </div>
+      </div>
+    </section>
     
+
     <!-- Why Choose Us -->
-    {% include 'aroma/WhyChooseUs.html' %}
-    
+    {% include 'aroma/indexSection/WhyChooseUs.html' %}
+
     <!-- Newsletter -->
-    {% include 'aroma/Newsletter.html' %}
-    
+    {% include 'aroma/indexSection/Newsletter.html' %}
+
     <!--Footer-->
     {% include 'aroma/footer.html' %}
   </body>

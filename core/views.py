@@ -11,7 +11,7 @@ from .utils import send_password_reset_email
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.http import urlsafe_base64_decode
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 
 # RegisterViewSet
@@ -75,8 +75,16 @@ def home_page(request):
 
 def blog(request):
     return render(request, 'aroma/blog.html')
-def blogDetails(request):
-    return render(request, 'aroma/blog-details.html')
+    
+def blog_details(request, id):
+    blog = get_object_or_404(Blog, id=id)
+    return render(request, 'aroma/blog-Details.html', {'blog': blog})
+
+def blogbreadcrumb_details(request, id):
+    blog = get_object_or_404(Blog, id=id)
+    return render(request, 'aroma/blog-Details.html', {'blog': blog})
+
+
 def checkout(request):
     return render(request, 'aroma/checkout.html')
 def confirmation(request):
@@ -101,6 +109,20 @@ def account(request):
     return render(request, 'aroma/account.html')
 def editProfile(request):
     return render(request, 'aroma/editProfile.html')
+def blogcard(request):
+    return render(request, 'aroma/blog/blogcard.html')
+    
+def featuredProducts(request):
+    return render(request, 'aroma/indexSection/FeaturedProducts.html')
+
+def product_details(request, id):
+    product = get_object_or_404(Product, id=id)
+    return render(request, 'aroma/product-detail.html', {'product': product})
+
+def productbreadcrumb_details(request, id):
+    product = get_object_or_404(Product, id=id)
+    return render(request, 'aroma/product-detail.html', {'product': product})
+
 
 
 

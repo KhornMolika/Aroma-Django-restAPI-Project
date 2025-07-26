@@ -1,0 +1,303 @@
+<div id="blogdetailListbreadcrumb"></div>
+
+<script>
+  const blogId1 = window.location.pathname.split("/")[2]; 
+
+  function fetchBlogDetailbreadcrumb() {
+    fetch(`/api/blogs/${blogId1}/`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Blog not found");
+        }
+        return res.json();
+      })
+      .then((blog) => {
+        const container = document.getElementById("blogdetailListbreadcrumb");
+        const categoryName = blog.category?.name || "General";
+
+        container.innerHTML = `
+          <div class="bg-white border-b">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+              <nav class="flex text-sm">
+                <a href="../../" class="text-gray-500 hover:text-green-600">Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <a href="../../blog/" class="text-gray-500 hover:text-green-600">Blog</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-900">${categoryName}</span>
+              </nav>
+            </div>
+          </div>
+        `;
+      })
+      .catch((err) => {
+        console.error("Error loading blog:", err);
+        document.getElementById(
+          "blogdetailListbreadcrumb"
+        ).innerHTML = `<p>Breadcrumb not found.</p>`;
+      });
+  }
+
+  fetchBlogDetailbreadcrumb();
+</script>
+
+<div id="blogdetailList"></div>
+<script>
+  const blogId = window.location.pathname.split("/")[2];
+  function fetchBlogDetail() {
+    fetch(`/api/blogs/${blogId}/`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Blog not found");
+        }
+        return res.json();
+      })
+      .then((blog) => {
+        const container = document.getElementById("blogdetailList");
+        const categoryName = blog.category?.name || "General";
+        const subtitle = blog.details?.subtitle || "Untitled";
+        const body = blog.details?.body || "";
+        const author = blog.author || "Unknown";
+
+        container.innerHTML += `
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+              <!-- Article Content -->
+              <article class="lg:col-span-3">
+                    <div class="bg-white rounded-xl shadow-sm p-6 mb-8 border border-gray-100">
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                          <img
+                            src="/media/images/CommentsList/userimage.jpg"
+                            alt="Sarah Johnson"
+                            class="w-16 h-16 rounded-full border-2 border-green-100"
+                          />
+                          <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-gray-900">${author}</h3>
+                            <p class="text-green-600 font-medium">${subtitle}</p>
+                            <p class="text-sm text-gray-500">10+ years experience • 50+ articles</p>
+                          </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                          <button
+                            class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
+                          >
+                            <i class="fab fa-twitter text-lg"></i>
+                          </button>
+                          <button
+                            class="p-2 text-gray-400 hover:text-blue-700 hover:bg-blue-50 rounded-full transition-colors"
+                          >
+                            <i class="fab fa-linkedin text-lg"></i>
+                          </button>
+                          <button
+                            class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+                          >
+                            Follow
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                        class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+                      >
+                      <div class="p-8 lg:p-12">
+                        <div class="prose prose-lg max-w-none">
+                          <p class="text-xl text-gray-700 mb-8 leading-relaxed font-light">
+                            ${body}
+                          </p>
+                          <div
+                            class="bg-gradient-to-r from-green-600 to-green-700 rounded-xl p-8 text-white text-center"
+                          >
+                            <div class="max-w-md mx-auto">
+                              <h4 class="text-2xl font-bold mb-4">Ready to Start Your Journey?</h4>
+                              <p class="text-green-100 mb-6">
+                                Browse our curated collection of pre-loved, high-quality fashion
+                                pieces.
+                              </p>
+                              <a
+                                href="../../shop/"
+                                class="inline-flex items-center bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
+                              >
+                                Shop ${categoryName}
+                                <i class="fas fa-arrow-right ml-2"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                  class="bg-white rounded-xl shadow-sm p-6 mt-8 border border-gray-100"
+                >
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-6">
+                      <button
+                        class="flex items-center text-gray-500 hover:text-red-500 transition-colors group"
+                      >
+                        <i class="far fa-heart mr-2 text-xl group-hover:fas"></i>
+                        <span class="font-medium">124 Likes</span>
+                      </button>
+                      <button
+                        class="flex items-center text-gray-500 hover:text-blue-500 transition-colors"
+                      >
+                        <i class="far fa-bookmark mr-2 text-xl"></i>
+                        <span class="font-medium">Save</span>
+                      </button>
+                      <button
+                        class="flex items-center text-gray-500 hover:text-green-500 transition-colors"
+                      >
+                        <i class="fas fa-share mr-2 text-xl"></i>
+                        <span class="font-medium">Share</span>
+                      </button>
+                    </div>
+
+                    <div class="flex items-center space-x-3">
+                      <span class="text-gray-600 text-sm">Share:</span>
+                      <button
+                        class="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors"
+                      >
+                        <i class="fab fa-facebook"></i>
+                      </button>
+                      <button
+                        class="p-2 text-gray-400 hover:text-blue-400 hover:bg-blue-50 rounded-full transition-colors"
+                      >
+                        <i class="fab fa-twitter"></i>
+                      </button>
+                      <button
+                        class="p-2 text-gray-400 hover:text-blue-700 hover:bg-blue-50 rounded-full transition-colors"
+                      >
+                        <i class="fab fa-linkedin"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Sidebar -->
+              <aside class="lg:col-span-1">
+                <!-- Table of Contents -->
+                <div
+                  class="bg-white rounded-xl shadow-sm p-6 mb-8 sticky top-24 border border-gray-100"
+                >
+                  <h3 class="font-semibold text-gray-900 mb-4 flex items-center">
+                    <i class="fas fa-list mr-2 text-green-600"></i>
+                    Table of Contents
+                  </h3>
+                  <nav class="space-y-2">
+                    <a
+                      href="#"
+                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
+                      >What is a Sustainable Wardrobe?</a
+                    >
+                    <a
+                      href="#"
+                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
+                      >Step 1: Audit Your Wardrobe</a
+                    >
+                    <a
+                      href="#"
+                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
+                      >Step 2: Define Your Style</a
+                    >
+                    <a
+                      href="#"
+                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
+                      >Step 3: Choose Quality</a
+                    >
+                    <a
+                      href="#"
+                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
+                      >Step 4: Build Foundation</a
+                    >
+                    <a
+                      href="#"
+                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
+                      >Step 5: Shop Secondhand</a
+                    >
+                    <a
+                      href="#"
+                      class="block text-sm text-gray-600 hover:text-green-600 py-2 px-3 rounded-lg hover:bg-green-50 transition-colors"
+                      >Step 6: Care for Clothes</a
+                    >
+                  </nav>
+                </div>
+
+                <!-- Newsletter Signup -->
+                <div
+                  class="bg-gradient-to-br from-green-600 to-green-700 rounded-xl p-6 text-white mb-8 shadow-lg"
+                >
+                  <div class="text-center mb-4">
+                    <div
+                      class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3"
+                    >
+                      <i class="fas fa-envelope text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg">Stay Updated</h3>
+                  </div>
+                  <p class="text-green-100 text-sm mb-4 text-center">
+                    Get weekly sustainable fashion tips and exclusive content.
+                  </p>
+                  <div class="space-y-3">
+                    <input
+                      type="email"
+                      placeholder="Your email address"
+                      class="w-full px-4 py-3 rounded-lg text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-white"
+                    />
+                    <button
+                      class="w-full bg-white text-green-600 py-3 rounded-lg font-semibold text-sm hover:bg-gray-100 transition-colors"
+                    >
+                      Subscribe Now
+                    </button>
+                  </div>
+                  <p class="text-xs text-green-200 text-center mt-3">
+                    No spam, unsubscribe anytime
+                  </p>
+                </div>
+
+                <!-- Popular Tags -->
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                  <h3 class="font-semibold text-gray-900 mb-4 flex items-center">
+                    <i class="fas fa-tags mr-2 text-green-600"></i>
+                    Popular Tags
+                  </h3>
+                  <div class="flex flex-wrap gap-2">
+                    <span
+                      class="bg-gray-100 text-gray-700 px-3 py-2 rounded-full text-sm hover:bg-green-100 hover:text-green-700 cursor-pointer transition-colors"
+                      >#sustainable</span
+                    >
+                    <span
+                      class="bg-gray-100 text-gray-700 px-3 py-2 rounded-full text-sm hover:bg-green-100 hover:text-green-700 cursor-pointer transition-colors"
+                      >#wardrobe</span
+                    >
+                    <span
+                      class="bg-gray-100 text-gray-700 px-3 py-2 rounded-full text-sm hover:bg-green-100 hover:text-green-700 cursor-pointer transition-colors"
+                      >#vintage</span
+                    >
+                    <span
+                      class="bg-gray-100 text-gray-700 px-3 py-2 rounded-full text-sm hover:bg-green-100 hover:text-green-700 cursor-pointer transition-colors"
+                      >#fashion</span
+                    >
+                    <span
+                      class="bg-gray-100 text-gray-700 px-3 py-2 rounded-full text-sm hover:bg-green-100 hover:text-green-700 cursor-pointer transition-colors"
+                      >#eco-friendly</span
+                    >
+                    <span
+                      class="bg-gray-100 text-gray-700 px-3 py-2 rounded-full text-sm hover:bg-green-100 hover:text-green-700 cursor-pointer transition-colors"
+                      >#style</span
+                    >
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        `;
+      })
+      .catch((err) => {
+        console.error("Error loading blog:", err);
+        document.getElementById(
+          "blogdetailList"
+        ).innerHTML = `<p>Blog not found.</p>`;
+      });
+  }
+
+  fetchBlogDetail();
+</script>
