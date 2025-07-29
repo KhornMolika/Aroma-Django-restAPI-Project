@@ -22,14 +22,13 @@ router.register(r'categories', CategoryViewSet, basename='category')
 router.register(r'products', ProductViewSet, basename='product')
 router.register(r'product-details', ProductDetailViewSet, basename='productdetail')
 
-# Feedback
-router.register(r'feedbacks', FeedbackViewSet, basename='feedback')
-
 # Cart and Order
 router.register(r'cart-items', CartItemViewSet, basename='cartitem')
 router.register(r'carts', CartViewSet, basename='cart')
+router.register(r'customer-cart-items', CustomerCartItemViewSet, basename='customercartitems')
 router.register(r'orders', OrderViewSet, basename='order')
 router.register(r'order-items', OrderItemViewSet, basename='orderitem')
+router.register(r'customer-order', CustomerOrderViewSet, basename='customerorder')
 
 # QR Code
 router.register(r'qrcodes', QRCodeViewSet, basename='qrcode')
@@ -38,7 +37,6 @@ router.register(r'qrcodes', QRCodeViewSet, basename='qrcode')
 router.register(r'blog-categories', BlogCategoryViewSet, basename='blogcategory')
 router.register(r'blogs', BlogViewSet, basename='blog')
 router.register(r'blog-details', BlogDetailViewSet, basename='blogdetail')
-router.register(r'blog-comments', BlogCommentViewSet, basename='blogcomment')
 
 # Custom view for Customer Profile
 customer_profile = CustomerProfileViewSet.as_view({
@@ -51,7 +49,7 @@ urlpatterns = [
     # API Auth
     path('api/register/', RegisterAPIView.as_view(), name='register'),
     path('api/login/', CustomLoginView.as_view(), name='token_obtain_pair'),
-    path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     # ViewSet API endpoints
     path('api/', include(router.urls)),
@@ -61,7 +59,9 @@ urlpatterns = [
     # HTML pages
     path('', views.home, name='home'),
     path('blog/', views.blog, name='blog'),
-    path('blogDetails/', views.blogDetails, name='blogDetails'),
+     path('blog/<int:id>/', views.blog_details, name='blogDetails'),
+    path('blog/<int:id>/', views.blogbreadcrumb_details, name='blogDetails'),
+
     path('checkout/', views.checkout, name='checkout'),
     path('comfirmation/', views.confirmation, name='confirmation'),
     path('forgotPassword/', views.forgotPassword, name='forgotPassword'),

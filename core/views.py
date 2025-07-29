@@ -15,7 +15,11 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import action
-from rest_framework import permissions
+from rest_framework.exceptions import PermissionDenied
+from django.db import transaction
+from django.core.files import File
+import os
+from django.conf import settings
 
 
 # RegisterViewSet
@@ -30,6 +34,17 @@ class RegisterAPIView(APIView):
 # JWT Login View with optional remember me
 class CustomLoginView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+
+def blog(request):
+    return render(request, 'aroma/blog.html')
+    
+def blog_details(request, id):
+    blog = get_object_or_404(Blog, id=id)
+    return render(request, 'aroma/blog-Details.html', {'blog': blog})
+
+def blogbreadcrumb_details(request, id):
+    blog = get_object_or_404(Blog, id=id)
+    return render(request, 'aroma/blog-Details.html', {'blog': blog})
     
 
 # HTML Page to serve Reset Form
@@ -177,23 +192,42 @@ class ProductDetailViewSet(viewsets.ModelViewSet):
 # ================================================ Cart ====================================
 
 class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
     serializer_class = CartSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self):
-        return Cart.objects.filter(customer__user=self.request.user)
 
 class CartItemViewSet(viewsets.ModelViewSet):
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
+
+class CustomerCartItemViewSet(viewsets.ModelViewSet):
+    queryset = CartItem.objects.all()
+    serializer_class = CartItemSerializer
+    permission_classes = [IsAuthenticated]
+
     def get_queryset(self):
-        return CartItem.objects.filter(cart__customer__user=self.request.user)
-    
+        user = self.request.user
+        if not user.is_authenticated:
+            raise PermissionDenied("Authentication required to view cart items.")
+        return CartItem.objects.filter(cart__customer__user=user)
+
     def perform_create(self, serializer):
         customer = self.request.user.customer
         cart = Cart.objects.filter(customer=customer).first()
         serializer.save(cart=cart)
 
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop("partial", False)
+        instance = self.get_object()
+
+        # Only allow updating quantity (and subtotal optionally)
+        quantity = request.data.get("quantity")
+        if quantity is not None:
+            instance.quantity = quantity
+            instance.save()
+            serializer = self.get_serializer(instance)
+            return Response(serializer.data)
+
+        return Response({"error": "Quantity is required."}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # ================================================ QR Code ====================================
@@ -238,12 +272,85 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
-    def perform_update(self, serializer):
-        serializer.save()
-
 class OrderItemViewSet(viewsets.ModelViewSet):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
+
+class CustomerOrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        if not user.is_authenticated:
+            raise PermissionDenied("You must be logged in to view your orders.")
+        return Order.objects.filter(customer__user=user)
+
+    @transaction.atomic
+    @transaction.atomic
+    def create(self, request, *args, **kwargs):
+        user = request.user
+        customer = user.customer
+        shipping_address_id = request.data.get("shipping_address_id")
+        is_paid = request.data.get("is_paid", False)
+        items = request.data.get("items")  # JSON string
+        payment_proof = request.FILES.get("payment_proof")
+
+        # Convert is_paid from string to boolean
+        if isinstance(is_paid, str):
+            is_paid = is_paid.lower() == "true"
+
+        if not shipping_address_id or not items:
+            return Response({"error": "Missing shipping address or items"}, status=400)
+
+        # Parse items JSON
+        import json
+        try:
+            items_data = json.loads(items)
+        except Exception:
+            return Response({"error": "Invalid items format"}, status=400)
+
+        # Create Order first
+        order = Order.objects.create(
+            customer=customer,
+            shipping_address_id=shipping_address_id,
+            is_paid=is_paid,
+        )
+
+        # Handle file upload from FormData
+        qr_file = request.FILES.get("QRCodeInvoice", None)
+        if qr_file:
+            order.qr_invoice = qr_file
+
+        if payment_proof:
+            order.payment_proof = payment_proof
+
+        # OPTIONAL: handle loading QR from saved filename
+        qr_filename = request.data.get("QRCodeInvoice")  # e.g., "/media/images/qrcodes/photo.jpg"
+        if qr_filename and not qr_file:
+            relative_path = qr_filename.replace("/media/", "")
+            full_path = os.path.join(settings.MEDIA_ROOT, relative_path)
+            if os.path.exists(full_path):
+                with open(full_path, "rb") as f:
+                    filename = os.path.basename(full_path)
+                    order.qr_invoice.save(filename, File(f), save=False)
+
+        order.save()
+
+        # Create OrderItems
+        for item in items_data:
+            OrderItem.objects.create(
+                order=order,
+                product_id=item.get("product_id"),
+                quantity=item.get("quantity"),
+                store_price=item.get("store_price", 0),
+                product_price=item.get("product_price", 0),
+            )
+
+        serializer = self.get_serializer(order)
+        return Response(serializer.data, status=201)
+
 
 # ================================================ Blog ====================================
 class BlogCategoryViewSet(viewsets.ModelViewSet):
@@ -257,12 +364,4 @@ class BlogViewSet(viewsets.ModelViewSet):
 class BlogDetailViewSet(viewsets.ModelViewSet):
     queryset = BlogDetail.objects.all()
     serializer_class = BlogDetailSerializer
-
-class BlogCommentViewSet(viewsets.ModelViewSet):
-    queryset = BlogComment.objects.all()
-    serializer_class = BlogCommentSerializer
-
-class FeedbackViewSet(viewsets.ModelViewSet):
-    queryset = Feedback.objects.all()
-    serializer_class = FeedbackSerializer
 

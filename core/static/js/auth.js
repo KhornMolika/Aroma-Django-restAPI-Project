@@ -7,6 +7,7 @@ async function handleRegisterLoginResponse(data) {
     localStorage.setItem('refresh_token', data.refresh);
 
     // Only store user fields if they exist
+    if(data.id) localStorage.setItem('customer_id', data.id);
     if (data.username) localStorage.setItem('username', data.username);
     if (data.email) localStorage.setItem('email', data.email);
     if (data.first_name) localStorage.setItem('first_name', data.first_name);

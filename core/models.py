@@ -111,7 +111,7 @@ class Order(models.Model):
     payment_proof = models.ImageField(upload_to='images/PaymentProof/', null=True, blank=True)
 
     def total_amount(self):
-        return sum(item.subtotal for item in self.orderitem_set.all())
+        return sum(item.subtotal() for item in self.items.all())
 
     def __str__(self):
         return f"Order : {self.id} by {self.customer.user.username}"
@@ -127,7 +127,7 @@ class OrderItem(models.Model):
         return self.store_price * self.quantity
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.name} in Order #{self.order.id}"
+        return f"{self.quantity} x {self.product.productName} in Order #{self.order.id}"
 
 class BlogCategory(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -155,25 +155,10 @@ class BlogDetail(models.Model):
     def __str__(self):
         return f"{self.id} | Detail of: {self.blog.title}"
 
-class BlogComment(models.Model):
-    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    subject = models.CharField(max_length=150, blank=True)
-    comment = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+
+class AccessToken(models.Model):
+    token = models.CharField(max_length=255, unique=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.id} | Comment by: {self.name} on {self.blog.title}"
-
-class Feedback(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    message = models.TextField()
-    rating = models.PositiveIntegerField(default=5)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.id} - {self.rating} stars for {self.product.productName}"
-
-
+        return self.token
