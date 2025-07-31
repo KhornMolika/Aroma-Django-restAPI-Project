@@ -302,6 +302,7 @@
 
                 const data = await res.json();
                 console.log("Updated:", data);
+                alert("Product added to cart successfully.");
                 // window.location.href = "/shoppingCart/";
               } else {
                 // Send POST to add new item
@@ -319,6 +320,7 @@
 
                 const data = await res.json();
                 console.log("Added:", data);
+                alert("Product added to cart successfully.");
                 // window.location.href = "/shoppingCart/";
               }
             } catch (err) {
