@@ -1,0 +1,336 @@
+{% load static %}
+<div id="productdetailListbreadcrumb"></div>
+
+<script>
+  const productId1 = window.location.pathname.split("/")[2];
+
+  function fetchProductDetailbreadcrumb() {
+    fetch(`/api/products/${productId1}/`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Product not found");
+        }
+        return res.json();
+      })
+      .then((product) => {
+        const container = document.getElementById(
+          "productdetailListbreadcrumb"
+        );
+        console.log("Product object:", product.id);
+
+        const productName = product.productName || "General";
+
+        container.innerHTML = `
+          <div class="bg-white border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <nav class="flex text-sm">
+                    <a href="../.." class="text-gray-500 hover:text-green-600">Home</a>
+                    <span class="mx-2 text-gray-400">/</span>
+                    <a href="../../shop/" class="text-gray-500 hover:text-green-600">Shop</a>
+                    <span class="mx-2 text-gray-400">/</span>
+                    <a href="#" class="text-gray-500 hover:text-green-600">Clothing</a>
+                    <span class="mx-2 text-gray-400">/</span>
+                    <span class="text-gray-900">${productName}</span>
+                </nav>
+            </div>
+          </div>
+
+        `;
+      })
+      .catch((err) => {
+        console.error("Error loading blog:", err);
+        document.getElementById(
+          "productdetailListbreadcrumb"
+        ).innerHTML = `<p>Breadcrumb not found.</p>`;
+      });
+  }
+
+  fetchProductDetailbreadcrumb();
+</script>
+
+<div id="productdetailList"></div>
+
+<script>
+  function productDetail() {
+    const productId = window.location.pathname.split("/")[2];
+    // fetch(`/api/product-details/${productId - 1}/`)
+    fetch(`/api/product-details/${parseInt(productId) - 1}/`)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Product not found");
+        }
+        return res.json();
+      })
+      .then((product) => {
+        const container = document.getElementById("productdetailList");
+        const productImage =
+          product?.productID.productImage ||
+          "https://via.placeholder.com/400x200";
+        const productName =
+          product?.productID?.productName ?? "Unnamed Product";
+        const unitPrice = product?.productID?.unitPrice || "0.00";
+        const productDescript =
+          product?.productID?.productDescript ??
+          "<p>No description provided.</p>";
+        const categoryName =
+          product?.productID?.categoryID?.categoryName ?? "Uncategorized";
+        const brand = product?.brand ?? "Unknown Brand";
+        const size = product?.size ?? "N/A";
+        const condition = product?.condition ?? "Unknown";
+        const material = product?.material ?? "Unknown";
+        const color = product?.color ?? "Unknown";
+
+        container.innerHTML += `
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+                    <div class="space-y-4">
+                    <div class="aspect-square bg-white rounded-lg overflow-hidden">
+                        <img
+                        src="${productImage}" alt="${productName}"
+                        class="w-full h-full object-cover"
+                        />
+                    </div>
+                    </div>
+
+                    <div class="space-y-6">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-green-600 text-white px-2 py-1 text-xs rounded"
+                            >${condition}</span
+                        >
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-500 ml-2">(24 reviews)</span>
+                        </div>
+                        </div>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">
+                            ${productName}
+                        </h1>
+                        <p class="text-gray-600">${brand} • ${categoryName}</p>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl font-bold text-green-600">${unitPrice} $</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Size</h3>
+                        <div class="flex gap-2">
+                            <button
+                            class="border-2 border-green-600 bg-green-50 text-green-600 rounded px-4 py-2 text-sm"
+                            >
+                            ${size}
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button id="addToCartBtn" data-product-id="${
+                          parseInt(product?.id) + 1
+                        }"
+                        class="flex-1 bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700"
+                        >
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        Add to Cart
+                        </button>
+                        <button
+                        class="border border-green-600 text-green-600 px-6 py-3 rounded-md hover:bg-green-50"
+                        >
+                        <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h3 class="font-semibold text-gray-900 mb-3">Product Details</h3>
+                        <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Brand:</span>
+                            <span class="text-gray-900">${brand}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Size:</span>
+                            <span class="text-gray-900">${size}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Condition:</span>
+                            <span class="text-gray-900">${condition}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Material:</span>
+                            <span class="text-gray-900">${material}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Color:</span>
+                            <span class="text-gray-900">${color}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Price:</span>
+                            <span class="text-gray-900">${unitPrice} $</span>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="mt-16 grid grid-cols-1 lg:grid-cols-2">
+                  <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-sm p-6 mb-3">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">Description</h2>
+                        <div class="prose text-gray-600">
+                        <p class="mb-4">
+                            ${productDescript}
+                        </p>
+                        <p>
+                            <strong>Measurements:</strong><br />
+                            • Bust: 34 inches<br />
+                            • Waist: 28 inches<br />
+                            • Length: 36 inches<br />
+                            • Sleeve Length: 8 inches
+                        </p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                    Shipping Info
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Shipping & Returns</h3>
+                        <div class="space-y-3 text-sm">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-truck text-green-600"></i>
+                            <div>
+                            <p class="font-medium text-gray-900">Free Shipping</p>
+                            <p class="text-gray-600">On orders over $50</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-clock text-green-600"></i>
+                            <div>
+                            <p class="font-medium text-gray-900">Fast Delivery</p>
+                            <p class="text-gray-600">2-3 business days</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-undo text-green-600"></i>
+                            <div>
+                            <p class="font-medium text-gray-900">Easy Returns</p>
+                            <p class="text-gray-600">30-day return policy</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        const addToCartBtn = document.getElementById("addToCartBtn");
+
+        if (addToCartBtn) {
+          addToCartBtn.addEventListener("click", async () => {
+            const productId = addToCartBtn.getAttribute("data-product-id");
+            const token = localStorage.getItem("access_token");
+            console.log("Token:", token);
+
+            if (!token) {
+              alert("Please log in to add items to your cart.");
+              return;
+            }
+
+            try {
+              // Fetch current cart items
+              const cartRes = await fetch("/api/customer-cart-items/", {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
+
+              if (cartRes.status === 403) {
+                alert("Session expired. Please log in again.");
+                localStorage.removeItem("access_token");
+                window.location.href = "/login/";
+                return;
+              }
+
+              if (!cartRes.ok) {
+                const errorData = await cartRes.json();
+                console.error("Failed to fetch cart items:", errorData);
+                alert(
+                  errorData.detail ||
+                    "Authentication error. Please login again."
+                );
+                return;
+              }
+
+              const cartItems = await cartRes.json();
+
+              console.log("Cart Items:", cartItems);
+
+              if (!Array.isArray(cartItems)) {
+                console.error("Failed to fetch cart items:", cartItems);
+                alert(
+                  "You are not authorized or there was an error fetching your cart."
+                );
+                return;
+              }
+
+              const existingItem = cartItems.find(
+                (item) => item.product.id == productId
+              );
+
+              if (existingItem) {
+                const res = await fetch(
+                  `/api/customer-cart-items/${existingItem.id}/`,
+                  {
+                    method: "PUT",
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      quantity: existingItem.quantity + 1,
+                    }),
+                  }
+                );
+
+                const data = await res.json();
+                console.log("Updated:", data);
+                alert("Product added to cart successfully.");
+                // window.location.href = "/shoppingCart/";
+              } else {
+                // Send POST to add new item
+                const res = await fetch("/api/customer-cart-items/", {
+                  method: "POST",
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    product_id: productId,
+                    quantity: 1,
+                  }),
+                });
+
+                const data = await res.json();
+                console.log("Added:", data);
+                alert("Product added to cart successfully.");
+                // window.location.href = "/shoppingCart/";
+              }
+            } catch (err) {
+              console.error("Error:", err);
+              console.log("DataToken:", token);
+              alert("Something went wrong.");
+            }
+          });
+        }
+      });
+  }
+  productDetail();
+</script>

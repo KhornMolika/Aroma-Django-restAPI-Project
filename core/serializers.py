@@ -28,10 +28,12 @@ class RegisterSerializer(serializers.Serializer):
             email=validated_data.get('email', ''),  # Optional email
             password=validated_data['password'],
         )
-        Customer.objects.create(
+        customer = Customer.objects.create(
             user=user,
             phone=validated_data['phone']
         )
+        Cart.objects.create(customer=customer)
+
         return user
 
     def to_representation(self, instance):
@@ -224,6 +226,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+        
 
 class ProductSerializer(serializers.ModelSerializer):
     categoryID = CategorySerializer(read_only=True)
@@ -241,28 +244,18 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         model = ProductDetail
         fields = '__all__'
 
-# Feedback to Product
-class FeedbackSerializer(serializers.ModelSerializer):
-    customer = CustomerSerializer(read_only=True)
-    customer_id = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all(), source='customer', write_only=True)
-    product = ProductSerializer(read_only=True)
-    product_id = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), source='product', write_only=True)
-
-    class Meta:
-        model = Feedback
-        fields = '__all__'
-
 
 
 # CartItem comes first to avoid circular ref
 class CartItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
     product_id = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), source='product', write_only=True)
-    cart_id = serializers.PrimaryKeyRelatedField(queryset=Cart.objects.all(), source='cart', write_only=True)
+    cart_id = serializers.PrimaryKeyRelatedField(read_only=True)
+
 
     class Meta:
         model = CartItem
-        fields = ['id', 'cart_id', 'product', 'product_id', 'quantity']
+        fields = ['id', 'cart_id', 'product', 'product_id', 'quantity', 'subtotal']
 
 # Cart
 class CartSerializer(serializers.ModelSerializer):
@@ -280,8 +273,6 @@ class CartSerializer(serializers.ModelSerializer):
 
     def get_total_price(self, obj):
         return obj.total_price()
-
-
 
 # QR Code
 class QRCodeSerializer(serializers.ModelSerializer):
@@ -301,52 +292,11 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 # Order
 class OrderSerializer(serializers.ModelSerializer):
-    customer = CustomerSerializer(read_only=True)
-    customer_id = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all(), source='customer', write_only=True)
-
-    shipping_address = AddressSerializer(read_only=True)
-    shipping_address_id = serializers.PrimaryKeyRelatedField(queryset=Address.objects.all(), source='shipping_address', write_only=True)
-
-    payment_proof = serializers.ImageField(required=False)
-
-    items = serializers.SerializerMethodField()
-    total_amount = serializers.SerializerMethodField()
+    items = OrderItemSerializer(many=True, read_only=True)
 
     class Meta:
         model = Order
-        fields = [
-            'id', 'customer', 'customer_id',
-            'shipping_address', 'shipping_address_id',
-            'order_date', 'is_paid', 'qr_invoice',
-            'items', 'total_amount'
-        ]
-
-    def get_items(self, obj):
-        return OrderItemSerializer(obj.orderitem_set.all(), many=True).data
-
-    def get_total_amount(self, obj):
-        return obj.total_amount()
-
-    def create(self, validated_data):
-        items_data = self.context['request'].data.get('items', [])
-        items_data = json.loads(items_data) if isinstance(items_data, str) else items_data
-
-        # Pop items key out, rest is for Order creation (QRCodeInvoice will be in validated_data as file)
-        validated_data.pop('items', None)
-        
-        order = Order.objects.create(**validated_data)
-
-        for item in items_data:
-            OrderItem.objects.create(
-                order=order,
-                product_id=item.get('product_id'),
-                quantity=item.get('quantity'),
-                store_price=item.get('store_price'),
-                product_price=item.get('product_price'),
-            )
-
-        return order
-
+        fields = "__all__"
 
 
 # BlogCategory
@@ -378,13 +328,4 @@ class BlogSerializer(serializers.ModelSerializer):
         if details:
             return BlogDetailSerializer(details).data
         return None
-
-# Blog Comment
-class BlogCommentSerializer(serializers.ModelSerializer):
-    blog = BlogSerializer(read_only=True)
-    blog_id = serializers.PrimaryKeyRelatedField(queryset=Blog.objects.all(), source='blog', write_only=True)
-
-    class Meta:
-        model = BlogComment
-        fields = '__all__'
 
