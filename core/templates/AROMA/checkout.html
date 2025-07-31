@@ -183,7 +183,7 @@
                   ACLEDA<img
                     src="/media/images/qrcodes/photo_1_2025-06-17_15-10-35.jpg"
                     alt="ABA"
-                    />
+                  />
                 </option>
                 <option
                   type="file"
@@ -422,6 +422,10 @@
 
           if (paymentProofInput?.files.length > 0) {
             formData.append("payment_proof", paymentProofInput.files[0]);
+            console.log(
+              "Payment proof file added:",
+              paymentProofInput.files[0]
+            );
           }
 
           // ✅ Send items as JSON string
