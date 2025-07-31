@@ -51,7 +51,7 @@
 <script>
   function productDetail() {
     const productId = window.location.pathname.split("/")[2];
-    fetch(`/api/product-details/${productId - 1}/`)
+    fetch(`/api/product-details/${productId}/`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Product not found");
@@ -232,6 +232,7 @@
           addToCartBtn.addEventListener("click", async () => {
             const productId = addToCartBtn.getAttribute("data-product-id");
             const token = localStorage.getItem("access_token");
+            console.log("Token:", token);
 
             if (!token) {
               alert("Please log in to add items to your cart.");
@@ -246,23 +247,46 @@
                 },
               });
 
+              if (!cartRes.ok) {
+                const errorData = await cartRes.json();
+                console.error("Failed to fetch cart items:", errorData);
+                alert(
+                  errorData.detail ||
+                    "Authentication error. Please login again."
+                );
+                return;
+              }
+
               const cartItems = await cartRes.json();
+
+              console.log("Cart Items:", cartItems);
+
+              if (!Array.isArray(cartItems)) {
+                console.error("Failed to fetch cart items:", cartItems);
+                alert(
+                  "You are not authorized or there was an error fetching your cart."
+                );
+                return;
+              }
 
               const existingItem = cartItems.find(
                 (item) => item.product.id == productId
               );
 
               if (existingItem) {
-                const res = await fetch(`/api/customer-cart-items/${existingItem.id}/`, {
-                  method: "PUT",
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    quantity: existingItem.quantity + 1,
-                  }),
-                });
+                const res = await fetch(
+                  `/api/customer-cart-items/${existingItem.id}/`,
+                  {
+                    method: "PUT",
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      quantity: existingItem.quantity + 1,
+                    }),
+                  }
+                );
 
                 const data = await res.json();
                 console.log("Updated:", data);
@@ -287,6 +311,7 @@
               }
             } catch (err) {
               console.error("Error:", err);
+              console.log("DataToken:", token);
               alert("Something went wrong.");
             }
           });

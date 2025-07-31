@@ -206,14 +206,22 @@ class CustomerCartItemViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
+        print(f"User: {user}, Authenticated: {user.is_authenticated}")
         if not user.is_authenticated:
             raise PermissionDenied("Authentication required to view cart items.")
         return CartItem.objects.filter(cart__customer__user=user)
 
+
     def perform_create(self, serializer):
-        customer = self.request.user.customer
+        try:
+            customer = self.request.user.customer
+        except Customer.DoesNotExist:
+            raise PermissionDenied("No customer profile linked to user.")
         cart = Cart.objects.filter(customer=customer).first()
+        if not cart:
+            raise PermissionDenied("No cart found for this customer.")
         serializer.save(cart=cart)
+
 
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop("partial", False)
