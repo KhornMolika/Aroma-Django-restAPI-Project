@@ -36,7 +36,9 @@
             <!-- Summary Items -->
             <div class="space-y-3 mb-6">
               <div class="flex justify-between text-sm">
-                <span class="text-gray-600">Items (<span id="totalQuantity">0</span>)</span>
+                <span class="text-gray-600"
+                  >Items (<span id="totalQuantity">0</span>)</span
+                >
                 <span id="totalSubtotal" class="text-gray-900">$0.00</span>
               </div>
               <div class="flex justify-between text-sm">
@@ -273,7 +275,7 @@
           return [];
         }
         try {
-          const response = await fetch("/api/carts/", {
+          const response = await fetch("/api/customer-cart-items/", {
             method: "GET",
             headers: {
               Authorization: `Bearer ${token}`,
@@ -293,11 +295,7 @@
             return [];
           }
 
-          // Assuming user has only one cart, take the first one
-          const cart = data[0];
-
-          // cart.items contains the list of cart items
-          return cart.items;
+          return data;
         } catch (error) {
           console.error("Error fetching cart:", error);
           return [];
@@ -360,8 +358,10 @@
         );
 
         // Update quantity in HTML
-        document.getElementById("totalQuantity").textContent = `$${totalQuantity}`;
-        document.getElementById("totalSubtotal").textContent = `$${totalSubtotal}`;
+        document.getElementById("totalQuantity").textContent = totalQuantity;
+        document.getElementById(
+          "totalSubtotal"
+        ).textContent = `$${totalSubtotal}`;
         document.getElementById("totalPrice").textContent = `$${totalSubtotal}`;
       }
 
@@ -374,10 +374,10 @@
         }
         fetchCartItems().then((cartItems) => {
           if (cartItems.length === 0) {
-            `
-              <div>You don't have card yet<div>
-            `;
+            cartContainer.innerHTML = `<div class="text-gray-500 text-center">You don't have any items in your cart.</div>`;
+            return;
           } else {
+            console.log("Cart items:", cartItems);
             // Render cart items on page
             cartItems.forEach((item) => {
               console.log(
@@ -446,7 +446,10 @@
                     quantity: item.quantity,
                     subtotal: item.subtotal,
                   });
-                  localStorage.setItem("selectedProducts", JSON.stringify(selectedProducts));
+                  localStorage.setItem(
+                    "selectedProducts",
+                    JSON.stringify(selectedProducts)
+                  );
                 } else {
                   const index = selectedProducts.findIndex(
                     (p) => p.cartItemId === item.id

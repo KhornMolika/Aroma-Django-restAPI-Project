@@ -16,6 +16,8 @@
         const container = document.getElementById(
           "productdetailListbreadcrumb"
         );
+        console.log("Product object:", product.id);
+
         const productName = product.productName || "General";
 
         container.innerHTML = `
@@ -51,7 +53,8 @@
 <script>
   function productDetail() {
     const productId = window.location.pathname.split("/")[2];
-    fetch(`/api/product-details/${productId}/`)
+    // fetch(`/api/product-details/${productId - 1}/`)
+    fetch(`/api/product-details/${parseInt(productId) - 1}/`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Product not found");
@@ -131,7 +134,9 @@
                     </div>
 
                     <div class="flex gap-4">
-                        <button id="addToCartBtn" data-product-id="{{ product.id }}"
+                        <button id="addToCartBtn" data-product-id="${
+                          parseInt(product?.id) + 1
+                        }"
                         class="flex-1 bg-green-600 text-white py-3 rounded-md font-semibold hover:bg-green-700"
                         >
                         <i class="fas fa-shopping-cart mr-2"></i>
@@ -247,6 +252,13 @@
                 },
               });
 
+              if (cartRes.status === 403) {
+                alert("Session expired. Please log in again.");
+                localStorage.removeItem("access_token");
+                window.location.href = "/login/";
+                return;
+              }
+
               if (!cartRes.ok) {
                 const errorData = await cartRes.json();
                 console.error("Failed to fetch cart items:", errorData);
@@ -290,7 +302,7 @@
 
                 const data = await res.json();
                 console.log("Updated:", data);
-                window.location.href = "/shoppingCart/";
+                // window.location.href = "/shoppingCart/";
               } else {
                 // Send POST to add new item
                 const res = await fetch("/api/customer-cart-items/", {
@@ -307,7 +319,7 @@
 
                 const data = await res.json();
                 console.log("Added:", data);
-                window.location.href = "/shoppingCart/";
+                // window.location.href = "/shoppingCart/";
               }
             } catch (err) {
               console.error("Error:", err);
