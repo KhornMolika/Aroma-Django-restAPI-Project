@@ -4,178 +4,286 @@
 <script src="{% static 'js/api.js' %}"></script>
 
 <div class="bg-gray-50">
-    <!-- Enhanced Navigation -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <a href="{% url 'home' %}" class="flex items-center">
-                        <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mr-2">
-                            <i class="fas fa-recycle text-white text-sm"></i>
-                        </div>
-                        <span class="text-2xl font-bold text-green-600">ReStyle</span>
-                    </a>
-                </div>
-                
-                <!-- Main Navigation -->
-                <div class="hidden lg:block">
-                    <div class="ml-10 flex items-center space-x-8">
-                        <a href="{% url 'home' %}" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors relative group">
-                            Home
-                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"></span>
-                        </a>
-                        
-                        <!-- Shop  -->
-                        <a href="{% url 'shop' %}" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors relative group">
-                            Shop
-                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"></span>
-                        </a>
-                        
-                        <a href="{% url 'blog' %}" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors relative group">
-                            Blog
-                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"></span>
-                        </a>
-                        <a href="{% url 'contact' %}" class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors relative group">
-                            Contact
-                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"></span>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Right Side Actions -->
-                <div class="flex items-center space-x-4">
-                    <!-- Search -->
-                    <div class="relative hidden md:block">
-                        <input type="text" placeholder="Search..." class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                            <i class="fas fa-search text-gray-400"></i>
-                        </div>
-                    </div>
-                    
-                    <!-- Mobile Search -->
-                    <button class="md:hidden text-gray-500 hover:text-green-600 p-2">
-                        <i class="fas fa-search"></i>
-                    </button>
-
-                    
-                    <!-- Shopping Cart -->
-                    <a href="{% url 'shoppingCart' %}" class="text-gray-500 hover:text-green-600 p-2 relative">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="absolute -top-1 -right-1 bg-green-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
-                    </a>
-                    
-                    <!-- User Account Dropdown -->
-                    <div class="relative group">
-                        <button class="flex items-center text-gray-500 hover:text-green-600 p-2 transition-colors">
-                            <div class="w-8 h-8 rounded-full overflow-hidden bg-gray-300 mr-2" id="userProfileImageContainer">
-                                <i class="fas fa-user text-gray-600 text-sm flex items-center justify-center h-full w-full"></i>
-                            </div>
-                            <span class="hidden lg:block text-sm font-medium text-gray-700" id="userName">Account</span>
-                            <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"></i>
-                        </button>
-
-                        
-                        <!-- Account Dropdown -->
-                        <div class="absolute top-full right-0 mt-1 w-64 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                            <div class="p-4">
-                                <!-- Not Logged In State -->
-                                <div class="border-b border-gray-100 pb-4 mb-4">
-                                    <p class="text-sm text-gray-600 mb-3">Welcome to ReStyle!</p>
-                                    <div class="space-y-2 account-buttons">
-                                        <a href="{% url 'login' %}" class="block w-full bg-green-600 text-white text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors">
-                                            Sign In
-                                        </a>
-                                        <a href="{% url 'register' %}" class="block w-full border border-gray-300 text-gray-700 text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
-                                            Create Account
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Mobile Menu Button -->
-                    <button class="lg:hidden text-gray-500 hover:text-green-600 p-2" id="mobile-menu-button">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+  <!-- Enhanced Navigation -->
+  <nav class="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <a href="{% url 'home' %}" class="flex items-center">
+            <div
+              class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center mr-2"
+            >
+              <i class="fas fa-recycle text-white text-sm"></i>
             </div>
+            <span class="text-2xl font-bold text-green-600">ReStyle</span>
+          </a>
         </div>
-        
-        <!-- Mobile Menu -->
-        <div class="lg:hidden hidden" id="mobile-menu">
-            <div class="px-4 pt-2 pb-4 space-y-2 bg-white border-t border-gray-100">
-                <!-- Mobile Search -->
-                <div class="relative mb-4">
-                    <input type="text" placeholder="Search..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                        <i class="fas fa-search text-gray-400"></i>
-                    </div>
-                </div>
-                
-                <!-- Mobile Navigation Links -->
-                <a href="{% url 'home' %}" class="block px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors">Home</a>
-                
-                <!-- Mobile Shop Submenu -->
-                <div class="space-y-1">
-                    <button class="flex items-center justify-between w-full px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors" onclick="toggleMobileSubmenu('shop-submenu')">
-                        Shop
-                        <i class="fas fa-chevron-down text-xs"></i>
-                    </button>
-                    <div class="hidden pl-6 space-y-1" id="shop-submenu">
-                        <a href="{% url 'shop' %}" class="block px-3 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors">All Products</a>
-                        <a href="{% url 'shop' %}" class="block px-3 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors">Women's</a>
-                        <a href="{% url 'shop' %}" class="block px-3 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors">Men's</a>
-                        <a href="{% url 'shop' %}" class="block px-3 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors">Accessories</a>
-                    </div>
-                </div>
-                
-                <a href="{% url 'blog' %}" class="block px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors">Blog</a>
-                <a href="{% url 'contact' %}" class="block px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors">Contact</a>
-                
-                <!-- Mobile Account Section -->
-                <div class="border-t border-gray-100 pt-4 mt-4">
-                    <div class="space-y-2">
-                        <a href="/login/" class="block w-full bg-green-600 text-white text-center py-2 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors">
-                            Sign In
-                        </a>
-                        <a href="/register/" class="block w-full border border-gray-300 text-gray-700 text-center py-2 px-4 rounded-lg font-medium hover:bg-gray-50 transition-colors">
-                            Create Account
-                        </a>
-                    </div>
-                </div>
+
+        <!-- Main Navigation -->
+        <div class="hidden lg:block">
+          <div class="ml-10 flex items-center space-x-8">
+            <a
+              href="{% url 'home' %}"
+              class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors relative group"
+            >
+              Home
+              <span
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+
+            <!-- Shop  -->
+            <a
+              href="{% url 'shop' %}"
+              class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors relative group"
+            >
+              Shop
+              <span
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+
+            <a
+              href="{% url 'blog' %}"
+              class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors relative group"
+            >
+              Blog
+              <span
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+            <a
+              href="{% url 'contact' %}"
+              class="text-gray-700 hover:text-green-600 px-3 py-2 text-sm font-medium transition-colors relative group"
+            >
+              Contact
+              <span
+                class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover:w-full transition-all duration-300"
+              ></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Side Actions -->
+        <div class="flex items-center space-x-4">
+          <!-- Search -->
+          <div class="relative hidden md:block">
+            <input
+              type="text"
+              placeholder="Search..."
+              class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            />
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
+              <i class="fas fa-search text-gray-400"></i>
             </div>
+          </div>
+
+          <!-- Mobile Search -->
+          <button class="md:hidden text-gray-500 hover:text-green-600 p-2">
+            <i class="fas fa-search"></i>
+          </button>
+
+          <!-- Shopping Cart -->
+          <a
+            href="{% url 'shoppingCart' %}"
+            class="text-gray-500 hover:text-green-600 p-2 relative"
+          >
+            <i class="fas fa-shopping-cart"></i>
+            <span
+              id="cart-count-badge"
+              class="absolute -top-1 -right-1 bg-green-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+            >
+              0
+            </span>
+          </a>
+
+          <!-- User Account Dropdown -->
+          <div class="relative group">
+            <button
+              class="flex items-center text-gray-500 hover:text-green-600 p-2 transition-colors"
+            >
+              <div
+                class="w-8 h-8 rounded-full overflow-hidden bg-gray-300 mr-2"
+                id="userProfileImageContainer"
+              >
+                <i
+                  class="fas fa-user text-gray-600 text-sm flex items-center justify-center h-full w-full"
+                ></i>
+              </div>
+              <span
+                class="hidden lg:block text-sm font-medium text-gray-700"
+                id="userName"
+                >Account</span
+              >
+              <i
+                class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform"
+              ></i>
+            </button>
+
+            <!-- Account Dropdown -->
+            <div
+              class="absolute top-full right-0 mt-1 w-64 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+            >
+              <div class="p-4">
+                <!-- Not Logged In State -->
+                <div class="border-b border-gray-100 pb-4 mb-4">
+                  <p class="text-sm text-gray-600 mb-3">Welcome to ReStyle!</p>
+                  <div class="space-y-2 account-buttons">
+                    <a
+                      href="{% url 'login' %}"
+                      class="block w-full bg-green-600 text-white text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+                    >
+                      Sign In
+                    </a>
+                    <a
+                      href="{% url 'register' %}"
+                      class="block w-full border border-gray-300 text-gray-700 text-center py-2 px-4 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+                    >
+                      Create Account
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <button
+            class="lg:hidden text-gray-500 hover:text-green-600 p-2"
+            id="mobile-menu-button"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
         </div>
-    </nav>
+      </div>
+    </div>
 
+    <!-- Mobile Menu -->
+    <div class="lg:hidden hidden" id="mobile-menu">
+      <div class="px-4 pt-2 pb-4 space-y-2 bg-white border-t border-gray-100">
+        <!-- Mobile Search -->
+        <div class="relative mb-4">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          />
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
+            <i class="fas fa-search text-gray-400"></i>
+          </div>
+        </div>
 
-    <script>
+        <!-- Mobile Navigation Links -->
+        <a
+          href="{% url 'home' %}"
+          class="block px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors"
+          >Home</a
+        >
 
-        document.addEventListener('DOMContentLoaded', () => {
-            updateNavbar();
-            });
+        <!-- Mobile Shop Submenu -->
+        <div class="space-y-1">
+          <button
+            class="flex items-center justify-between w-full px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors"
+            onclick="toggleMobileSubmenu('shop-submenu')"
+          >
+            Shop
+            <i class="fas fa-chevron-down text-xs"></i>
+          </button>
+          <div class="hidden pl-6 space-y-1" id="shop-submenu">
+            <a
+              href="{% url 'shop' %}"
+              class="block px-3 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors"
+              >All Products</a
+            >
+            <a
+              href="{% url 'shop' %}"
+              class="block px-3 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors"
+              >Women's</a
+            >
+            <a
+              href="{% url 'shop' %}"
+              class="block px-3 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors"
+              >Men's</a
+            >
+            <a
+              href="{% url 'shop' %}"
+              class="block px-3 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors"
+              >Accessories</a
+            >
+          </div>
+        </div>
 
+        <a
+          href="{% url 'blog' %}"
+          class="block px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors"
+          >Blog</a
+        >
+        <a
+          href="{% url 'contact' %}"
+          class="block px-3 py-2 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-md transition-colors"
+          >Contact</a
+        >
 
-        // Example usage of fetchWithAuth
-        async function loadUserData() {
-            try {
-                const data = await fetchWithAuth('/api/user-profile/');
-                console.log(data);
-            } catch (err) {
-                alert(err.message);
-            }
-        }
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
+        <!-- Mobile Account Section -->
+        <div class="border-t border-gray-100 pt-4 mt-4">
+          <div class="space-y-2">
+            <a
+              href="/login/"
+              class="block w-full bg-green-600 text-white text-center py-2 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors"
+            >
+              Sign In
+            </a>
+            <a
+              href="/register/"
+              class="block w-full border border-gray-300 text-gray-700 text-center py-2 px-4 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+            >
+              Create Account
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-        // Mobile submenu toggle
-        function toggleMobileSubmenu(submenuId) {
-            const submenu = document.getElementById(submenuId);
-            submenu.classList.toggle('hidden');
-        }
-    </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      updateNavbar();
+    });
+
+    async function loadUserData() {
+      try {
+        const data = await fetchWithAuth("/api/user-profile/");
+        console.log(data);
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+    // Mobile menu toggle
+    document
+      .getElementById("mobile-menu-button")
+      .addEventListener("click", function () {
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenu.classList.toggle("hidden");
+      });
+
+    // Mobile submenu toggle
+    function toggleMobileSubmenu(submenuId) {
+      const submenu = document.getElementById(submenuId);
+      submenu.classList.toggle("hidden");
+    }
+  </script>
+  <script type="module">
+    import { fetchCartItems } from "{% static 'js/cart.js' %}";
+
+    const cartCountBadge = document.getElementById("cart-count-badge");
+    fetchCartItems().then((cartItems) => {
+      const totalQuantity = cartItems.reduce(
+        (sum, item) => sum + item.quantity,
+        0
+      );
+      cartCountBadge.textContent = totalQuantity;
+      console.log("Cart items fetched:", cartItems);
+    });
+  </script>
 </div>

@@ -267,7 +267,7 @@
 
     <script>
       const selectedProducts = [];
-      async function fetchCartItems() {
+      async function fetchCartProducts() {
         const token = localStorage.getItem("access_token"); // get token from localStorage
 
         if (!token) {
@@ -372,7 +372,7 @@
           console.error("Cart container not found!");
           return;
         }
-        fetchCartItems().then((cartItems) => {
+        fetchCartProducts().then((cartItems) => {
           if (cartItems.length === 0) {
             cartContainer.innerHTML = `<div class="text-gray-500 text-center">You don't have any items in your cart.</div>`;
             return;
