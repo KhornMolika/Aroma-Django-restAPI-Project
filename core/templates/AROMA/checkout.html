@@ -412,6 +412,15 @@
             return;
           }
 
+          if (
+            !paymentProofInput.files ||
+            paymentProofInput.files.length === 0
+          ) {
+            alert("Please upload your payment receipt before proceeding.");
+            paymentProofInput.focus();
+            return;
+          }
+
           const formData = new FormData();
           formData.append("shipping_address_id", shippingAddressId);
           formData.append("is_paid", true);
