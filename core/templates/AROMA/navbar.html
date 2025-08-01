@@ -277,13 +277,30 @@
     import { fetchCartItems } from "{% static 'js/cart.js' %}";
 
     const cartCountBadge = document.getElementById("cart-count-badge");
-    fetchCartItems().then((cartItems) => {
-      const totalQuantity = cartItems.reduce(
-        (sum, item) => sum + item.quantity,
-        0
-      );
-      cartCountBadge.textContent = totalQuantity;
-      console.log("Cart items fetched:", cartItems);
-    });
+
+    let lastTotalQuantity = null;
+
+    async function updateCartCountBadge() {
+      try {
+        const cartItems = await fetchCartItems();
+        const totalQuantity = cartItems.reduce(
+          (sum, item) => sum + item.quantity,
+          0
+        );
+
+        if (totalQuantity !== lastTotalQuantity) {
+          cartCountBadge.textContent = totalQuantity;
+          lastTotalQuantity = totalQuantity;
+        }
+
+        console.log("Cart items fetched:", cartItems);
+      } catch (error) {
+        console.error("Error fetching cart items:", error);
+      }
+    }
+
+    updateCartCountBadge();
+    setInterval(updateCartCountBadge, 100);
+    document.addEventListener("cartUpdated", updateCartCountBadge);
   </script>
 </div>
