@@ -129,8 +129,8 @@ ROOT_URLCONF = 'aroma_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
+        'DIRS': [],  # ⬅️ leave it empty
+        'APP_DIRS': True,  # ⬅️ make sure this is True
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -140,6 +140,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'aroma_api.wsgi.application'
 
