@@ -25,11 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@0+30i3#-&a(gcs^8y1%)%o=0j*+1kp12egbb6=rroq2pr++q2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = ['localhost','127.0.0.1','aroma-django-restapi-project.onrender.com']
-# ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'localhost')]
+ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'localhost')]
 
 
 
