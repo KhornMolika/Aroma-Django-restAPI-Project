@@ -30,7 +30,13 @@ DEBUG = False
 
 # ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = ['localhost','127.0.0.1','aroma-django-restapi-project.onrender.com']
-ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'localhost')]
+# ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'localhost')]
+ALLOWED_HOSTS = [
+    os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'localhost'),
+    'localhost',
+    '127.0.0.1'
+]
+
 
 
 
@@ -99,13 +105,14 @@ LOGGING = {
 
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS =[
     BASE_DIR / 'static/',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -129,8 +136,8 @@ ROOT_URLCONF = 'aroma_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # ⬅️ leave it empty
-        'APP_DIRS': True,  # ⬅️ make sure this is True
+        'DIRS': [],  # ✅ OK if using app-level templates
+        'APP_DIRS': True,  # ✅ required
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
