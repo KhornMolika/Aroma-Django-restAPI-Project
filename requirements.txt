@@ -92,7 +92,6 @@ pyelftools==0.32
 PyJWT==2.10.1
 PyMatting==1.1.14
 pyparsing==3.2.3
-pypiwin32==223
 pyreadline3==3.5.4
 pyserial==3.5
 PySocks==1.7.1
