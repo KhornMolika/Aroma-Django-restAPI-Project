@@ -54,7 +54,7 @@
   function productDetail() {
     const productId = window.location.pathname.split("/")[2];
     // fetch(`/api/product-details/${productId - 1}/`)
-    fetch(`/api/product-details/${parseInt(productId) - 1}/`)
+    fetch(`/api/product-details/${parseInt(productId) - 1}/?token=qwertyuiop`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Product not found");
