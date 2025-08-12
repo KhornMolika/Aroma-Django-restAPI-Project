@@ -179,13 +179,6 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     authentication_classes = [QueryParamAccessTokenAuthentication]
     permission_classes = [AllowAny]  # or use custom permission
-
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #     category_id = self.request.query_params.get('categoryID')
-    #     if category_id:
-    #         queryset = queryset.filter(categoryID_id=category_id)
-    #     return queryset
     
     def get_queryset(self):
 
@@ -300,6 +293,7 @@ class CustomerAddressViewSet(viewsets.ModelViewSet):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    
 
 class OrderItemViewSet(viewsets.ModelViewSet):
     queryset = OrderItem.objects.all()
