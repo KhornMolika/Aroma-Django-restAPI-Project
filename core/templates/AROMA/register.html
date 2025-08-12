@@ -584,7 +584,7 @@
       }
 
       function getRegisterImage() {
-        const IMAGE_API = "/api/images/";
+        const IMAGE_API = "/api/images/?token=qwertyuiop";
         const ImageTypeId = 3;
 
         fetch(IMAGE_API)
@@ -614,7 +614,7 @@
           const token = localStorage.getItem("access_token");
 
           try {
-            const res = await fetch("/api/carts/", {
+            const res = await fetch("/api/carts/?token=qwertyuiop", {
               method: "POST",
               headers: {
                 Authorization: `Bearer ${token}`,

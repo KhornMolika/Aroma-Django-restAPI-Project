@@ -1,7 +1,7 @@
 <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blogList"></div>
 <script>
 function fetchBlogs() {
-  fetch('/api/blogs/')
+  fetch('/api/blogs/?token=qwertyuiop')
     .then(res => res.json())
     .then(data => {
       const container = document.getElementById('blogList');

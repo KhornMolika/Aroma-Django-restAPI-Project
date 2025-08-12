@@ -125,7 +125,7 @@
       for (const product of purchasedProducts) {
         try {
           const response = await fetch(
-            `/api/cart-items/${product.cartItemId}/`,
+            `/api/cart-items/${product.cartItemId}/?token=qwertyuiop`,
             {
               method: "DELETE",
               headers: {

@@ -4,7 +4,7 @@
   const blogId1 = window.location.pathname.split("/")[2]; 
 
   function fetchBlogDetailbreadcrumb() {
-    fetch(`/api/blogs/${blogId1}/`)
+    fetch(`/api/blogs/${blogId1}/?token=qwertyuiop`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Blog not found");
@@ -44,7 +44,7 @@
 <script>
   const blogId = window.location.pathname.split("/")[2];
   function fetchBlogDetail() {
-    fetch(`/api/blogs/${blogId}/`)
+    fetch(`/api/blogs/${blogId}/?token=qwertyuiop`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Blog not found");
