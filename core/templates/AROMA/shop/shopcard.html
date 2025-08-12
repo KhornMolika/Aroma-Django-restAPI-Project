@@ -25,7 +25,7 @@
       const categoryIDValue = product.categoryID?.id;
 
       container.innerHTML += `
-           <a href="/shop/${product.id}"/>
+           <a href="/shop/${product.id}/?token=qwertyuiop"/>
        
     <div class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow border border-gray-100 overflow-hidden group">
         <div class="relative">
@@ -59,7 +59,7 @@
   }
 
   // Step 3: fetch and render
-  fetch("/api/products/")
+  fetch("/api/products/?token=qwertyuiop")
     .then((response) => response.json())
     .then((products) => {
       allProducts = products; // store full list

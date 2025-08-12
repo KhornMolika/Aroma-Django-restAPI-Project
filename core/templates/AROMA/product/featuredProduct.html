@@ -4,7 +4,7 @@
 
 <script>
   function fetchFeaturedProducts() {
-    fetch('/api/products/')
+    fetch('/api/products/?token=qwertyuiop')
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById('FeaturedProductList');

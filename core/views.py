@@ -20,6 +20,9 @@ from django.db import transaction
 from django.core.files import File
 import os
 from django.conf import settings
+from rest_framework.permissions import AllowAny
+from core.authentication import QueryParamAccessTokenAuthentication
+from rest_framework.exceptions import AuthenticationFailed
 
 
 # RegisterViewSet
@@ -173,12 +176,30 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
+
+    authentication_classes = [QueryParamAccessTokenAuthentication]
+    permission_classes = [AllowAny]  # or use custom permission
+
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #     category_id = self.request.query_params.get('categoryID')
+    #     if category_id:
+    #         queryset = queryset.filter(categoryID_id=category_id)
+    #     return queryset
+    
     def get_queryset(self):
+
+        token = self.request.query_params.get('token')
+        if not AccessToken.objects.filter(token=token, is_active=True).exists():
+            from django.http import JsonResponse
+            raise AuthenticationFailed("Invalid or inactive token")
+    
         queryset = super().get_queryset()
         category_id = self.request.query_params.get('categoryID')
         if category_id:
             queryset = queryset.filter(categoryID_id=category_id)
         return queryset
+
 
 class ProductDetailViewSet(viewsets.ModelViewSet):
     serializer_class = ProductDetailSerializer

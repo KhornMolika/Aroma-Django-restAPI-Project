@@ -5,7 +5,7 @@
   const productId1 = window.location.pathname.split("/")[2];
 
   function fetchProductDetailbreadcrumb() {
-    fetch(`/api/products/${productId1}/`)
+    fetch(`/api/products/${productId1}/?token=qwertyuiop`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Product not found");

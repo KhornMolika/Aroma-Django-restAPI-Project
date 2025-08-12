@@ -18,5 +18,4 @@ admin.site.register(OrderItem)
 admin.site.register(BlogCategory)
 admin.site.register(Blog)
 admin.site.register(BlogDetail)
-
 admin.site.register(AccessToken)
